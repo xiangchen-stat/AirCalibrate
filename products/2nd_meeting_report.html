@@ -13784,9 +13784,14 @@ div.tocify {
 <p><strong>[Health effects of PM2.5]</strong> Air pollution is one of the top threatens in global disease burden and Disability Adjusted Life Year (DALY) [State of Global Air report 2019, Global Disease Burden 2019]. PM2.5, as one of the main components of the air pollution, is particularly concerned by researcher and public. Since Harvard Six Cites research [Dockery 1993], there are lots of papers investigating the relationship between PM2.5 exposure and human health. PM2.5 may cause asthma[Keet 2018], Inflammation in type 1 diabetes[Puett 2019], Lung function and emphysema[Wang 2019], Low birthweight[Fong 2019], Respiratory Viral Infection[Ciencewicki 2007], etc.</p>
 <p><strong>[US air monitoring system]</strong> Due to the harm of PM2.5 and other air pollutants, US government passed the Clean Air Act of 1963. This law authorizes EPA to establish National Ambient Air Quality Standards (NAAQS) to protect public health and public welfare and to regulate emissions of hazardous air pollutants. EPA directing the states to develop state implementation plans and set air pollution monitors. Monitors have FRM and FEM method. Summary the number and distribution of monitors.</p>
 <p><strong>[Disadvantages of AQS and need for low cost sensors]</strong> However, regulatory monitors are expensive, need well-trained scientists to maintain, dense is low, can’t reflect spatial variability within small areas. In recent years, the development and application of low cost sensors provide a possible way to solve this problem. Advantages of sensors: low cost, easy to maintain.</p>
-<p><strong>[Disadvantages of low cost sensors and need for calibration]</strong> Neverthless, there are also disadvantages of low cost sensors: accuracy (overestimate), stability (drift, prone to temp, rh, missing data).</p>
-<p><strong>[Calibration method]</strong> In general, there are two ways to do calibration, lab calibration and in-field calibration. Lab calibration is accurate, but they are not performed in real world, and is difficult to scale. The other way is in-field calibration. This method often used for mobile sampling, short-term champigns, and long-term automatic online monitoring. There are many statistical methods to do this: - Simple correction factors[Lim 2019, ] - Linear: Gain-offset[Datta 2020, Devito 2018], geographically weighted regression[Bi 2020], linear and orthogonal regression[Johnson 2018a], ridge regression[Johnson 2018b] - Non-linear: random forests[Zimmerman 2018, ], neural networks[Topalovic 2019, Devito 2018], gradient boosting regression trees[Johnson 2018b], support vector regression[Devito 2018], Gaussian Processes Regressors[Devito 2018, Monroy2012], Reservoir Computing[Devito 2018], high-dimensional model representation [Cross 2017, Fonollosa 2015], k nearest neighbors[Cross 2017], semi-supervised learning[Martinelli 2013]</p>
-<p><strong>[Why do my research]</strong> Although there are many research, most of them are within city or state level, and time span are less than one year.</p>
+<p><strong>[Disadvantages of low cost sensors and need for calibration]</strong> Neverthless, there are also disadvantages of low cost sensors: accuracy (overestimate), stability (drift, prone to temp, RH, missing data).</p>
+<p><strong>[Calibration method]</strong> In general, there are two ways to do calibration, lab calibration and in-field calibration. Lab calibration is accurate, but they are not performed in real world, and is difficult to scale. The other way is in-field calibration. This method often used for mobile sampling, short-term champigns, and long-term automatic online monitoring. There are many statistical methods to do this:</p>
+<ul>
+<li>Simple correction factors[Lim 2019]</li>
+<li>Linear: Gain-offset[Datta 2020, Devito 2018], geographically weighted regression[Bi 2020], linear and orthogonal regression[Johnson 2018a], ridge regression[Johnson 2018b]</li>
+<li>Non-linear: random forests[Zimmerman 2018], neural networks[Topalovic 2019, Devito 2018], gradient boosting regression trees[Johnson 2018b], support vector regression[Devito 2018], Gaussian Processes Regressors[Devito 2018, Monroy2012], Reservoir Computing[Devito 2018], high-dimensional model representation [Cross 2017, Fonollosa 2015], k nearest neighbors[Cross 2017], semi-supervised learning[Martinelli 2013]</li>
+</ul>
+<p><strong>[Why do this research]</strong> Although there are many research, most of them are within city or state level, and time span are less than one year.</p>
 </div>
 <div id="summarized-table-for-methods-paper" class="section level3">
 <h3>1.2 Summarized table for methods paper</h3>
@@ -13799,8 +13804,8 @@ pacman::p_load(excelR,magrittr,broom,skimr,naniar,lubridate,knitr,kableExtra,her
 review &lt;- read_xlsx(here(&quot;products&quot;,&quot;review.xlsx&quot;))
 
 excelTable(review)</code></pre>
-<div id="htmlwidget-96c6174e79e6c40630fc" style="width:0px;height:0px;" class="jexcel html-widget"></div>
-<script type="application/json" data-for="htmlwidget-96c6174e79e6c40630fc">{"x":{"data":[["Bi","2020","CA","2018.01-2018.09","hourly","purpleair(PPA)+EPA (N=2090+157)","PM2.5",null,"PurpleAir PA-II (Plantower PMS5003) \r\nPlantower PMS5003/PMS1003","geographically weighted regression","AQS=PPA+RH+TEMP+optime+uptime+e, e~normal, \r\ngaussian kernal, bandwidth from corrected AIC","sampling discontinuity and less representative sensor siting",null,null,"The study conducted a spatially varying calibration and a downweighting strategy to integrate low-cost sensor data into high-resolution PM2.5 modeling in California. The calibration reduced the overall systematic bias of PurpleAir data from 1.9 to ∼0 μg/m3, decreased standard deviation of the AQS/PurpleAir differences from 8.18 to 5.20 μg/m3 (36%).",null,"https://pubs.acs.org/doi/10.1021/acs.est.9b06046?ref=pdf"],["Datta","2020","Baltimore, MD","Training: 2018.12.20-2019.7.31.\r\nValidation: 2019.8-2019.9","10sec?","SEARCH \r\n(N=(32~45+1))","PM2.5","FEM BAM from MDE","Plantower A003","parsimonious multiple linear regression-based gain-offset","PM2.5=a^t*x+ b^t*x*low-cost+e. \r\na&b = constant+RH+T+daytime+weekend\r\nco-located data","spatially varying biases cannot be identified and corrected\r\nfor due to co-location at a single site and using only two low-cost units",null,"3.6 (2.6)","Co-location analysis revealed high variability and significant overestimation of PM2.5 levels by the raw data. Field calibration (24-hr avg. RMSE of 2 μg/m3) outperformed laboratory correction. Calibrated data revealed spatiotemporal differences in PM2.5 across Baltimore.",null,"https://www.sciencedirect.com/science/article/abs/pii/S1352231020304933"],["Zimmerman","2018","around CMU, Pittsburgh, PA","2016.8-2017.2 \r\n(5.5-16 weeks, Median 9)","15 min average","(n=16~19)","CO, NO2, O3, and CO2.","mobile laboratory","RAMP monitor (Alphasense Ltd)","Random forest","100 trees per fold, 5 fold, no of nodes determined by RMSE","can only predict in sample value, so it needs large dataset",null,"Mean MAE of RF: 38 ppb for CO (14% relative error), 10 ppm for CO2 (2%), 3.5 ppb for NO2 (29%), and 3.4 ppb for O3 (15%).","RF matched (CO) or significantly outperformed (NO2, CO2, O3) than lab univariate linear regression and multivariate linear regression.",null,"https://amt.copernicus.org/articles/11/291/2018/"],["Topalović","2019","Belgrade, Serbia","2016.7.26-2015.8.27, 2015.8.30-2015.10.1","hourly","(N=25)","CO and O3","Automatic Monitoring Station (AMS) Stari Grad \r\nof SEPA and campaigns with AQMESH platforms","AQMESH v. 3.5","Feed-forward ANNs, one layer, 10 neurons, sigmoid transfer.\r\n Linear function at the output layer.\r\nTraining algorithms: (1)Levenberg - Marquardt algorithm (LM);\r\n(2) Resilient back-propagation algorithm (RB) \r\n(3) Conjugate Gradient Powell - Beale algorithm (CGPB)","CO=CO+PM2.5+NO2. O3=O3+NO+absolute humidity",null,null,"median normalized RMSE for CO improves from 79% to 58% of standard deviation of the CO reference measurement, and from 67% to 47% in SG1 and SG2, respectively. Similarly, the median NRMSE for O3 improves from 92% to 78% of standard deviation of the O3 reference measurement, and from 81% to 67% in SG1 and SG2, respectively.","performance of the same type of calibration model can vary significantly from platform to platform for the same type of sensor. ANN is better than univariate/multivariate linear model, though simple MLR models shows good accuracy.",null,"https://www.sciencedirect.com/science/article/abs/pii/S1352231019304194"],["Lim","2019","Seoul, South Korea","169h, 3weeks long","1 minute","7","PM2.5","DataRAM pDR-1500 and regulary monitors","AirBeam (PPD60PV-T2)","collocated with DataRAM to calibrate intra-instrument variability and use multiplicative hourly factor to adjust temporal variability","stacked ensemble for [random forest (‘rf’), Bayesian generalized linear model (‘bayesglm’), k-nearest neighbors (‘knn’), recursive partitioning and regression trees (‘rpart’), and partitioning using deletion, substitution, and addition moves (‘partDSA’).]",null,null,null,"We applied and compared three statistical approaches in constructing the LUR models – linear regression (LR), random forest (RF), and stacked ensemble (SE) combining multiple machine learning algorithms – which resulted in cross-validation R2 values of 0.63, 0.73, and 0.80.","Not using SE for calibration, but for LUR.","https://www.sciencedirect.com/science/article/pii/S0160412019304854"],["Johnson","2018a","laboratory, urban rooftop in Atlanta, GA,\r\n roadside in Atlanta,\r\nrooftop in Hyderabad, India",null,"hourly","3","PM2.5","TSI DustTrak 8533","Shinyei PPD42NS, PPD20V, and PPD60PV","linear and orthogonal regression",null,null,null,null,"Applying orthogonal regression, instead of linear regression alone, reduces the standard deviation of the error by up to about 5 μg m–3","No detailed description for model","https://aaqr.org/articles/aaqr-17-10-oa-0418.pdf"],["Johnson","2018b","New York City, NY","2017.2.7-2017.3.25 campign","hourly","3","PM2.5","Thermo Scientific tapered element oscillating microbalance  (TEOM) 1400","Shinyei PPD42","gradient boosting regression tree\r\nridge regression","Multiple linear regression: BIC, VIF to select. \r\nRidge regression. \r\nGBRT. \r\nCovariate: meteorological data, time of day.",null,"OLS: 0.36-0.51 \r\nRR: 0.36-0.52 \r\nGBRT: 0.68-0.76","OLS: 3.11-3.55 \r\nRR: 3.07-3.54\r\nGBRT: 2.16-2.52","GBRT outperformed OLS and RR.",null,"https://www.sciencedirect.com/science/article/abs/pii/S1352231018302504"],["Devito","2018","UK, US",null,null,"SNAQ \r\nENEA Pirelli\r\nUCSD dynamic gas mixtures dataset","gases",null,null,"neural networks (NN), \r\nSupport Vector Regressors (SVR),\r\nGaussian Processes Regressors (GPR), \r\nMultiple Linear Regressors(MLR) \r\nReservoir Computing (RC).",null,null,null,"Table 2 for MAE. Too many scenarios, hard to summarize and compare","1. Non-linear is better than linear. Dynamic machine learning surpasses their respective static counterparts.\r\n2.SVRs was shown to have the best performance in most scenarios irrespective of the timeframe, the sensor technology or the lengthof the tapped delay line.\r\n3. despite not the best in many cases, plain shallow neural networks (NN) provided more compact and low computational/storage impact models\r\n4. RC is average",null,"https://www.sciencedirect.com/science/article/abs/pii/S0925400517313692"],["Cross","2017","Boston, MA, USA","2016.7-2016.11","5 min",null,"gases: CO, NO, NO2, and O3","regulary","ARISense integrated sensor","high-dimensional model representation (HDMR)",null,null,"0.88, 0.84, 0.69, 0.39","RMSE: CO 39.2(24.8), NO 4.52(2.83), NO2 4.56(3.45), and O3 9.71(7.34) ppb,","Results indicate that HDMR can effectively model interference effects",null,"https://amt.copernicus.org/articles/10/3575/2017/amt-10-3575-2017.pdf"],["Hagan","2018","Hawaii","2017.1.15-2017.5.22",null,"9","SO2","Thermo Scientific 43i","Alphasense SO2-B4 electrochemical sensor","1.nonparametric algorithm (k nearest neighbors)\r\n2. hybrid linear–nonparametric algorithm",null,null,"<0.997","RMSE<7 ppb, (MAE<4 ppb)",null,null,"https://amt.copernicus.org/articles/11/315/2018/amt-11-315-2018.pdf"],["Fonollosa","2015",null,null,null,null,null,null,null,"reservoir computing",null,null,null,null,null,null,"https://www.sciencedirect.com/science/article/abs/pii/S0925400515003524"],["Monroy","2012",null,null,null,null,null,null,null,"Gaussian processes",null,null,null,null,null,null,"https://ieeexplore.ieee.org/document/6411464"],["Martinelli","2013",null,null,null,null,null,null,null,"semi-supervised learning",null,null,null,null,null,null,"https://www.sciencedirect.com/science/article/abs/pii/S0925400512013032"],["Devito","2008",null,null,null,null,null,null,null,"Shallow artificial neural networks (ANN)",null,null,null,null,null,null,"https://www.sciencedirect.com/science/article/abs/pii/S0925400507007691"],["Feenstra","2019","Riverside, CA.",null,null,"(N=12)",null,null,null,null,null,null,null,"5.4~18.0",null,null,"https://www.sciencedirect.com/science/article/abs/pii/S1352231019305850"]],"colHeaders":["Author","Year","Location","Time Span","Time Resolution","Low cost sensor Data (No of sensors)","Pollutants","Reference Instrument","Low cost sensor","Calibration Method","Model detail","Limitation","R2","Hourly RMSE (MAE) in μg/m-3","Conclusion","Comment","Link"],"columns":[{"type":"text"},{"type":"text"},{"type":"text"},{"type":"text"},{"type":"text"},{"type":"text"},{"type":"text"},{"type":"text"},{"type":"text"},{"type":"text"},{"type":"text"},{"type":"text"},{"type":"text"},{"type":"text"},{"type":"text"},{"type":"text"},{"type":"text"}],"columnSorting":true,"columnDrag":false,"columnResize":true,"rowResize":false,"rowDrag":true,"editable":true,"allowInsertRow":true,"allowInsertColumn":true,"allowDeleteRow":true,"allowDeleteColumn":true,"allowRenameColumn":true,"allowComments":false,"wordWrap":false,"selectionCopy":true,"search":false,"fullscreen":false,"lazyLoading":false,"loadingSpin":false,"showToolbar":false,"autoWidth":true,"autoFill":false,"getSelectedData":false,"dateFormat":"DD/MM/YYYY"},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-36eacd967045e55a48ab" style="width:0px;height:0px;" class="jexcel html-widget"></div>
+<script type="application/json" data-for="htmlwidget-36eacd967045e55a48ab">{"x":{"data":[["Bi","2020","CA","2018.01-2018.09","hourly","purpleair(PPA)+EPA (N=2090+157)","PM2.5",null,"PurpleAir PA-II (Plantower PMS5003) \r\nPlantower PMS5003/PMS1003","geographically weighted regression","AQS=PPA+RH+TEMP+optime+uptime+e, e~normal, \r\ngaussian kernal, bandwidth from corrected AIC","sampling discontinuity and less representative sensor siting",null,null,"The study conducted a spatially varying calibration and a downweighting strategy to integrate low-cost sensor data into high-resolution PM2.5 modeling in California. The calibration reduced the overall systematic bias of PurpleAir data from 1.9 to ∼0 μg/m3, decreased standard deviation of the AQS/PurpleAir differences from 8.18 to 5.20 μg/m3 (36%).",null,"https://pubs.acs.org/doi/10.1021/acs.est.9b06046?ref=pdf"],["Datta","2020","Baltimore, MD","Training: 2018.12.20-2019.7.31.\r\nValidation: 2019.8-2019.9","10sec?","SEARCH \r\n(N=(32~45+1))","PM2.5","FEM BAM from MDE","Plantower A003","parsimonious multiple linear regression-based gain-offset","PM2.5=a^t*x+ b^t*x*low-cost+e. \r\na&b = constant+RH+T+daytime+weekend\r\nco-located data","spatially varying biases cannot be identified and corrected\r\nfor due to co-location at a single site and using only two low-cost units",null,"3.6 (2.6)","Co-location analysis revealed high variability and significant overestimation of PM2.5 levels by the raw data. Field calibration (24-hr avg. RMSE of 2 μg/m3) outperformed laboratory correction. Calibrated data revealed spatiotemporal differences in PM2.5 across Baltimore.",null,"https://www.sciencedirect.com/science/article/abs/pii/S1352231020304933"],["Zimmerman","2018","around CMU, Pittsburgh, PA","2016.8-2017.2 \r\n(5.5-16 weeks, Median 9)","15 min average","(n=16~19)","CO, NO2, O3, and CO2.","mobile laboratory","RAMP monitor (Alphasense Ltd)","Random forest","100 trees per fold, 5 fold, no of nodes determined by RMSE","can only predict in sample value, so it needs large dataset",null,"Mean MAE of RF: 38 ppb for CO (14% relative error), 10 ppm for CO2 (2%), 3.5 ppb for NO2 (29%), and 3.4 ppb for O3 (15%).","RF matched (CO) or significantly outperformed (NO2, CO2, O3) than lab univariate linear regression and multivariate linear regression.",null,"https://amt.copernicus.org/articles/11/291/2018/"],["Topalović","2019","Belgrade, Serbia","2016.7.26-2015.8.27, 2015.8.30-2015.10.1","hourly","(N=25)","CO and O3","Automatic Monitoring Station (AMS) Stari Grad \r\nof SEPA and campaigns with AQMESH platforms","AQMESH v. 3.5","neural networks","CO=CO+PM2.5+NO2. O3=O3+NO+absolute humidity\r\nFeed-forward ANNs, one layer, 10 neurons, sigmoid transfer.\r\n Linear function at the output layer.\r\nTraining algorithms: (1)Levenberg - Marquardt algorithm (LM);\r\n(2) Resilient back-propagation algorithm (RB) \r\n(3) Conjugate Gradient Powell - Beale algorithm (CGPB)",null,null,"median normalized RMSE for CO improves from 79% to 58% of standard deviation of the CO reference measurement, and from 67% to 47% in SG1 and SG2, respectively. Similarly, the median NRMSE for O3 improves from 92% to 78% of standard deviation of the O3 reference measurement, and from 81% to 67% in SG1 and SG2, respectively.","performance of the same type of calibration model can vary significantly from platform to platform for the same type of sensor. ANN is better than univariate/multivariate linear model, though simple MLR models shows good accuracy.",null,"https://www.sciencedirect.com/science/article/abs/pii/S1352231019304194"],["Lim","2019","Seoul, South Korea","169h, 3weeks long","1 minute","7","PM2.5","DataRAM pDR-1500 and regulary monitors","AirBeam (PPD60PV-T2)","multiplicative factor","collocated with DataRAM to calibrate intra-instrument variability\r\nuse multiplicative hourly factor to adjust temporal variability \r\nstacked ensemble for [random forest, Bayesian generalized linear, \r\nk-nearest neighbors, recursive partitioning and regression trees, \r\nand partitioning using deletion, substitution, and addition moves]",null,null,null,"We applied and compared three statistical approaches in constructing the LUR models – linear regression (LR), random forest (RF), and stacked ensemble (SE) combining multiple machine learning algorithms – which resulted in cross-validation R2 values of 0.63, 0.73, and 0.80.","Not using SE for calibration, but for LUR.","https://www.sciencedirect.com/science/article/pii/S0160412019304854"],["Johnson","2018a","laboratory, urban rooftop in Atlanta, GA,\r\n roadside in Atlanta,\r\nrooftop in Hyderabad, India",null,"hourly","3","PM2.5","TSI DustTrak 8533","Shinyei PPD42NS, PPD20V, and PPD60PV","linear and orthogonal regression",null,null,null,null,"Applying orthogonal regression, instead of linear regression alone, reduces the standard deviation of the error by up to about 5 μg m–3","No detailed description for model","https://aaqr.org/articles/aaqr-17-10-oa-0418.pdf"],["Johnson","2018b","New York City, NY","2017.2.7-2017.3.25 campign","hourly","3","PM2.5","Thermo Scientific tapered element oscillating microbalance  (TEOM) 1400","Shinyei PPD42","gradient boosting regression tree,\r\nridge regression","Multiple linear regression: BIC, VIF to select. \r\nRidge regression. \r\nGBRT. \r\nCovariate: meteorological data, time of day.",null,"OLS: 0.36-0.51 \r\nRR: 0.36-0.52 \r\nGBRT: 0.68-0.76","OLS: 3.11-3.55 \r\nRR: 3.07-3.54\r\nGBRT: 2.16-2.52","GBRT outperformed OLS and RR.",null,"https://www.sciencedirect.com/science/article/abs/pii/S1352231018302504"],["Devito","2018","UK, US",null,null,"SNAQ \r\nENEA Pirelli\r\nUCSD dynamic gas mixtures dataset","gases",null,null,"neural networks (NN), \r\nSupport Vector Regressors (SVR),\r\nGaussian Processes Regressors (GPR), \r\nMultiple Linear Regressors(MLR) \r\nReservoir Computing (RC).",null,null,null,"Table 2 for MAE. Too many scenarios, hard to summarize and compare","1. Non-linear is better than linear. Dynamic machine learning surpasses their respective static counterparts.\r\n2.SVRs was shown to have the best performance in most scenarios irrespective of the timeframe, the sensor technology or the lengthof the tapped delay line.\r\n3. despite not the best in many cases, plain shallow neural networks (NN) provided more compact and low computational/storage impact models\r\n4. RC is average",null,"https://www.sciencedirect.com/science/article/abs/pii/S0925400517313692"],["Cross","2017","Boston, MA, USA","2016.7-2016.11","5 min",null,"gases: CO, NO, NO2, and O3","regulary","ARISense integrated sensor","high-dimensional model representation (HDMR)",null,null,"0.88, 0.84, 0.69, 0.39","RMSE: CO 39.2(24.8), NO 4.52(2.83), NO2 4.56(3.45), and O3 9.71(7.34) ppb,","Results indicate that HDMR can effectively model interference effects",null,"https://amt.copernicus.org/articles/10/3575/2017/amt-10-3575-2017.pdf"],["Hagan","2018","Hawaii","2017.1.15-2017.5.22",null,"9","SO2","Thermo Scientific 43i","Alphasense SO2-B4 electrochemical sensor","1.nonparametric algorithm (k nearest neighbors)\r\n2. hybrid linear–nonparametric algorithm",null,null,"<0.997","RMSE<7 ppb, (MAE<4 ppb)",null,null,"https://amt.copernicus.org/articles/11/315/2018/amt-11-315-2018.pdf"],["Fonollosa","2015",null,null,null,null,null,null,null,"reservoir computing",null,null,null,null,null,null,"https://www.sciencedirect.com/science/article/abs/pii/S0925400515003524"],["Monroy","2012",null,null,null,null,null,null,null,"Gaussian processes",null,null,null,null,null,null,"https://ieeexplore.ieee.org/document/6411464"],["Martinelli","2013",null,null,null,null,null,null,null,"semi-supervised learning",null,null,null,null,null,null,"https://www.sciencedirect.com/science/article/abs/pii/S0925400512013032"],["Devito","2008",null,null,null,null,null,null,null,"Shallow artificial neural networks (ANN)",null,null,null,null,null,null,"https://www.sciencedirect.com/science/article/abs/pii/S0925400507007691"],["Feenstra","2019","Riverside, CA.",null,null,"(N=12)",null,null,null,null,null,null,null,"5.4~18.0",null,null,"https://www.sciencedirect.com/science/article/abs/pii/S1352231019305850"]],"colHeaders":["Author","Year","Location","Time Span","Time Resolution","Low cost sensor Data (No of sensors)","Pollutants","Reference Instrument","Low cost sensor","Calibration Method","Model detail","Limitation","R2","Hourly RMSE (MAE) in μg/m-3","Conclusion","Comment","Link"],"columns":[{"type":"text"},{"type":"text"},{"type":"text"},{"type":"text"},{"type":"text"},{"type":"text"},{"type":"text"},{"type":"text"},{"type":"text"},{"type":"text"},{"type":"text"},{"type":"text"},{"type":"text"},{"type":"text"},{"type":"text"},{"type":"text"},{"type":"text"}],"columnSorting":true,"columnDrag":false,"columnResize":true,"rowResize":false,"rowDrag":true,"editable":true,"allowInsertRow":true,"allowInsertColumn":true,"allowDeleteRow":true,"allowDeleteColumn":true,"allowRenameColumn":true,"allowComments":false,"wordWrap":false,"selectionCopy":true,"search":false,"fullscreen":false,"lazyLoading":false,"loadingSpin":false,"showToolbar":false,"autoWidth":true,"autoFill":false,"getSelectedData":false,"dateFormat":"DD/MM/YYYY"},"evals":[],"jsHooks":[]}</script>
 </div>
 <div id="questions" class="section level3">
 <h3>1.3 Questions</h3>
@@ -13815,7 +13820,7 @@ excelTable(review)</code></pre>
 </div>
 <div id="github-website" class="section level2">
 <h2>2. GitHub website</h2>
-<p>__Link: <a href="https://github.com/wilson-xiangchen/AirCalibrate__" class="uri">https://github.com/wilson-xiangchen/AirCalibrate__</a></p>
+<p>Link: <a href="https://github.com/wilson-xiangchen/AirCalibrate" class="uri">https://github.com/wilson-xiangchen/AirCalibrate</a></p>
 <ul>
 <li>This report and literature review excel file are under ./products.</li>
 <li>Is it safe to upload all the code/reports/drafts to GitHUb?</li>
@@ -13845,6 +13850,193 @@ excelTable(review)</code></pre>
 </div>
 <div id="data-processing" class="section level2">
 <h2>4. Data processing</h2>
+<p>Split raw data into 3 lists: covariate (name, lontitude, latitude), channel A, channel B (PM2.5, TEMP, RH).</p>
+<pre class="r"><code>## Read in csv files. Only include Primary data for the sensor.
+csv_files &lt;- list.files(here::here(&quot;data&quot;,&quot;raw&quot;,&quot;MD&quot;), recursive = TRUE,
+                          pattern = &quot;Primary.*\\.csv&quot;)
+tbl_files &lt;- here(&quot;data&quot;,&quot;raw&quot;,&quot;MD&quot;,csv_files) %&gt;%
+        map(~ readr::read_csv(.))
+## Rename tibbles
+tbl_names &lt;- csv_files %&gt;%
+        str_extract(&quot;.*(\\(outside\\)|\\(inside\\)|\\(undefined\\))&quot;) %&gt;% 
+        str_remove(&quot;(\\ \\(outside\\)|\\ \\(inside\\)|\\ \\(undefined\\))&quot;)
+names(tbl_files) &lt;- tbl_names
+## Get covariate (label, location, period, etc.) of the sensor
+covariate &lt;- csv_files %&gt;% 
+        str_extract(&quot;(\\(outside\\)|\\(inside\\)|\\(undefined\\)).*&quot;) %&gt;% 
+        str_remove_all(&quot;[\\(\\)\\-]&quot;) %&gt;% 
+        str_remove(&quot;\\.csv&quot;) %&gt;% 
+        str_split(pattern = &quot; &quot;) %&gt;% 
+        as_tibble(., .name_repair = &quot;minimal&quot;) %&gt;% 
+        t(.) %&gt;% 
+        as_tibble(.) %&gt;% 
+        rename_all(~c(&quot;environment&quot;,&quot;latitude&quot;,&quot;longitude&quot;,&quot;file_type&quot;,&quot;average&quot;,&quot;start_time&quot;,&quot;end_time&quot;)) %&gt;% 
+        mutate(label = tbl_names,
+               latitude = as.numeric(latitude),
+               longitude = as.numeric(longitude)) %&gt;% 
+        relocate(label)
+## Split covariate and data to channel A and B
+covariate_A &lt;- covariate %&gt;% 
+        filter(!str_detect(label, &quot;( B)$&quot;))
+covariate_B &lt;- covariate %&gt;% 
+        filter(str_detect(label, pattern = &quot;( B)$&quot;))
+
+tbl_files_A &lt;- tbl_files[!str_detect(covariate$label, &quot;( B)$&quot;)]
+tbl_files_B &lt;- tbl_files[str_detect(covariate$label, &quot;( B)$&quot;)]
+
+
+## Select key variables from the data, rename variables, remove duplicates, 
+## and add missing dates.
+## Add missing date
+start_time &lt;- as_datetime(&quot;2019-01-01 00:00:00 UTC&quot;)
+end_time &lt;- as_datetime(&quot;2021-01-01 00:00:00 UTC&quot;)
+interval_time &lt;- 600 # Time interval is 10 minutes.
+full_time &lt;- as_datetime(seq(start_time, end_time, by = interval_time))
+full_time &lt;- tibble(time = full_time)
+
+tbl_files_A_reduced &lt;-  
+        tbl_files_A[1:length(tbl_files_A)] %&gt;% 
+                map(~ select(., &quot;created_at&quot;,&quot;UptimeMinutes&quot;,&quot;PM2.5_ATM_ug/m3&quot;,
+                             &quot;Temperature_F&quot;,&quot;Humidity_%&quot;)) %&gt;% 
+                map(~ rename(., time = created_at,
+                             uptime = UptimeMinutes,
+                             pm2.5 = &quot;PM2.5_ATM_ug/m3&quot;,
+                             temp = &quot;Temperature_F&quot;,
+                             humidity = &quot;Humidity_%&quot;)) %&gt;% 
+                map(~ mutate(., time = lubridate::as_datetime(time))) %&gt;% 
+                map(~ distinct(.)) %&gt;% # Remove duplicated rows
+                map(~ right_join(., full_time, by = &quot;time&quot;)) %&gt;% # Add missing dates
+                map(~ arrange(., time))
+
+## Check if there is still any duplicated time point
+tbl_files_A_reduced %&gt;%
+        map(~ select(., time)) %&gt;% 
+        map(~ sum(duplicated(.))) %&gt;% 
+        unlist() %&gt;% 
+        sum()</code></pre>
+<pre><code>## [1] 0</code></pre>
+<pre class="r"><code>tbl_files_B_reduced &lt;- 
+        tbl_files_B[1:length(tbl_files_B)] %&gt;% 
+        map(~ select(., &quot;created_at&quot;,&quot;UptimeMinutes&quot;,&quot;PM2.5_ATM_ug/m3&quot;)) %&gt;% 
+        map(~ rename(., time = created_at,
+                     uptime = UptimeMinutes,
+                     pm2.5 = &quot;PM2.5_ATM_ug/m3&quot;)) %&gt;% 
+        map(~ mutate(., time = lubridate::as_datetime(time))) %&gt;% 
+        map(~ distinct(.)) %&gt;% # Remove duplicated rows
+        map(~ right_join(., full_time, by = &quot;time&quot;)) %&gt;% # Add missing dates
+        map(~ arrange(., time))
+
+## Check if there is still any duplicated time point
+tbl_files_B_reduced %&gt;%
+        map(~ select(., time)) %&gt;% 
+        map(~ sum(duplicated(.))) %&gt;% 
+        unlist() %&gt;% 
+        sum()</code></pre>
+<pre><code>## [1] 0</code></pre>
+<pre class="r"><code># rm(list = c(&quot;tbl_files&quot;,&quot;tbl_files_A&quot;,&quot;tbl_files_B&quot;,&quot;csv_files&quot;,&quot;tbl_names&quot;,&quot;covariate&quot;,
+            # &quot;start_time&quot;,&quot;end_time&quot;,&quot;interval_time&quot;,&quot;full_time&quot;))
+tbl_files[1:2] %&gt;% glimpse()</code></pre>
+<pre><code>## List of 2
+##  $ 13th and E St SE  : tibble [163,303 x 10] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
+##   ..$ created_at      : chr [1:163303] &quot;2019-01-11 02:30:00 UTC&quot; &quot;2019-01-11 02:40:00 UTC&quot; &quot;2019-01-11 02:50:00 UTC&quot; &quot;2019-01-11 03:00:00 UTC&quot; ...
+##   ..$ PM1.0_CF1_ug/m3 : num [1:163303] 4.8 5.82 9.27 6.3 5.32 7.97 6.04 4.98 3.78 4.2 ...
+##   ..$ PM2.5_CF1_ug/m3 : num [1:163303] 7.62 9.82 14.59 10.03 8.49 ...
+##   ..$ PM10.0_CF1_ug/m3: num [1:163303] 9.65 11.74 18.02 12.22 11.26 ...
+##   ..$ UptimeMinutes   : num [1:163303] 5 11.7 20.2 31.6 41.5 ...
+##   ..$ RSSI_dbm        : num [1:163303] -18.5 31 31 -10.6 14.8 ...
+##   ..$ Temperature_F   : num [1:163303] 45.5 40 36.2 34.3 34 ...
+##   ..$ Humidity_%      : num [1:163303] 26 28.5 31 33.3 34 ...
+##   ..$ PM2.5_ATM_ug/m3 : num [1:163303] 7.62 9.82 14.59 10.03 8.49 ...
+##   ..$ X10             : logi [1:163303] NA NA NA NA NA NA ...
+##   ..- attr(*, &quot;problems&quot;)= tibble [162,644 x 5] (S3: tbl_df/tbl/data.frame)
+##   ..- attr(*, &quot;spec&quot;)=
+##   .. .. cols(
+##   .. ..   created_at = col_character(),
+##   .. ..   `PM1.0_CF1_ug/m3` = col_double(),
+##   .. ..   `PM2.5_CF1_ug/m3` = col_double(),
+##   .. ..   `PM10.0_CF1_ug/m3` = col_double(),
+##   .. ..   UptimeMinutes = col_double(),
+##   .. ..   RSSI_dbm = col_double(),
+##   .. ..   Temperature_F = col_double(),
+##   .. ..   `Humidity_%` = col_double(),
+##   .. ..   `PM2.5_ATM_ug/m3` = col_double(),
+##   .. ..   X10 = col_logical()
+##   .. .. )
+##  $ 13th and E St SE B: tibble [163,309 x 10] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
+##   ..$ created_at      : chr [1:163309] &quot;2019-01-11 02:30:00 UTC&quot; &quot;2019-01-11 02:40:00 UTC&quot; &quot;2019-01-11 02:50:00 UTC&quot; &quot;2019-01-11 03:00:00 UTC&quot; ...
+##   ..$ PM1.0_CF1_ug/m3 : num [1:163309] 5.28 5.82 9.48 6.9 6.53 7.82 7.44 4.69 3.84 4.3 ...
+##   ..$ PM2.5_CF1_ug/m3 : num [1:163309] 7.59 8.74 14.48 10.03 9.24 ...
+##   ..$ PM10.0_CF1_ug/m3: num [1:163309] 8.15 9.3 15.83 10.58 9.84 ...
+##   ..$ UptimeMinutes   : num [1:163309] 31736 31055 31564 31021 31194 ...
+##   ..$ ADC             : num [1:163309] 0.01 0.01 0.01 0.01 0.01 0.01 0.01 0.01 0.01 0.01 ...
+##   ..$ Pressure_hpa    : num [1:163309] 1020 1020 1020 1020 1021 ...
+##   ..$ IAQ             : logi [1:163309] NA NA NA NA NA NA ...
+##   ..$ PM2.5_ATM_ug/m3 : num [1:163309] 7.59 8.74 14.36 10.03 9.24 ...
+##   ..$ X10             : logi [1:163309] NA NA NA NA NA NA ...
+##   ..- attr(*, &quot;problems&quot;)= tibble [162,650 x 5] (S3: tbl_df/tbl/data.frame)
+##   ..- attr(*, &quot;spec&quot;)=
+##   .. .. cols(
+##   .. ..   created_at = col_character(),
+##   .. ..   `PM1.0_CF1_ug/m3` = col_double(),
+##   .. ..   `PM2.5_CF1_ug/m3` = col_double(),
+##   .. ..   `PM10.0_CF1_ug/m3` = col_double(),
+##   .. ..   UptimeMinutes = col_double(),
+##   .. ..   ADC = col_double(),
+##   .. ..   Pressure_hpa = col_double(),
+##   .. ..   IAQ = col_logical(),
+##   .. ..   `PM2.5_ATM_ug/m3` = col_double(),
+##   .. ..   X10 = col_logical()
+##   .. .. )</code></pre>
+<pre class="r"><code>covariate_A %&gt;% glimpse()</code></pre>
+<pre><code>## Rows: 104
+## Columns: 8
+## $ label       &lt;chr&gt; &quot;13th and E St SE&quot;, &quot;14th &amp; S ST NW &quot;, &quot;1625 N Quincy S...
+## $ environment &lt;chr&gt; &quot;outside&quot;, &quot;outside&quot;, &quot;outside&quot;, &quot;outside&quot;, &quot;inside&quot;, &quot;...
+## $ latitude    &lt;dbl&gt; 38.88297, 38.91381, 38.89122, 38.94350, 39.32419, 39.32...
+## $ longitude   &lt;dbl&gt; 76.98804, 77.03275, 77.10781, 78.24529, 76.62891, 76.62...
+## $ file_type   &lt;chr&gt; &quot;Primary&quot;, &quot;Primary&quot;, &quot;Primary&quot;, &quot;Primary&quot;, &quot;Primary&quot;, ...
+## $ average     &lt;chr&gt; &quot;10_minute_average&quot;, &quot;10_minute_average&quot;, &quot;10_minute_av...
+## $ start_time  &lt;chr&gt; &quot;01_01_2019&quot;, &quot;01_01_2019&quot;, &quot;01_01_2019&quot;, &quot;01_01_2019&quot;,...
+## $ end_time    &lt;chr&gt; &quot;11_01_2020&quot;, &quot;11_01_2020&quot;, &quot;11_01_2020&quot;, &quot;11_01_2020&quot;,...</code></pre>
+<pre class="r"><code>covariate_B %&gt;% glimpse()</code></pre>
+<pre><code>## Rows: 104
+## Columns: 8
+## $ label       &lt;chr&gt; &quot;13th and E St SE B&quot;, &quot;14th &amp; S ST NW  B&quot;, &quot;1625 N Quin...
+## $ environment &lt;chr&gt; &quot;undefined&quot;, &quot;undefined&quot;, &quot;undefined&quot;, &quot;undefined&quot;, &quot;un...
+## $ latitude    &lt;dbl&gt; 38.88297, 38.91381, 38.89122, 38.94350, 39.32419, 39.32...
+## $ longitude   &lt;dbl&gt; 76.98804, 77.03275, 77.10781, 78.24529, 76.62891, 76.62...
+## $ file_type   &lt;chr&gt; &quot;Primary&quot;, &quot;Primary&quot;, &quot;Primary&quot;, &quot;Primary&quot;, &quot;Primary&quot;, ...
+## $ average     &lt;chr&gt; &quot;10_minute_average&quot;, &quot;10_minute_average&quot;, &quot;10_minute_av...
+## $ start_time  &lt;chr&gt; &quot;01_01_2019&quot;, &quot;01_01_2019&quot;, &quot;01_01_2019&quot;, &quot;01_01_2019&quot;,...
+## $ end_time    &lt;chr&gt; &quot;11_01_2020&quot;, &quot;11_01_2020&quot;, &quot;11_01_2020&quot;, &quot;11_01_2020&quot;,...</code></pre>
+<pre class="r"><code>tbl_files_A_reduced[1:2] %&gt;% glimpse()</code></pre>
+<pre><code>## List of 2
+##  $ 13th and E St SE: tibble [105,265 x 5] (S3: tbl_df/tbl/data.frame)
+##   ..$ time    : POSIXct[1:105265], format: &quot;2019-01-01 00:00:00&quot; &quot;2019-01-01 00:10:00&quot; ...
+##   ..$ uptime  : num [1:105265] NA NA NA NA NA NA NA NA NA NA ...
+##   ..$ pm2.5   : num [1:105265] NA NA NA NA NA NA NA NA NA NA ...
+##   ..$ temp    : num [1:105265] NA NA NA NA NA NA NA NA NA NA ...
+##   ..$ humidity: num [1:105265] NA NA NA NA NA NA NA NA NA NA ...
+##   ..- attr(*, &quot;problems&quot;)= tibble [162,644 x 5] (S3: tbl_df/tbl/data.frame)
+##  $ 14th &amp; S ST NW  : tibble [105,265 x 5] (S3: tbl_df/tbl/data.frame)
+##   ..$ time    : POSIXct[1:105265], format: &quot;2019-01-01 00:00:00&quot; &quot;2019-01-01 00:10:00&quot; ...
+##   ..$ uptime  : num [1:105265] NA NA NA NA NA NA NA NA NA NA ...
+##   ..$ pm2.5   : num [1:105265] NA NA NA NA NA NA NA NA NA NA ...
+##   ..$ temp    : num [1:105265] NA NA NA NA NA NA NA NA NA NA ...
+##   ..$ humidity: num [1:105265] NA NA NA NA NA NA NA NA NA NA ...
+##   ..- attr(*, &quot;problems&quot;)= tibble [135,499 x 5] (S3: tbl_df/tbl/data.frame)</code></pre>
+<pre class="r"><code>tbl_files_B_reduced[1:2] %&gt;% glimpse()</code></pre>
+<pre><code>## List of 2
+##  $ 13th and E St SE B: tibble [105,265 x 3] (S3: tbl_df/tbl/data.frame)
+##   ..$ time  : POSIXct[1:105265], format: &quot;2019-01-01 00:00:00&quot; &quot;2019-01-01 00:10:00&quot; ...
+##   ..$ uptime: num [1:105265] NA NA NA NA NA NA NA NA NA NA ...
+##   ..$ pm2.5 : num [1:105265] NA NA NA NA NA NA NA NA NA NA ...
+##   ..- attr(*, &quot;problems&quot;)= tibble [162,650 x 5] (S3: tbl_df/tbl/data.frame)
+##  $ 14th &amp; S ST NW  B : tibble [105,265 x 3] (S3: tbl_df/tbl/data.frame)
+##   ..$ time  : POSIXct[1:105265], format: &quot;2019-01-01 00:00:00&quot; &quot;2019-01-01 00:10:00&quot; ...
+##   ..$ uptime: num [1:105265] NA NA NA NA NA NA NA NA NA NA ...
+##   ..$ pm2.5 : num [1:105265] NA NA NA NA NA NA NA NA NA NA ...
+##   ..- attr(*, &quot;problems&quot;)= tibble [135,498 x 5] (S3: tbl_df/tbl/data.frame)</code></pre>
 </div>
 <div id="future-work" class="section level2">
 <h2>5. Future work</h2>
@@ -13852,7 +14044,7 @@ excelTable(review)</code></pre>
 <li>Do more literature review</li>
 <li>Finish the data processing</li>
 <li>Download EPA data and pair monitors</li>
-<li></li>
+<li>Exploratory analysis</li>
 </ol>
 </div>
 
