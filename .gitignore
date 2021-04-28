@@ -1,9 +1,10 @@
-# File
-# ignore
-# data
+# Directories
+out
 
-
-# R related file
+# R related files
 .Rhistory
 .Rdata
 .Rproj.user
+
+# ssh related files
+.Rout

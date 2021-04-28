@@ -20,10 +20,13 @@
 
 ## Check for packages needed to run analyses
 # Using pacman to load all packages
-if(!require("pacman", quietly = T)){
-        install.packages(x)
-        require(x,character.only = T)
-}
+# if(!require("pacman", quietly = T)){
+#         install.packages(x)
+#         require(x,character.only = T)
+# }
+
+install.packages("pacman")
+library(pacman)
 
 # Packages for data import and data wrangling
 pacman::p_load(here,reshape2,lubridate,hms)
@@ -121,7 +124,7 @@ rm(check)
 
 # Read and save data
 pa <- here("data","raw","CA",csv_files) %>%
-        purrr::map(~ readr::read_csv(.))
+        purrr::map(~ suppressMessages(suppressWarnings(readr::read_csv(.))))
 # save(pa, file = here("data","tidy","CA","pa_raw.RData"))
 
 # Load data
@@ -328,7 +331,7 @@ epa_cov_sf = st_as_sf(epa_cov, coords = c("Longitude", "Latitude"), crs = 4326)
 
 # Calculate nearest location index, and distance
 ind_near <- st_nearest_feature(pa_cov_sf, epa_cov_sf)
-distance <- st_distance(pa_cov_sf, epa_cov_sf[ind_near, ], by_element = T)
+distance <- sf::st_distance(pa_cov_sf, epa_cov_sf[ind_near, ], by_element = T)
 line_near <- st_nearest_points(pa_cov_sf, epa_cov_sf[ind_near, ], pairwise = TRUE)
 ind_dis <- distance <= set_units(5000, m)
 
