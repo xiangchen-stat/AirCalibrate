@@ -1,0 +1,9 @@
+# File
+# ignore
+# data
+
+
+# R related file
+.Rhistory
+.Rdata
+.Rproj.user
