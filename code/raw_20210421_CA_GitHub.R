@@ -35,7 +35,7 @@ p_load(skimr,GGally,RColorBrewer,viridis,ggpubr)
 # Packages for building machine learning algorithm
 p_load(randomForest,gbm,yardstick)
 # Packages for creating map/spatial operation
-p_load(sf,geosphere,units,ggmap,MBA)
+p_load(sf,lwgeom,geosphere,units,ggmap,MBA)
 # Load tidyverse
 p_load(tidyverse)
 # Set ggplot theme
@@ -331,7 +331,10 @@ epa_cov_sf = st_as_sf(epa_cov, coords = c("Longitude", "Latitude"), crs = 4326)
 
 # Calculate nearest location index, and distance
 ind_near <- st_nearest_feature(pa_cov_sf, epa_cov_sf)
-distance <- sf::st_distance(pa_cov_sf, epa_cov_sf[ind_near, ], by_element = T)
+# distance <- sf::st_distance(pa_cov_sf, epa_cov_sf[ind_near, ], by_element = T)
+# save(distance, file = here("data","tidy","CA","distance.RData"))
+load(here("data","tidy","CA","distance.RData"))
+
 line_near <- st_nearest_points(pa_cov_sf, epa_cov_sf[ind_near, ], pairwise = TRUE)
 ind_dis <- distance <= set_units(5000, m)
 
