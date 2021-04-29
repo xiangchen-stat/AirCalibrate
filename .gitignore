@@ -1,6 +1,14 @@
 # Directories
 out
 
+# Data
+data/raw/CA/*.csv
+data/tidy/CA/cov.RData
+data/tidy/CA/pa_join.RData
+data/tidy/EPA/pm2.5_CA_reduced.RData
+data/tidy/EPA/pm2.5_CA_reduced_cov.RData
+data/tidy/EPA/epa_reduced.RData
+
 # R related files
 .Rhistory
 .Rdata

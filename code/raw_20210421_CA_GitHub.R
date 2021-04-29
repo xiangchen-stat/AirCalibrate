@@ -393,6 +393,9 @@ pa_join <- pa %>%
                hms_GMT = str_remove(hms_GMT, ".* "),
                hms_GMT = as_hms(hms_GMT)) # Get hour-minute-second data
 
+# save(pa_join, file=here("data","tidy","CA","pa_join.RData"))
+# load(here("data","tidy","CA","pa_join.RData"))
+
 # Some EPA sites has multiple devices. We only use one device.
 ind_epa_dup <- epa %>% 
         select(Latitude, Longitude, `Date GMT`, `Time GMT`) %>% 
