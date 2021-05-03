@@ -16,3 +16,4 @@ data/tidy/EPA/epa_reduced.RData
 
 # ssh related files
 .Rout
+.sh

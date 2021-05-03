@@ -1263,46 +1263,46 @@ legend("topright", c("m=3"),
 write.csv(round(met_all[,seq(from = 3, to = length(met_all[1,]), by = 3)],2), here("results", "met_all_fit.csv"))
 
 
-# save(pre_epa_time,  file = here("data", "model", "pre_epa_time.RData"))
-# save(mod_epare_time,  file = here("data", "model", "mod_epare_time.RData"))
-# save(pre_epare_time,  file = here("data", "model", "pre_epare_time.RData"))
-# save(mod_lm_time,  file = here("data", "model", "mod_lm_time.RData"))
-# save(pre_lm_time,  file = here("data", "model", "pre_lm_time.RData"))
-# save(mod_lmint_time,  file = here("data", "model", "mod_lmint_time.RData"))
-# save(pre_lmint_time,  file = here("data", "model", "pre_lmint_time.RData"))
-# save(mod_gbm_time,  file = here("data", "model", "mod_gbm_time.RData"))
-# save(pre_gbm_time,  file = here("data", "model", "pre_gbm_time.RData"))
-# save(mod_rf_time,  file = here("data", "model", "mod_rf_time.RData"))
-# save(pre_rf_time,  file = here("data", "model", "pre_rf_time.RData"))
-# 
-# save(pre_epa_loc,  file = here("data", "model", "pre_epa_loc.RData"))
-# save(mod_epare_loc,  file = here("data", "model", "mod_epare_loc.RData"))
-# save(pre_epare_loc,  file = here("data", "model", "pre_epare_loc.RData"))
-# save(mod_lm_loc,  file = here("data", "model", "mod_lm_loc.RData"))
-# save(pre_lm_loc,  file = here("data", "model", "pre_lm_loc.RData"))
-# save(mod_lmint_loc,  file = here("data", "model", "mod_lmint_loc.RData"))
-# save(pre_lmint_loc,  file = here("data", "model", "pre_lmint_loc.RData"))
-# save(mod_gbm_loc,  file = here("data", "model", "mod_gbm_loc.RData"))
-# save(pre_gbm_loc,  file = here("data", "model", "pre_gbm_loc.RData"))
-# save(mod_rf_loc,  file = here("data", "model", "mod_rf_loc.RData"))
-# save(pre_rf_loc,  file = here("data", "model", "pre_rf_loc.RData"))
-# 
-# save(pre_epa_loc_ran,  file = here("data", "model", "pre_epa_loc_ran.RData"))
-# save(mod_epare_loc_ran,  file = here("data", "model", "mod_epare_loc_ran.RData"))
-# save(pre_epare_loc_ran,  file = here("data", "model", "pre_epare_loc_ran.RData"))
-# save(mod_lm_loc_ran,  file = here("data", "model", "mod_lm_loc_ran.RData"))
-# save(pre_lm_loc_ran,  file = here("data", "model", "pre_lm_loc_ran.RData"))
-# save(mod_lmint_loc_ran,  file = here("data", "model", "mod_lmint_loc_ran.RData"))
-# save(pre_lmint_loc_ran,  file = here("data", "model", "pre_lmint_loc_ran.RData"))
-# save(mod_gbm_loc_ran,  file = here("data", "model", "mod_gbm_loc_ran.RData"))
-# save(pre_gbm_loc_ran,  file = here("data", "model", "pre_gbm_loc_ran.RData"))
-# save(mod_rf_loc_ran,  file = here("data", "model", "mod_rf_loc_ran.RData"))
-# save(pre_rf_loc_ran,  file = here("data", "model", "pre_rf_loc_ran.RData"))
+save(pre_epa_time,  file = here("data", "model", "pre_epa_time.RData"))
+save(mod_epare_time,  file = here("data", "model", "mod_epare_time.RData"))
+save(pre_epare_time,  file = here("data", "model", "pre_epare_time.RData"))
+save(mod_lm_time,  file = here("data", "model", "mod_lm_time.RData"))
+save(pre_lm_time,  file = here("data", "model", "pre_lm_time.RData"))
+save(mod_lmint_time,  file = here("data", "model", "mod_lmint_time.RData"))
+save(pre_lmint_time,  file = here("data", "model", "pre_lmint_time.RData"))
+save(mod_gbm_time,  file = here("data", "model", "mod_gbm_time.RData"))
+save(pre_gbm_time,  file = here("data", "model", "pre_gbm_time.RData"))
+save(mod_rf_time,  file = here("data", "model", "mod_rf_time.RData"))
+save(pre_rf_time,  file = here("data", "model", "pre_rf_time.RData"))
+
+save(pre_epa_loc,  file = here("data", "model", "pre_epa_loc.RData"))
+save(mod_epare_loc,  file = here("data", "model", "mod_epare_loc.RData"))
+save(pre_epare_loc,  file = here("data", "model", "pre_epare_loc.RData"))
+save(mod_lm_loc,  file = here("data", "model", "mod_lm_loc.RData"))
+save(pre_lm_loc,  file = here("data", "model", "pre_lm_loc.RData"))
+save(mod_lmint_loc,  file = here("data", "model", "mod_lmint_loc.RData"))
+save(pre_lmint_loc,  file = here("data", "model", "pre_lmint_loc.RData"))
+save(mod_gbm_loc,  file = here("data", "model", "mod_gbm_loc.RData"))
+save(pre_gbm_loc,  file = here("data", "model", "pre_gbm_loc.RData"))
+save(mod_rf_loc,  file = here("data", "model", "mod_rf_loc.RData"))
+save(pre_rf_loc,  file = here("data", "model", "pre_rf_loc.RData"))
+
+save(pre_epa_loc_ran,  file = here("data", "model", "pre_epa_loc_ran.RData"))
+save(mod_epare_loc_ran,  file = here("data", "model", "mod_epare_loc_ran.RData"))
+save(pre_epare_loc_ran,  file = here("data", "model", "pre_epare_loc_ran.RData"))
+save(mod_lm_loc_ran,  file = here("data", "model", "mod_lm_loc_ran.RData"))
+save(pre_lm_loc_ran,  file = here("data", "model", "pre_lm_loc_ran.RData"))
+save(mod_lmint_loc_ran,  file = here("data", "model", "mod_lmint_loc_ran.RData"))
+save(pre_lmint_loc_ran,  file = here("data", "model", "pre_lmint_loc_ran.RData"))
+save(mod_gbm_loc_ran,  file = here("data", "model", "mod_gbm_loc_ran.RData"))
+save(pre_gbm_loc_ran,  file = here("data", "model", "pre_gbm_loc_ran.RData"))
+save(mod_rf_loc_ran,  file = here("data", "model", "mod_rf_loc_ran.RData"))
+save(pre_rf_loc_ran,  file = here("data", "model", "pre_rf_loc_ran.RData"))
 
 
 ##################(1) Time Series Plot##################
 # Time series
-# load(here("data","tidy","CA","dat.RData"))
+load(here("data","tidy","CA","dat.RData"))
 # load(here("data","model","mod_gbm_time.RData"))
 # dat_vis <- dat %>% 
 #         mutate(month = month(time),
@@ -1637,7 +1637,7 @@ write.csv(round(met_epa_final,2), here("results", "met_epa_final.csv"))
 ##################2.3.2 EPA Retrained##################
 ## 1. EPA Retrained based
 ## Create spatial-temporal evaluation data set
-# load(here("data","tidy","CA","dat.RData"))
+load(here("data","tidy","CA","dat.RData"))
 
 # Leave out 2020 March for evaluation
 dat_time_train <- dat %>% 
@@ -1664,10 +1664,10 @@ ind_loc_train <- sample(1:length(dat_loc_far_train$time), nsim_train, replace = 
 
 
 # Create simulation model specific data set
-# load(here("data","model","mod_epare_time.RData"))
-# load(here("data","model","pre_epare_time.RData"))
-# load(here("data","model","mod_epare_loc.RData"))
-# load(here("data","model","pre_epare_loc.RData"))
+load(here("data","model","mod_epare_time.RData"))
+load(here("data","model","pre_epare_time.RData"))
+load(here("data","model","mod_epare_loc.RData"))
+load(here("data","model","pre_epare_loc.RData"))
 
 dat_sim_epare_time_train <- dat_time_train %>% 
         mutate(true_sim = mod_epare_time$fitted.values)
@@ -1889,7 +1889,7 @@ write.csv(round(met_epare_final,2), here("results", "met_epare_final.csv"))
 ##################2.3.3 Linear Model##################
 ## 1. Linear Model based
 ## Create spatial-temporal evaluation data set
-# load(here("data","tidy","CA","dat.RData"))
+load(here("data","tidy","CA","dat.RData"))
 
 # Leave out 2020 March for evaluation
 dat_time_train <- dat %>% 
@@ -1916,10 +1916,10 @@ ind_loc_train <- sample(1:length(dat_loc_far_train$time), nsim_train, replace = 
 
 
 # Create simulation model specific data set
-# load(here("data","model","mod_lm_time.RData"))
-# load(here("data","model","pre_lm_time.RData"))
-# load(here("data","model","mod_lm_loc.RData"))
-# load(here("data","model","pre_lm_loc.RData"))
+load(here("data","model","mod_lm_time.RData"))
+load(here("data","model","pre_lm_time.RData"))
+load(here("data","model","mod_lm_loc.RData"))
+load(here("data","model","pre_lm_loc.RData"))
 
 dat_sim_lm_time_train <- dat_time_train %>% 
         mutate(true_sim = mod_lm_time$fitted.values)
@@ -2141,7 +2141,7 @@ write.csv(round(met_lm_final,2), here("results", "met_lm_final.csv"))
 ##################2.3.4 Linear Interaction Model##################
 ## 1. Linear Interaction Model based
 ## Create spatial-temporal evaluation data set
-# load(here("data","tidy","CA","dat.RData"))
+load(here("data","tidy","CA","dat.RData"))
 
 # Leave out 2020 March for evaluation
 dat_time_train <- dat %>% 
@@ -2168,10 +2168,10 @@ ind_loc_train <- sample(1:length(dat_loc_far_train$time), nsim_train, replace = 
 
 
 # Create simulation model specific data set
-# load(here("data","model","mod_lmint_time.RData"))
-# load(here("data","model","pre_lmint_time.RData"))
-# load(here("data","model","mod_lmint_loc.RData"))
-# load(here("data","model","pre_lmint_loc.RData"))
+load(here("data","model","mod_lmint_time.RData"))
+load(here("data","model","pre_lmint_time.RData"))
+load(here("data","model","mod_lmint_loc.RData"))
+load(here("data","model","pre_lmint_loc.RData"))
 
 dat_sim_lmint_time_train <- dat_time_train %>% 
         mutate(true_sim = mod_lmint_time$fitted.values)
@@ -2393,7 +2393,7 @@ write.csv(round(met_lmint_final,2), here("results", "met_lmint_final.csv"))
 ##################2.3.5 Gradient Boosting Method##################
 ## 1. Gradient Boosting Method based
 ## Create spatial-temporal evaluation data set
-# load(here("data","tidy","CA","dat.RData"))
+load(here("data","tidy","CA","dat.RData"))
 
 # Leave out 2020 March for evaluation
 dat_time_train <- dat %>% 
@@ -2420,10 +2420,10 @@ ind_loc_train <- sample(1:length(dat_loc_far_train$time), nsim_train, replace = 
 
 
 # Create simulation model specific data set
-# load(here("data","model","mod_gbm_time.RData"))
-# load(here("data","model","pre_gbm_time.RData"))
-# load(here("data","model","mod_gbm_loc.RData"))
-# load(here("data","model","pre_gbm_loc.RData"))
+load(here("data","model","mod_gbm_time.RData"))
+load(here("data","model","pre_gbm_time.RData"))
+load(here("data","model","mod_gbm_loc.RData"))
+load(here("data","model","pre_gbm_loc.RData"))
 
 dat_sim_gbm_time_train <- dat_time_train %>% 
         mutate(true_sim = mod_gbm_time$fit)
@@ -2646,7 +2646,7 @@ write.csv(round(met_gbm_final,2), here("results", "met_gbm_final.csv"))
 ##################2.3.6 RF##################
 ## 1. RF based
 ## Create spatial-temporal evaluation data set
-# load(here("data","tidy","CA","dat.RData"))
+load(here("data","tidy","CA","dat.RData"))
 
 # Leave out 2020 March for evaluation
 dat_time_train <- dat %>% 
@@ -2673,10 +2673,10 @@ ind_loc_train <- sample(1:length(dat_loc_far_train$time), nsim_train, replace = 
 
 
 # Create simulation model specific data set
-# load(here("data","model","mod_rf_time.RData"))
-# load(here("data","model","pre_rf_time.RData"))
-# load(here("data","model","mod_rf_loc.RData"))
-# load(here("data","model","pre_rf_loc.RData"))
+load(here("data","model","mod_rf_time.RData"))
+load(here("data","model","pre_rf_time.RData"))
+load(here("data","model","mod_rf_loc.RData"))
+load(here("data","model","pre_rf_loc.RData"))
 
 dat_sim_rf_time_train <- dat_time_train %>% 
         mutate(true_sim = mod_rf_time$predicted)
@@ -2904,7 +2904,7 @@ mymean = function(x){
 }
 
 # (1) Create data set for ploting
-# load(here("data","model","mod_gbm_time.RData"))
+load(here("data","model","mod_gbm_time.RData"))
 # load(here("data","tidy","CA","pa_join_epa.RData"))
 
 ### California map
