@@ -2,6 +2,7 @@
 out
 
 # Data
+data
 data/raw/CA/*.csv
 data/tidy/CA/cov.RData
 data/tidy/CA/pa_join.RData
@@ -11,8 +12,9 @@ data/tidy/EPA/epa_reduced.RData
 
 # R related files
 .Rhistory
-.Rdata
+.RData
 .Rproj.user
 
 # ssh related files
 .Rout
+.sh

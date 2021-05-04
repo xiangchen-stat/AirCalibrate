@@ -497,29 +497,6 @@ map_sites <- camap +
               legend.title = element_text(size = 20),
               legend.text = element_text(size = 18))
 
-plot_map1 <- camap + 
-        geom_jitter(data = loc_both[loc_both$group=="PurpleAir",],
-                   aes(x=lon, y=lat), shape = 21, fill = "black",
-                   alpha = 0.3, size = 4, col="black",stroke=0.1,
-                   width = 0.1, height = 0.1)+
-        geom_density_2d_filled(data = loc_both, aes(x=lon, y=lat),
-                               contour_var = "count", alpha = 0.5,
-                               breaks = c(1,5,10,20,40,80,160,320))+
-        geom_point(data = loc_both[loc_both$group=="EPA",],
-                   aes(x=lon, y=lat), shape = 21, fill = "red",
-                   alpha = 0.5, size = 4, col="black",stroke=0.1,) +
-        labs(x="Longitude",
-             y="Latitude")
-
-ggsave(filename = "plot_map1.png",
-       path = here("figures","map"),
-       plot = plot_map1,
-       device = "png",
-       width = 28,
-       height = 21,
-       units = "cm",
-       dpi = 300
-)
 
 ##### (1) CA Map with EPA and PA sites
 # Create facet_grid map for monitors
@@ -577,17 +554,13 @@ ggsave(filename = "plot_map.png",
 
 #####(2) CA Map with EPA and PA sites
 ## Zoom-in pairing map
-### Bay area boundaries
-left=-123
-bottom=37
-right=-121
-top=38.5
+# ### Bay area boundaries
+# left=-123
+# bottom=37
+# right=-121
+# top=38.5
 
 ### Bay area map
-base_bay = ggmap(get_stamenmap(bbox=c(left=left,bottom=bottom,right=right,top=top),
-        source="stamen", maptype="terrain-background", crop=FALSE, zoom = 10))
-# save(base_bay, file = here("data","plot","CA","base_bay.RData"))
-
 base_sf <- ggmap(get_stamenmap(bbox=c(left=-122.5,bottom=37.7,right=-121,top=37.95),
                                source="stamen", maptype="terrain-background", crop=FALSE, zoom = 12))
 # save(base_sf, file = here("data","plot","CA","base_sf.RData"))
@@ -694,30 +667,6 @@ ggsave(filename = "plot_ab.png",
        device = "png",
        width = 25,
        height = 26,
-       units = "cm",
-       dpi = 300
-)
-
-# PA PM2.5 vs EPA PM2.5
-plot_pes <- dat %>%
-        ggplot(aes(x = pm2.5_epa, y = pm2.5_cf1_a))+
-        geom_point(alpha = 0.05)+
-        geom_smooth(method = lm)+
-        labs(title = expression(paste(PM[2.5], " [",mu,"g/", "m"^3, "]")),
-             x = "EPA",
-             y = "PurpleAir") +
-        xlim(c(0,100)) + 
-        ylim(c(0,100))
-
-# dev.new()
-# plot_pes
-
-ggsave(filename = "plot_pes.png",
-       path = here("figures","EDA"),
-       plot = plot_pes,
-       device = "png",
-       width = 28,
-       height = 21,
        units = "cm",
        dpi = 300
 )
@@ -1408,7 +1357,7 @@ dat_loc_far_test <- dat %>%
 nsim <- 20
 nsim_train <- 100000
 nsim_test <- 20000
-set.seed(1)
+set.seed(123)
 ind_time_train <- sample(1:length(dat_time_train$time), nsim_train, replace = F)
 
 ind_loc_train <- sample(1:length(dat_loc_far_train$time), nsim_train, replace = F)
@@ -1657,7 +1606,7 @@ dat_loc_far_test <- dat %>%
 nsim <- 20
 nsim_train <- 100000
 nsim_test <- 20000
-set.seed(1)
+set.seed(123)
 ind_time_train <- sample(1:length(dat_time_train$time), nsim_train, replace = F)
 
 ind_loc_train <- sample(1:length(dat_loc_far_train$time), nsim_train, replace = F)
@@ -1909,7 +1858,7 @@ dat_loc_far_test <- dat %>%
 nsim <- 20
 nsim_train <- 100000
 nsim_test <- 20000
-set.seed(1)
+set.seed(123)
 ind_time_train <- sample(1:length(dat_time_train$time), nsim_train, replace = F)
 
 ind_loc_train <- sample(1:length(dat_loc_far_train$time), nsim_train, replace = F)
@@ -2161,7 +2110,7 @@ dat_loc_far_test <- dat %>%
 nsim <- 20
 nsim_train <- 100000
 nsim_test <- 20000
-set.seed(1)
+set.seed(123)
 ind_time_train <- sample(1:length(dat_time_train$time), nsim_train, replace = F)
 
 ind_loc_train <- sample(1:length(dat_loc_far_train$time), nsim_train, replace = F)
@@ -2413,7 +2362,7 @@ dat_loc_far_test <- dat %>%
 nsim <- 20
 nsim_train <- 100000
 nsim_test <- 20000
-set.seed(1)
+set.seed(123)
 ind_time_train <- sample(1:length(dat_time_train$time), nsim_train, replace = F)
 
 ind_loc_train <- sample(1:length(dat_loc_far_train$time), nsim_train, replace = F)
@@ -2666,7 +2615,7 @@ dat_loc_far_test <- dat %>%
 nsim <- 20
 nsim_train <- 100000
 nsim_test <- 20000
-set.seed(1)
+set.seed(123)
 ind_time_train <- sample(1:length(dat_time_train$time), nsim_train, replace = F)
 
 ind_loc_train <- sample(1:length(dat_loc_far_train$time), nsim_train, replace = F)
@@ -2908,8 +2857,6 @@ load(here("data","model","mod_gbm_time.RData"))
 # load(here("data","tidy","CA","pa_join_epa.RData"))
 
 ### California map
-camap = ggmap(get_stamenmap(bbox=c(left=left,bottom=bottom,right=right,top=top),
-        source="stamen", maptype="terrain-background", crop=FALSE, zoom = 10))
 dat_ca <- pa_join_epa %>% 
         select("time","pm2.5","PM2.5_CF1_A","PM2.5_CF1_B","pm2.5_A","pm2.5_B","temp","humidity",
                "label","longitude","latitude","lon_epa","lat_epa","dist") %>% 
