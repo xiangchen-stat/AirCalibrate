@@ -77,7 +77,7 @@ pm2.5_reduced <- pm2.5 %>%
         rename(pm2.5="Sample Measurement") %>% 
         distinct()
 
-# save(pm2.5_reduced, file=here("data","tidy","EPA","pm2.5_CA_reduced.RData"))
+save(pm2.5_reduced, file=here("data","tidy","EPA","pm2.5_CA_reduced.RData"))
 # load(here("data","tidy","EPA","pm2.5_CA_reduced.RData"))
 
 # Get EPA covaritate data matrix
@@ -471,13 +471,13 @@ save(dat, file = here("data","tidy","CA","dat.RData"))
 
 ##################1.4 Plot maps##################
 ### California boundaries
-left=-124.6
-bottom=32.2
-right=-114
-top=42.2
+# left=-124.6
+# bottom=32.2
+# right=-114
+# top=42.2
 
 ### California map
-camap = ggmap(get_stamenmap(bbox=c(left=left,bottom=bottom,right=right,top=top),
+camap = ggmap(get_stamenmap(bbox=c(left=-124.6,bottom=32.2,right=-114,top=42.2),
         source="stamen", maptype="terrain-background", crop=FALSE, zoom = 10))
 # save(camap, file = here("data","plot","CA","camap10.RData"))
 
@@ -2860,9 +2860,12 @@ mymean = function(x){
 
 # (1) Create data set for ploting
 load(here("data","model","mod_gbm_time.RData"))
-# load(here("data","tidy","CA","pa_join_epa.RData"))
+load(here("data","tidy","CA","pa_join_epa.RData"))
 
 ### California map
+camap = ggmap(get_stamenmap(bbox=c(left=-124.6,bottom=32.2,right=-114,top=42.2),
+                            source="stamen", maptype="terrain-background", crop=FALSE, zoom = 10))
+
 dat_ca <- pa_join_epa %>% 
         select("time","pm2.5","PM2.5_CF1_A","PM2.5_CF1_B","pm2.5_A","pm2.5_B","temp","humidity",
                "label","longitude","latitude","lon_epa","lat_epa","dist") %>% 
@@ -2950,7 +2953,7 @@ name_mba <- c("all","oct","nov","dec","jan","feb","mar")
 names(dat_mba) <- name_mba
 
 # save(dat_mba, file = here("data","plot","CA","dat_mba.RData"))
-# load(here("data","tidy","EPA","pm2.5_CA_reduced.RData"))
+load(here("data","tidy","EPA","pm2.5_CA_reduced.RData"))
 
 epa <- pm2.5_reduced %>% 
         mutate(`Date GMT` = date(`Date GMT`),
