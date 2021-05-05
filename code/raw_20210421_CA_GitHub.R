@@ -617,6 +617,10 @@ ggsave(filename = "plot_map_sf.png",
 ##################2.1 Exploratory Analysis##################
 load(here("data","tidy","CA","dat.RData"))
 
+lm_ca <- lm(pm2.5_epa ~ pm2.5_cf1_m + hum,
+            data = dat)
+summary(lm_ca)
+
 # Summary statistics
 dat %>% select(pm2.5_epa:hum,dist) %>% 
         skim()
