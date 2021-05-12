@@ -18,7 +18,7 @@ To run all of the analysis, you need to download all of the files in this repo a
 
 **Note 1: You may need 50G memory or more to run all the analysis at once. It may take around 50 hours to finish which depends on the system.**
 
-**Note 2: The code is originally designed to be modulized to reduce the need for memory and time. You can utilize this design by uncommented all of the code lines including `save()` and `load()` functions in the `main.R` file. After doing that, you only need to run all the code once and then you can run each section independently. The "section" here means sections in the code with level 1 heading, such as 1., 2., 3., etc.** 
+**Note 2: The code is originally designed to be modulized to reduce the need for memory and time. You can utilize this design by uncommented all of the code lines including `save()` and `load()` functions in the `main.R` file (which is optional). After doing that, you only need to run all the code once and then you can run each section independently. The "section" here means sections in the code with level 1 heading, such as 1., 2., 3., etc.** 
 
 The structure of this repository is as follows: 
 
