@@ -1,5 +1,5 @@
 # Directories
-
+out/*
 
 # Data
 data/raw/CA/*.csv
