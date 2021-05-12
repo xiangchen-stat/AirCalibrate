@@ -35,7 +35,8 @@ p_load(skimr,GGally,RColorBrewer,viridis,ggpubr)
 # Packages for building machine learning algorithm
 p_load(randomForest,gbm,yardstick)
 # Packages for creating map/spatial operation
-p_load(sf,lwgeom,geosphere,units,ggmap,MBA)
+# p_load(sf,lwgeom,geosphere,units,ggmap,MBA)
+p_load(sf,geosphere,units,ggmap,MBA)
 # Load tidyverse
 p_load(tidyverse)
 # Set ggplot theme
