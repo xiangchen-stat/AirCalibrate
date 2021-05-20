@@ -10,13 +10,13 @@ _Johns Hopkins University_
 
 ## Overview
 
-This repository provides all the code and data to reproduce the ScM Thesis *Evaluating Machine Learning Methods for Calibrating Low-Cost PM<sub>2.5</sub> Sensor Data*.
+This repository provides all the code and data to reproduce the ScM Thesis *Evaluating Machine Learning Methods for Calibrating Low-Cost PM<sub>2.5</sub> Sensor Data*. The full text will be available online soon from [JScholarship](https://jscholarship.library.jhu.edu/).
 
 ## Instructions
 
 To run all of the analysis, you need to download all of the files in this repo and keep the folder structures to avoid potiential errors when saving results. It is recommended to open the `/AirCalibrate.Rproj` file to start a new R session and then open `/code/main.R` if you use Rstudio. You need to install `pacman` package before using `p_load()` function to install and load other required packages. When you begin the analysis, please make sure the current working directory of R is at home directory of this repository (`/AirCalibrate/`).
 
-**Note 1: You may need 50G memory or more to run all the analysis at once. It may take around 50 hours to finish which depends on the system.**
+**Note 1: You may need 35G memory or more to run all the analysis at once. It may take around 50-125 hours to finish which depends on the system.**
 
 **Note 2: The code is originally designed to be modulized to reduce the need for memory and time. You can utilize this design by uncommented all of the code lines including `save()` and `load()` functions in the `main.R` file (which is optional). After doing that, you only need to run all the code once and then you can run each section independently. The "section" here means sections in the code with level 1 heading, such as 1., 2., 3., etc.** 
 

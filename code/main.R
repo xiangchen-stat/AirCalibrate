@@ -1,6 +1,8 @@
 # Author: Xiang Chen
 # Advisor: Abhirup Datta
-# Last updated: 2021.4.25
+# Department of Biostatistics
+# Johns Hopkins University
+# Last updated: 2021.5.20
 
 ##### Table of Content ####
 # 0. Loading packages and set environment
@@ -1338,6 +1340,84 @@ ggsave(filename = "plot_ts.png",
        units = "cm",
        dpi = 300
 )
+
+## Time series in one plot
+dat_vis_ts_long <- dat_vis_ts %>% 
+        rename(EPA = `pm2.5_epa`, PurpleAir = `pm2.5_pa`, GBM = `pm2.5_gbm`) %>%
+        pivot_longer(cols = c(EPA, PurpleAir, GBM),
+                     names_to = "Source",
+                     values_to = "pm2.5",
+                     ) %>% 
+        mutate(Source = factor(Source, levels = c("EPA", "PurpleAir", "GBM")))
+        # mutate(source_lat = interaction(source, lat_pa),
+        #        source_time = interaction(source, time))
+
+dat_vis_ts_mean <- dat_vis_ts_long %>%
+        group_by(time, Source) %>% 
+        summarize(pm2.5_mean = mean(pm2.5))
+
+plot_ts_com <- dat_vis_ts_mean %>% 
+        ggplot() +
+        geom_line(aes(x = time, y = pm2.5_mean, group = Source, color = Source), 
+                  size = 0.8, alpha = 0.85) +
+        labs(x = "Time",
+             # y = expression(paste(PM[2.5], " [",mu,"g/", "m"^3, "]"))) +
+             y = expression("PM"[2.5]*" ["*mu*"g/m"^3*"]"))+
+        # ylim(c(0,40)) +
+        scale_x_datetime(date_breaks = "1 month", date_labels = "%Y %b") +
+        theme(legend.position = "bottom",
+              legend.title = element_text(size = 20),
+              legend.text = element_text(size = 18)) +
+        # scale_color_viridis(discrete=TRUE, direction = -1)
+        scale_color_manual(values = c("#21908CFF", "#440154FF", "#FDE725FF"))
+
+# dev.new()
+# plot_ts_com
+
+
+ggsave(filename = "plot_ts_com.png",
+       path = here("figures","EDA"),
+       plot = plot_ts_com,
+       device = "png",
+       width = 45,
+       height = 20,
+       units = "cm",
+       dpi = 300
+)
+
+# dat_vis_ts_mean_daily <- dat_vis_ts_mean %>% 
+#         mutate(date = date(time)) %>% 
+#         group_by(date, Source) %>% 
+#         summarize(pm2.5_mean_daily = mean(pm2.5_mean))
+# 
+# plot_ts_com_daily <- dat_vis_ts_mean_daily %>% 
+#         ggplot() +
+#         geom_smooth(aes(x = date, y = pm2.5_mean_daily, group = Source, color = Source), 
+#                   size = 0.8, alpha = 0.85) +
+#         labs(x = "Time",
+#              # y = expression(paste(PM[2.5], " [",mu,"g/", "m"^3, "]"))) +
+#              y = expression("PM"[2.5]*" ["*mu*"g/m"^3*"]"))+
+#         # ylim(c(0,40)) +
+#         scale_x_datetime(date_breaks = "1 month", date_labels = "%Y %b") +
+#         theme(legend.position = "bottom",
+#               legend.title = element_text(size = 20),
+#               legend.text = element_text(size = 18)) +
+#         # scale_color_viridis(discrete=TRUE, direction = -1)
+#         scale_color_manual(values = c("#21908CFF", "#440154FF", "#FDE725FF")) 
+# 
+# # dev.new()
+# # plot_ts_com
+# 
+# 
+# ggsave(filename = "plot_ts_com_daily.png",
+#        path = here("figures","EDA"),
+#        plot = plot_ts_com,
+#        device = "png",
+#        width = 45,
+#        height = 20,
+#        units = "cm",
+#        dpi = 300
+# )
 
 ##################2.2 Model fitting and evaluation END##################
 ############################END############################
