@@ -12,7 +12,7 @@ _Johns Hopkins University_
 
 ## Overview
 
-This repository provides all the code and data to reproduce the ScM Thesis *Evaluating Machine Learning Methods for Calibrating Low-Cost PM<sub>2.5</sub> Sensor Data*. The full text will be available online soon from [JScholarship](https://jscholarship.library.jhu.edu/).
+This repository provides all the code and data to reproduce the ScM Thesis *Evaluating Machine Learning Methods for Calibrating Low-Cost PM<sub>2.5</sub> Sensor Data*. The full text is available online [JScholarship](http://jhir.library.jhu.edu/handle/1774.2/64177).
 
 ## Instructions
 
