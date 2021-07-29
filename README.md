@@ -4,7 +4,7 @@ Author: Xiang Chen
 
 Advisor: Dr. Abhirup Datta
 
-Secondary Reader: Roger D. Peng
+Secondary Reader: Dr. Roger D. Peng
 
 _Department of Biostatistics_
 
