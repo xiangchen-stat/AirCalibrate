@@ -1,0 +1,2101 @@
+"","epoch","Middle layers","Number of nodes","Validation","Loss","Batch normalization"
+"1",1,"1 layer","huge","Validation error",37.2139663696289,TRUE
+"2",2,"1 layer","huge","Validation error",27.3203086853027,TRUE
+"3",3,"1 layer","huge","Validation error",24.4227504730225,TRUE
+"4",4,"1 layer","huge","Validation error",25.0708065032959,TRUE
+"5",5,"1 layer","huge","Validation error",25.3595199584961,TRUE
+"6",6,"1 layer","huge","Validation error",26.17502784729,TRUE
+"7",7,"1 layer","huge","Validation error",26.4597244262695,TRUE
+"8",8,"1 layer","huge","Validation error",26.559778213501,TRUE
+"9",9,"1 layer","huge","Validation error",24.8371810913086,TRUE
+"10",10,"1 layer","huge","Validation error",24.6011962890625,TRUE
+"11",11,"1 layer","huge","Validation error",25.8300228118896,TRUE
+"12",12,"1 layer","huge","Validation error",24.8536758422852,TRUE
+"13",13,"1 layer","huge","Validation error",24.2268447875977,TRUE
+"14",14,"1 layer","huge","Validation error",25.1453952789307,TRUE
+"15",15,"1 layer","huge","Validation error",24.7929668426514,TRUE
+"16",16,"1 layer","huge","Validation error",23.7703704833984,TRUE
+"17",17,"1 layer","huge","Validation error",23.8598766326904,TRUE
+"18",18,"1 layer","huge","Validation error",25.8350429534912,TRUE
+"19",19,"1 layer","huge","Validation error",24.5553379058838,TRUE
+"20",20,"1 layer","huge","Validation error",26.1794013977051,TRUE
+"21",21,"1 layer","huge","Validation error",23.4244403839111,TRUE
+"22",22,"1 layer","huge","Validation error",24.2384471893311,TRUE
+"23",23,"1 layer","huge","Validation error",23.9432888031006,TRUE
+"24",24,"1 layer","huge","Validation error",24.6168384552002,TRUE
+"25",25,"1 layer","huge","Validation error",24.8163013458252,TRUE
+"26",26,"1 layer","huge","Validation error",26.6203880310059,TRUE
+"27",27,"1 layer","huge","Validation error",23.7927207946777,TRUE
+"28",28,"1 layer","huge","Validation error",24.9754524230957,TRUE
+"29",29,"1 layer","huge","Validation error",24.4326343536377,TRUE
+"30",30,"1 layer","huge","Validation error",25.0917186737061,TRUE
+"31",1,"1 layer","large","Validation error",36.5952262878418,TRUE
+"32",2,"1 layer","large","Validation error",27.283863067627,TRUE
+"33",3,"1 layer","large","Validation error",25.8000526428223,TRUE
+"34",4,"1 layer","large","Validation error",24.7533302307129,TRUE
+"35",5,"1 layer","large","Validation error",26.7456665039062,TRUE
+"36",6,"1 layer","large","Validation error",26.843822479248,TRUE
+"37",7,"1 layer","large","Validation error",24.2038154602051,TRUE
+"38",8,"1 layer","large","Validation error",25.1325531005859,TRUE
+"39",9,"1 layer","large","Validation error",26.2599048614502,TRUE
+"40",10,"1 layer","large","Validation error",26.5733661651611,TRUE
+"41",11,"1 layer","large","Validation error",23.9308319091797,TRUE
+"42",12,"1 layer","large","Validation error",24.336389541626,TRUE
+"43",13,"1 layer","large","Validation error",24.8203525543213,TRUE
+"44",14,"1 layer","large","Validation error",26.838399887085,TRUE
+"45",15,"1 layer","large","Validation error",25.9280033111572,TRUE
+"46",16,"1 layer","large","Validation error",25.3923568725586,TRUE
+"47",17,"1 layer","large","Validation error",24.1538372039795,TRUE
+"48",18,"1 layer","large","Validation error",25.8698139190674,TRUE
+"49",19,"1 layer","large","Validation error",24.5882244110107,TRUE
+"50",20,"1 layer","large","Validation error",25.4694786071777,TRUE
+"51",21,"1 layer","large","Validation error",24.4306583404541,TRUE
+"52",22,"1 layer","large","Validation error",25.9341888427734,TRUE
+"53",23,"1 layer","large","Validation error",25.3731155395508,TRUE
+"54",24,"1 layer","large","Validation error",24.6906814575195,TRUE
+"55",25,"1 layer","large","Validation error",25.1175155639648,TRUE
+"56",26,"1 layer","large","Validation error",25.3357315063477,TRUE
+"57",27,"1 layer","large","Validation error",24.8017044067383,TRUE
+"58",28,"1 layer","large","Validation error",23.8767356872559,TRUE
+"59",29,"1 layer","large","Validation error",26.4545822143555,TRUE
+"60",30,"1 layer","large","Validation error",24.3339538574219,TRUE
+"61",1,"1 layer","medium","Validation error",38.3330001831055,TRUE
+"62",2,"1 layer","medium","Validation error",26.6700954437256,TRUE
+"63",3,"1 layer","medium","Validation error",25.4854640960693,TRUE
+"64",4,"1 layer","medium","Validation error",25.277868270874,TRUE
+"65",5,"1 layer","medium","Validation error",26.2189292907715,TRUE
+"66",6,"1 layer","medium","Validation error",25.6479663848877,TRUE
+"67",7,"1 layer","medium","Validation error",25.6698722839355,TRUE
+"68",8,"1 layer","medium","Validation error",25.3924446105957,TRUE
+"69",9,"1 layer","medium","Validation error",25.400562286377,TRUE
+"70",10,"1 layer","medium","Validation error",26.9914703369141,TRUE
+"71",11,"1 layer","medium","Validation error",25.4360370635986,TRUE
+"72",12,"1 layer","medium","Validation error",25.1766357421875,TRUE
+"73",13,"1 layer","medium","Validation error",25.2671909332275,TRUE
+"74",14,"1 layer","medium","Validation error",25.5889072418213,TRUE
+"75",15,"1 layer","medium","Validation error",25.7993183135986,TRUE
+"76",16,"1 layer","medium","Validation error",24.9327354431152,TRUE
+"77",17,"1 layer","medium","Validation error",25.0528984069824,TRUE
+"78",18,"1 layer","medium","Validation error",24.7341709136963,TRUE
+"79",19,"1 layer","medium","Validation error",25.1901340484619,TRUE
+"80",20,"1 layer","medium","Validation error",25.0277938842773,TRUE
+"81",21,"1 layer","medium","Validation error",25.485279083252,TRUE
+"82",22,"1 layer","medium","Validation error",24.9569797515869,TRUE
+"83",23,"1 layer","medium","Validation error",24.9951076507568,TRUE
+"84",24,"1 layer","medium","Validation error",24.4020652770996,TRUE
+"85",25,"1 layer","medium","Validation error",24.5708312988281,TRUE
+"86",26,"1 layer","medium","Validation error",25.3803291320801,TRUE
+"87",27,"1 layer","medium","Validation error",25.2805843353271,TRUE
+"88",28,"1 layer","medium","Validation error",24.4428176879883,TRUE
+"89",29,"1 layer","medium","Validation error",24.1668376922607,TRUE
+"90",30,"1 layer","medium","Validation error",24.5654773712158,TRUE
+"91",1,"1 layer","medium large","Validation error",31.6661739349365,TRUE
+"92",2,"1 layer","medium large","Validation error",26.848030090332,TRUE
+"93",3,"1 layer","medium large","Validation error",26.2187480926514,TRUE
+"94",4,"1 layer","medium large","Validation error",26.4363803863525,TRUE
+"95",5,"1 layer","medium large","Validation error",24.9033851623535,TRUE
+"96",6,"1 layer","medium large","Validation error",25.8188781738281,TRUE
+"97",7,"1 layer","medium large","Validation error",25.448314666748,TRUE
+"98",8,"1 layer","medium large","Validation error",24.9674854278564,TRUE
+"99",9,"1 layer","medium large","Validation error",24.2592735290527,TRUE
+"100",10,"1 layer","medium large","Validation error",24.7841949462891,TRUE
+"101",11,"1 layer","medium large","Validation error",24.1186447143555,TRUE
+"102",12,"1 layer","medium large","Validation error",25.1575317382812,TRUE
+"103",13,"1 layer","medium large","Validation error",25.0927314758301,TRUE
+"104",14,"1 layer","medium large","Validation error",25.6221733093262,TRUE
+"105",15,"1 layer","medium large","Validation error",24.3623638153076,TRUE
+"106",16,"1 layer","medium large","Validation error",24.3306713104248,TRUE
+"107",17,"1 layer","medium large","Validation error",24.3236656188965,TRUE
+"108",18,"1 layer","medium large","Validation error",24.4138355255127,TRUE
+"109",19,"1 layer","medium large","Validation error",24.1653213500977,TRUE
+"110",20,"1 layer","medium large","Validation error",24.6998310089111,TRUE
+"111",21,"1 layer","medium large","Validation error",24.9669399261475,TRUE
+"112",22,"1 layer","medium large","Validation error",25.368989944458,TRUE
+"113",23,"1 layer","medium large","Validation error",26.2608432769775,TRUE
+"114",24,"1 layer","medium large","Validation error",25.969669342041,TRUE
+"115",25,"1 layer","medium large","Validation error",25.4456977844238,TRUE
+"116",26,"1 layer","medium large","Validation error",24.0419216156006,TRUE
+"117",27,"1 layer","medium large","Validation error",24.9861354827881,TRUE
+"118",28,"1 layer","medium large","Validation error",24.5398864746094,TRUE
+"119",29,"1 layer","medium large","Validation error",24.6708087921143,TRUE
+"120",30,"1 layer","medium large","Validation error",23.5150127410889,TRUE
+"121",1,"1 layer","medium small","Validation error",74.3219985961914,TRUE
+"122",2,"1 layer","medium small","Validation error",26.3031387329102,TRUE
+"123",3,"1 layer","medium small","Validation error",26.0356159210205,TRUE
+"124",4,"1 layer","medium small","Validation error",26.1814880371094,TRUE
+"125",5,"1 layer","medium small","Validation error",26.030834197998,TRUE
+"126",6,"1 layer","medium small","Validation error",25.6942558288574,TRUE
+"127",7,"1 layer","medium small","Validation error",26.2312030792236,TRUE
+"128",8,"1 layer","medium small","Validation error",25.4125537872314,TRUE
+"129",9,"1 layer","medium small","Validation error",25.1747283935547,TRUE
+"130",10,"1 layer","medium small","Validation error",25.2046909332275,TRUE
+"131",11,"1 layer","medium small","Validation error",25.350248336792,TRUE
+"132",12,"1 layer","medium small","Validation error",25.4262390136719,TRUE
+"133",13,"1 layer","medium small","Validation error",25.7784786224365,TRUE
+"134",14,"1 layer","medium small","Validation error",25.487377166748,TRUE
+"135",15,"1 layer","medium small","Validation error",25.1313285827637,TRUE
+"136",16,"1 layer","medium small","Validation error",24.8884220123291,TRUE
+"137",17,"1 layer","medium small","Validation error",25.2404460906982,TRUE
+"138",18,"1 layer","medium small","Validation error",25.3963794708252,TRUE
+"139",19,"1 layer","medium small","Validation error",25.4046840667725,TRUE
+"140",20,"1 layer","medium small","Validation error",25.5076999664307,TRUE
+"141",21,"1 layer","medium small","Validation error",24.8367176055908,TRUE
+"142",22,"1 layer","medium small","Validation error",25.071756362915,TRUE
+"143",23,"1 layer","medium small","Validation error",25.1279220581055,TRUE
+"144",24,"1 layer","medium small","Validation error",24.8930759429932,TRUE
+"145",25,"1 layer","medium small","Validation error",25.7379703521729,TRUE
+"146",26,"1 layer","medium small","Validation error",24.9424858093262,TRUE
+"147",27,"1 layer","medium small","Validation error",25.3258094787598,TRUE
+"148",28,"1 layer","medium small","Validation error",25.0518760681152,TRUE
+"149",29,"1 layer","medium small","Validation error",25.2179756164551,TRUE
+"150",30,"1 layer","medium small","Validation error",25.3220558166504,TRUE
+"151",1,"1 layer","mega","Validation error",38.6667747497559,TRUE
+"152",2,"1 layer","mega","Validation error",32.7383728027344,TRUE
+"153",3,"1 layer","mega","Validation error",27.225456237793,TRUE
+"154",4,"1 layer","mega","Validation error",27.7064037322998,TRUE
+"155",5,"1 layer","mega","Validation error",26.503547668457,TRUE
+"156",6,"1 layer","mega","Validation error",26.9949474334717,TRUE
+"157",7,"1 layer","mega","Validation error",25.9636096954346,TRUE
+"158",8,"1 layer","mega","Validation error",25.9740257263184,TRUE
+"159",9,"1 layer","mega","Validation error",27.0405197143555,TRUE
+"160",10,"1 layer","mega","Validation error",28.1966285705566,TRUE
+"161",11,"1 layer","mega","Validation error",24.5497703552246,TRUE
+"162",12,"1 layer","mega","Validation error",25.6810359954834,TRUE
+"163",13,"1 layer","mega","Validation error",23.8955039978027,TRUE
+"164",14,"1 layer","mega","Validation error",26.5154972076416,TRUE
+"165",15,"1 layer","mega","Validation error",26.160665512085,TRUE
+"166",16,"1 layer","mega","Validation error",28.4199829101562,TRUE
+"167",17,"1 layer","mega","Validation error",27.622257232666,TRUE
+"168",18,"1 layer","mega","Validation error",25.768928527832,TRUE
+"169",19,"1 layer","mega","Validation error",23.6901435852051,TRUE
+"170",20,"1 layer","mega","Validation error",27.0212230682373,TRUE
+"171",21,"1 layer","mega","Validation error",24.3242568969727,TRUE
+"172",22,"1 layer","mega","Validation error",23.4549255371094,TRUE
+"173",23,"1 layer","mega","Validation error",27.8401889801025,TRUE
+"174",24,"1 layer","mega","Validation error",25.5762786865234,TRUE
+"175",25,"1 layer","mega","Validation error",23.7493629455566,TRUE
+"176",26,"1 layer","mega","Validation error",24.7741622924805,TRUE
+"177",27,"1 layer","mega","Validation error",23.4259223937988,TRUE
+"178",28,"1 layer","mega","Validation error",27.2903823852539,TRUE
+"179",29,"1 layer","mega","Validation error",25.6685085296631,TRUE
+"180",30,"1 layer","mega","Validation error",24.8133850097656,TRUE
+"181",1,"1 layer","small","Validation error",90.5923538208008,TRUE
+"182",2,"1 layer","small","Validation error",42.5157928466797,TRUE
+"183",3,"1 layer","small","Validation error",26.3287525177002,TRUE
+"184",4,"1 layer","small","Validation error",25.6767902374268,TRUE
+"185",5,"1 layer","small","Validation error",25.7898101806641,TRUE
+"186",6,"1 layer","small","Validation error",25.8528614044189,TRUE
+"187",7,"1 layer","small","Validation error",25.8009757995605,TRUE
+"188",8,"1 layer","small","Validation error",25.4795799255371,TRUE
+"189",9,"1 layer","small","Validation error",25.2220458984375,TRUE
+"190",10,"1 layer","small","Validation error",25.5659961700439,TRUE
+"191",11,"1 layer","small","Validation error",25.5320301055908,TRUE
+"192",12,"1 layer","small","Validation error",25.5084114074707,TRUE
+"193",13,"1 layer","small","Validation error",25.1431159973145,TRUE
+"194",14,"1 layer","small","Validation error",25.291316986084,TRUE
+"195",15,"1 layer","small","Validation error",25.4118804931641,TRUE
+"196",16,"1 layer","small","Validation error",25.236047744751,TRUE
+"197",17,"1 layer","small","Validation error",25.1286945343018,TRUE
+"198",18,"1 layer","small","Validation error",25.2349414825439,TRUE
+"199",19,"1 layer","small","Validation error",25.0758686065674,TRUE
+"200",20,"1 layer","small","Validation error",25.6272659301758,TRUE
+"201",21,"1 layer","small","Validation error",25.6781558990479,TRUE
+"202",22,"1 layer","small","Validation error",25.224142074585,TRUE
+"203",23,"1 layer","small","Validation error",25.4700088500977,TRUE
+"204",24,"1 layer","small","Validation error",25.6987972259521,TRUE
+"205",25,"1 layer","small","Validation error",25.2821998596191,TRUE
+"206",26,"1 layer","small","Validation error",25.343620300293,TRUE
+"207",27,"1 layer","small","Validation error",25.6116600036621,TRUE
+"208",28,"1 layer","small","Validation error",25.1966686248779,TRUE
+"209",29,"1 layer","small","Validation error",25.6911869049072,TRUE
+"210",30,"1 layer","small","Validation error",25.6124439239502,TRUE
+"211",1,"2 layer","huge","Validation error",37.1553688049316,TRUE
+"212",2,"2 layer","huge","Validation error",26.766975402832,TRUE
+"213",3,"2 layer","huge","Validation error",25.2152214050293,TRUE
+"214",4,"2 layer","huge","Validation error",29.7188091278076,TRUE
+"215",5,"2 layer","huge","Validation error",25.5864944458008,TRUE
+"216",6,"2 layer","huge","Validation error",25.5396747589111,TRUE
+"217",7,"2 layer","huge","Validation error",23.2528686523438,TRUE
+"218",8,"2 layer","huge","Validation error",26.2338275909424,TRUE
+"219",9,"2 layer","huge","Validation error",26.4366359710693,TRUE
+"220",10,"2 layer","huge","Validation error",23.4479942321777,TRUE
+"221",11,"2 layer","huge","Validation error",26.7279758453369,TRUE
+"222",12,"2 layer","huge","Validation error",23.5385398864746,TRUE
+"223",13,"2 layer","huge","Validation error",26.1303863525391,TRUE
+"224",14,"2 layer","huge","Validation error",24.5159549713135,TRUE
+"225",15,"2 layer","huge","Validation error",23.5211353302002,TRUE
+"226",16,"2 layer","huge","Validation error",24.9431114196777,TRUE
+"227",17,"2 layer","huge","Validation error",24.1540622711182,TRUE
+"228",18,"2 layer","huge","Validation error",24.2029571533203,TRUE
+"229",19,"2 layer","huge","Validation error",26.2229957580566,TRUE
+"230",20,"2 layer","huge","Validation error",25.0061950683594,TRUE
+"231",21,"2 layer","huge","Validation error",23.761402130127,TRUE
+"232",22,"2 layer","huge","Validation error",25.10595703125,TRUE
+"233",23,"2 layer","huge","Validation error",24.0311965942383,TRUE
+"234",24,"2 layer","huge","Validation error",23.2357654571533,TRUE
+"235",25,"2 layer","huge","Validation error",23.416187286377,TRUE
+"236",26,"2 layer","huge","Validation error",23.6420936584473,TRUE
+"237",27,"2 layer","huge","Validation error",23.7832088470459,TRUE
+"238",28,"2 layer","huge","Validation error",23.9050254821777,TRUE
+"239",29,"2 layer","huge","Validation error",23.6260070800781,TRUE
+"240",30,"2 layer","huge","Validation error",23.7281932830811,TRUE
+"241",1,"2 layer","large","Validation error",33.5463447570801,TRUE
+"242",2,"2 layer","large","Validation error",27.943977355957,TRUE
+"243",3,"2 layer","large","Validation error",25.5238590240479,TRUE
+"244",4,"2 layer","large","Validation error",25.2925891876221,TRUE
+"245",5,"2 layer","large","Validation error",25.3851318359375,TRUE
+"246",6,"2 layer","large","Validation error",24.6740837097168,TRUE
+"247",7,"2 layer","large","Validation error",24.4997043609619,TRUE
+"248",8,"2 layer","large","Validation error",24.1090850830078,TRUE
+"249",9,"2 layer","large","Validation error",26.2154388427734,TRUE
+"250",10,"2 layer","large","Validation error",23.1333332061768,TRUE
+"251",11,"2 layer","large","Validation error",27.1795635223389,TRUE
+"252",12,"2 layer","large","Validation error",24.5489234924316,TRUE
+"253",13,"2 layer","large","Validation error",25.2603569030762,TRUE
+"254",14,"2 layer","large","Validation error",23.4369468688965,TRUE
+"255",15,"2 layer","large","Validation error",23.8634586334229,TRUE
+"256",16,"2 layer","large","Validation error",25.371654510498,TRUE
+"257",17,"2 layer","large","Validation error",23.6098537445068,TRUE
+"258",18,"2 layer","large","Validation error",23.1893043518066,TRUE
+"259",19,"2 layer","large","Validation error",23.37428855896,TRUE
+"260",20,"2 layer","large","Validation error",23.5557708740234,TRUE
+"261",21,"2 layer","large","Validation error",23.9755191802979,TRUE
+"262",22,"2 layer","large","Validation error",23.7486915588379,TRUE
+"263",23,"2 layer","large","Validation error",24.9323062896729,TRUE
+"264",24,"2 layer","large","Validation error",24.8356170654297,TRUE
+"265",25,"2 layer","large","Validation error",23.3470516204834,TRUE
+"266",26,"2 layer","large","Validation error",23.6389865875244,TRUE
+"267",27,"2 layer","large","Validation error",23.6818733215332,TRUE
+"268",28,"2 layer","large","Validation error",27.8639965057373,TRUE
+"269",29,"2 layer","large","Validation error",24.4979705810547,TRUE
+"270",30,"2 layer","large","Validation error",23.3484668731689,TRUE
+"271",1,"2 layer","medium","Validation error",51.0751914978027,TRUE
+"272",2,"2 layer","medium","Validation error",26.4001140594482,TRUE
+"273",3,"2 layer","medium","Validation error",25.6688594818115,TRUE
+"274",4,"2 layer","medium","Validation error",24.3623847961426,TRUE
+"275",5,"2 layer","medium","Validation error",24.5996837615967,TRUE
+"276",6,"2 layer","medium","Validation error",28.19508934021,TRUE
+"277",7,"2 layer","medium","Validation error",23.7465744018555,TRUE
+"278",8,"2 layer","medium","Validation error",24.1884117126465,TRUE
+"279",9,"2 layer","medium","Validation error",24.8417301177979,TRUE
+"280",10,"2 layer","medium","Validation error",23.968053817749,TRUE
+"281",11,"2 layer","medium","Validation error",24.6457023620605,TRUE
+"282",12,"2 layer","medium","Validation error",23.8232803344727,TRUE
+"283",13,"2 layer","medium","Validation error",24.5846481323242,TRUE
+"284",14,"2 layer","medium","Validation error",26.9706630706787,TRUE
+"285",15,"2 layer","medium","Validation error",23.2781391143799,TRUE
+"286",16,"2 layer","medium","Validation error",23.0063724517822,TRUE
+"287",17,"2 layer","medium","Validation error",23.7051391601562,TRUE
+"288",18,"2 layer","medium","Validation error",23.0517902374268,TRUE
+"289",19,"2 layer","medium","Validation error",23.9186344146729,TRUE
+"290",20,"2 layer","medium","Validation error",25.1077575683594,TRUE
+"291",21,"2 layer","medium","Validation error",25.1576690673828,TRUE
+"292",22,"2 layer","medium","Validation error",25.6821670532227,TRUE
+"293",23,"2 layer","medium","Validation error",22.8827972412109,TRUE
+"294",24,"2 layer","medium","Validation error",23.3198299407959,TRUE
+"295",25,"2 layer","medium","Validation error",23.347827911377,TRUE
+"296",26,"2 layer","medium","Validation error",23.0396556854248,TRUE
+"297",27,"2 layer","medium","Validation error",23.5566673278809,TRUE
+"298",28,"2 layer","medium","Validation error",23.0478229522705,TRUE
+"299",29,"2 layer","medium","Validation error",23.0425510406494,TRUE
+"300",30,"2 layer","medium","Validation error",23.7314586639404,TRUE
+"301",1,"2 layer","medium large","Validation error",36.4430656433105,TRUE
+"302",2,"2 layer","medium large","Validation error",24.8929271697998,TRUE
+"303",3,"2 layer","medium large","Validation error",24.1808891296387,TRUE
+"304",4,"2 layer","medium large","Validation error",28.5337429046631,TRUE
+"305",5,"2 layer","medium large","Validation error",23.0731658935547,TRUE
+"306",6,"2 layer","medium large","Validation error",23.6380443572998,TRUE
+"307",7,"2 layer","medium large","Validation error",28.6276760101318,TRUE
+"308",8,"2 layer","medium large","Validation error",23.5541534423828,TRUE
+"309",9,"2 layer","medium large","Validation error",24.2805824279785,TRUE
+"310",10,"2 layer","medium large","Validation error",23.2606391906738,TRUE
+"311",11,"2 layer","medium large","Validation error",23.117359161377,TRUE
+"312",12,"2 layer","medium large","Validation error",23.5334873199463,TRUE
+"313",13,"2 layer","medium large","Validation error",24.8463954925537,TRUE
+"314",14,"2 layer","medium large","Validation error",23.1328830718994,TRUE
+"315",15,"2 layer","medium large","Validation error",25.0103893280029,TRUE
+"316",16,"2 layer","medium large","Validation error",26.1078147888184,TRUE
+"317",17,"2 layer","medium large","Validation error",24.7780075073242,TRUE
+"318",18,"2 layer","medium large","Validation error",23.0867156982422,TRUE
+"319",19,"2 layer","medium large","Validation error",23.1180438995361,TRUE
+"320",20,"2 layer","medium large","Validation error",26.0254821777344,TRUE
+"321",21,"2 layer","medium large","Validation error",22.9086151123047,TRUE
+"322",22,"2 layer","medium large","Validation error",24.7455673217773,TRUE
+"323",23,"2 layer","medium large","Validation error",23.3170776367188,TRUE
+"324",24,"2 layer","medium large","Validation error",22.9848518371582,TRUE
+"325",25,"2 layer","medium large","Validation error",25.0247974395752,TRUE
+"326",26,"2 layer","medium large","Validation error",23.5309028625488,TRUE
+"327",27,"2 layer","medium large","Validation error",23.1412315368652,TRUE
+"328",28,"2 layer","medium large","Validation error",23.5899181365967,TRUE
+"329",29,"2 layer","medium large","Validation error",24.0893421173096,TRUE
+"330",30,"2 layer","medium large","Validation error",22.9198322296143,TRUE
+"331",1,"2 layer","medium small","Validation error",68.1888885498047,TRUE
+"332",2,"2 layer","medium small","Validation error",33.6307907104492,TRUE
+"333",3,"2 layer","medium small","Validation error",25.0429630279541,TRUE
+"334",4,"2 layer","medium small","Validation error",25.1201076507568,TRUE
+"335",5,"2 layer","medium small","Validation error",25.6665992736816,TRUE
+"336",6,"2 layer","medium small","Validation error",25.5139560699463,TRUE
+"337",7,"2 layer","medium small","Validation error",24.9011459350586,TRUE
+"338",8,"2 layer","medium small","Validation error",24.7706718444824,TRUE
+"339",9,"2 layer","medium small","Validation error",23.7905120849609,TRUE
+"340",10,"2 layer","medium small","Validation error",24.3509654998779,TRUE
+"341",11,"2 layer","medium small","Validation error",24.8312435150146,TRUE
+"342",12,"2 layer","medium small","Validation error",23.9021282196045,TRUE
+"343",13,"2 layer","medium small","Validation error",24.2611694335938,TRUE
+"344",14,"2 layer","medium small","Validation error",24.3080196380615,TRUE
+"345",15,"2 layer","medium small","Validation error",24.097936630249,TRUE
+"346",16,"2 layer","medium small","Validation error",24.799783706665,TRUE
+"347",17,"2 layer","medium small","Validation error",23.5489177703857,TRUE
+"348",18,"2 layer","medium small","Validation error",24.4372253417969,TRUE
+"349",19,"2 layer","medium small","Validation error",25.0143947601318,TRUE
+"350",20,"2 layer","medium small","Validation error",23.6438674926758,TRUE
+"351",21,"2 layer","medium small","Validation error",23.6079730987549,TRUE
+"352",22,"2 layer","medium small","Validation error",22.9553966522217,TRUE
+"353",23,"2 layer","medium small","Validation error",22.7579174041748,TRUE
+"354",24,"2 layer","medium small","Validation error",23.5366058349609,TRUE
+"355",25,"2 layer","medium small","Validation error",24.2226810455322,TRUE
+"356",26,"2 layer","medium small","Validation error",23.2066287994385,TRUE
+"357",27,"2 layer","medium small","Validation error",23.6171054840088,TRUE
+"358",28,"2 layer","medium small","Validation error",23.646821975708,TRUE
+"359",29,"2 layer","medium small","Validation error",22.9241180419922,TRUE
+"360",30,"2 layer","medium small","Validation error",23.0177688598633,TRUE
+"361",1,"2 layer","mega","Validation error",34.1385231018066,TRUE
+"362",2,"2 layer","mega","Validation error",27.7131595611572,TRUE
+"363",3,"2 layer","mega","Validation error",28.2846698760986,TRUE
+"364",4,"2 layer","mega","Validation error",25.7833976745605,TRUE
+"365",5,"2 layer","mega","Validation error",24.3492202758789,TRUE
+"366",6,"2 layer","mega","Validation error",22.8689308166504,TRUE
+"367",7,"2 layer","mega","Validation error",25.0464458465576,TRUE
+"368",8,"2 layer","mega","Validation error",24.404857635498,TRUE
+"369",9,"2 layer","mega","Validation error",23.9569034576416,TRUE
+"370",10,"2 layer","mega","Validation error",24.0252170562744,TRUE
+"371",11,"2 layer","mega","Validation error",24.9128856658936,TRUE
+"372",12,"2 layer","mega","Validation error",23.5750846862793,TRUE
+"373",13,"2 layer","mega","Validation error",23.9182643890381,TRUE
+"374",14,"2 layer","mega","Validation error",24.898458480835,TRUE
+"375",15,"2 layer","mega","Validation error",24.5762100219727,TRUE
+"376",16,"2 layer","mega","Validation error",23.09690284729,TRUE
+"377",17,"2 layer","mega","Validation error",27.4663028717041,TRUE
+"378",18,"2 layer","mega","Validation error",23.7069244384766,TRUE
+"379",19,"2 layer","mega","Validation error",24.1306934356689,TRUE
+"380",20,"2 layer","mega","Validation error",24.4552516937256,TRUE
+"381",21,"2 layer","mega","Validation error",24.3470344543457,TRUE
+"382",22,"2 layer","mega","Validation error",26.3229656219482,TRUE
+"383",23,"2 layer","mega","Validation error",23.628625869751,TRUE
+"384",24,"2 layer","mega","Validation error",24.4080657958984,TRUE
+"385",25,"2 layer","mega","Validation error",23.5442333221436,TRUE
+"386",26,"2 layer","mega","Validation error",24.1153202056885,TRUE
+"387",27,"2 layer","mega","Validation error",24.3109531402588,TRUE
+"388",28,"2 layer","mega","Validation error",24.5879974365234,TRUE
+"389",29,"2 layer","mega","Validation error",25.1943092346191,TRUE
+"390",30,"2 layer","mega","Validation error",23.737621307373,TRUE
+"391",1,"2 layer","small","Validation error",96.5288009643555,TRUE
+"392",2,"2 layer","small","Validation error",49.4633445739746,TRUE
+"393",3,"2 layer","small","Validation error",29.4859924316406,TRUE
+"394",4,"2 layer","small","Validation error",24.1988563537598,TRUE
+"395",5,"2 layer","small","Validation error",25.6809368133545,TRUE
+"396",6,"2 layer","small","Validation error",24.6320552825928,TRUE
+"397",7,"2 layer","small","Validation error",24.7951431274414,TRUE
+"398",8,"2 layer","small","Validation error",24.6290855407715,TRUE
+"399",9,"2 layer","small","Validation error",25.0428276062012,TRUE
+"400",10,"2 layer","small","Validation error",25.4103183746338,TRUE
+"401",11,"2 layer","small","Validation error",24.6916637420654,TRUE
+"402",12,"2 layer","small","Validation error",24.7754249572754,TRUE
+"403",13,"2 layer","small","Validation error",24.2945308685303,TRUE
+"404",14,"2 layer","small","Validation error",24.791561126709,TRUE
+"405",15,"2 layer","small","Validation error",23.5757656097412,TRUE
+"406",16,"2 layer","small","Validation error",24.1715965270996,TRUE
+"407",17,"2 layer","small","Validation error",24.0487861633301,TRUE
+"408",18,"2 layer","small","Validation error",24.1328163146973,TRUE
+"409",19,"2 layer","small","Validation error",23.751838684082,TRUE
+"410",20,"2 layer","small","Validation error",25.2747039794922,TRUE
+"411",21,"2 layer","small","Validation error",23.754768371582,TRUE
+"412",22,"2 layer","small","Validation error",24.2405300140381,TRUE
+"413",23,"2 layer","small","Validation error",24.1988391876221,TRUE
+"414",24,"2 layer","small","Validation error",23.2987308502197,TRUE
+"415",25,"2 layer","small","Validation error",23.6294403076172,TRUE
+"416",26,"2 layer","small","Validation error",24.1745662689209,TRUE
+"417",27,"2 layer","small","Validation error",23.5846939086914,TRUE
+"418",28,"2 layer","small","Validation error",24.0531940460205,TRUE
+"419",29,"2 layer","small","Validation error",23.0777168273926,TRUE
+"420",30,"2 layer","small","Validation error",24.3623657226562,TRUE
+"421",1,"3 layer","huge","Validation error",31.9541702270508,TRUE
+"422",2,"3 layer","huge","Validation error",27.2066764831543,TRUE
+"423",3,"3 layer","huge","Validation error",26.660530090332,TRUE
+"424",4,"3 layer","huge","Validation error",27.8213005065918,TRUE
+"425",5,"3 layer","huge","Validation error",24.6176719665527,TRUE
+"426",6,"3 layer","huge","Validation error",24.2068519592285,TRUE
+"427",7,"3 layer","huge","Validation error",24.3337001800537,TRUE
+"428",8,"3 layer","huge","Validation error",27.6504745483398,TRUE
+"429",9,"3 layer","huge","Validation error",31.1966705322266,TRUE
+"430",10,"3 layer","huge","Validation error",23.5757102966309,TRUE
+"431",11,"3 layer","huge","Validation error",24.5647449493408,TRUE
+"432",12,"3 layer","huge","Validation error",23.1625690460205,TRUE
+"433",13,"3 layer","huge","Validation error",23.3329792022705,TRUE
+"434",14,"3 layer","huge","Validation error",23.4689197540283,TRUE
+"435",15,"3 layer","huge","Validation error",24.2897148132324,TRUE
+"436",16,"3 layer","huge","Validation error",26.6624526977539,TRUE
+"437",17,"3 layer","huge","Validation error",25.2499732971191,TRUE
+"438",18,"3 layer","huge","Validation error",24.4568557739258,TRUE
+"439",19,"3 layer","huge","Validation error",23.758243560791,TRUE
+"440",20,"3 layer","huge","Validation error",23.0757904052734,TRUE
+"441",21,"3 layer","huge","Validation error",24.0518093109131,TRUE
+"442",22,"3 layer","huge","Validation error",23.7136878967285,TRUE
+"443",23,"3 layer","huge","Validation error",23.9872455596924,TRUE
+"444",24,"3 layer","huge","Validation error",23.1424522399902,TRUE
+"445",25,"3 layer","huge","Validation error",23.4800987243652,TRUE
+"446",26,"3 layer","huge","Validation error",24.2164516448975,TRUE
+"447",27,"3 layer","huge","Validation error",23.2373924255371,TRUE
+"448",28,"3 layer","huge","Validation error",22.8115234375,TRUE
+"449",29,"3 layer","huge","Validation error",23.7291831970215,TRUE
+"450",30,"3 layer","huge","Validation error",23.2605514526367,TRUE
+"451",1,"3 layer","large","Validation error",36.5143585205078,TRUE
+"452",2,"3 layer","large","Validation error",24.2606964111328,TRUE
+"453",3,"3 layer","large","Validation error",24.8076152801514,TRUE
+"454",4,"3 layer","large","Validation error",25.9339275360107,TRUE
+"455",5,"3 layer","large","Validation error",26.8695983886719,TRUE
+"456",6,"3 layer","large","Validation error",23.7562370300293,TRUE
+"457",7,"3 layer","large","Validation error",23.3962593078613,TRUE
+"458",8,"3 layer","large","Validation error",24.2203025817871,TRUE
+"459",9,"3 layer","large","Validation error",22.6149768829346,TRUE
+"460",10,"3 layer","large","Validation error",24.8044872283936,TRUE
+"461",11,"3 layer","large","Validation error",23.4571189880371,TRUE
+"462",12,"3 layer","large","Validation error",22.8754024505615,TRUE
+"463",13,"3 layer","large","Validation error",24.243616104126,TRUE
+"464",14,"3 layer","large","Validation error",25.5583992004395,TRUE
+"465",15,"3 layer","large","Validation error",24.7634887695312,TRUE
+"466",16,"3 layer","large","Validation error",23.6254749298096,TRUE
+"467",17,"3 layer","large","Validation error",24.7929286956787,TRUE
+"468",18,"3 layer","large","Validation error",23.8583545684814,TRUE
+"469",19,"3 layer","large","Validation error",23.1828575134277,TRUE
+"470",20,"3 layer","large","Validation error",24.2096309661865,TRUE
+"471",21,"3 layer","large","Validation error",25.2330780029297,TRUE
+"472",22,"3 layer","large","Validation error",23.8358211517334,TRUE
+"473",23,"3 layer","large","Validation error",23.9127426147461,TRUE
+"474",24,"3 layer","large","Validation error",23.2759952545166,TRUE
+"475",25,"3 layer","large","Validation error",22.7980442047119,TRUE
+"476",26,"3 layer","large","Validation error",23.6527976989746,TRUE
+"477",27,"3 layer","large","Validation error",24.2241344451904,TRUE
+"478",28,"3 layer","large","Validation error",23.41086769104,TRUE
+"479",29,"3 layer","large","Validation error",23.9299144744873,TRUE
+"480",30,"3 layer","large","Validation error",22.9131031036377,TRUE
+"481",1,"3 layer","medium","Validation error",73.6664199829102,TRUE
+"482",2,"3 layer","medium","Validation error",31.6513633728027,TRUE
+"483",3,"3 layer","medium","Validation error",24.2463779449463,TRUE
+"484",4,"3 layer","medium","Validation error",24.6572074890137,TRUE
+"485",5,"3 layer","medium","Validation error",26.6039638519287,TRUE
+"486",6,"3 layer","medium","Validation error",23.34889793396,TRUE
+"487",7,"3 layer","medium","Validation error",25.0035514831543,TRUE
+"488",8,"3 layer","medium","Validation error",23.4789733886719,TRUE
+"489",9,"3 layer","medium","Validation error",22.9531917572021,TRUE
+"490",10,"3 layer","medium","Validation error",23.3093795776367,TRUE
+"491",11,"3 layer","medium","Validation error",25.1652412414551,TRUE
+"492",12,"3 layer","medium","Validation error",25.2101402282715,TRUE
+"493",13,"3 layer","medium","Validation error",24.5075263977051,TRUE
+"494",14,"3 layer","medium","Validation error",22.8565063476562,TRUE
+"495",15,"3 layer","medium","Validation error",25.709545135498,TRUE
+"496",16,"3 layer","medium","Validation error",22.9056816101074,TRUE
+"497",17,"3 layer","medium","Validation error",23.1785793304443,TRUE
+"498",18,"3 layer","medium","Validation error",26.2870445251465,TRUE
+"499",19,"3 layer","medium","Validation error",23.7537403106689,TRUE
+"500",20,"3 layer","medium","Validation error",22.8768711090088,TRUE
+"501",21,"3 layer","medium","Validation error",23.5227737426758,TRUE
+"502",22,"3 layer","medium","Validation error",23.1670894622803,TRUE
+"503",23,"3 layer","medium","Validation error",23.2089729309082,TRUE
+"504",24,"3 layer","medium","Validation error",24.4103927612305,TRUE
+"505",25,"3 layer","medium","Validation error",23.6128196716309,TRUE
+"506",26,"3 layer","medium","Validation error",22.8268852233887,TRUE
+"507",27,"3 layer","medium","Validation error",22.9711799621582,TRUE
+"508",28,"3 layer","medium","Validation error",23.0260429382324,TRUE
+"509",29,"3 layer","medium","Validation error",23.0849952697754,TRUE
+"510",30,"3 layer","medium","Validation error",23.6332950592041,TRUE
+"511",1,"3 layer","medium large","Validation error",61.4329376220703,TRUE
+"512",2,"3 layer","medium large","Validation error",28.0562000274658,TRUE
+"513",3,"3 layer","medium large","Validation error",25.6746730804443,TRUE
+"514",4,"3 layer","medium large","Validation error",23.4502067565918,TRUE
+"515",5,"3 layer","medium large","Validation error",24.0576801300049,TRUE
+"516",6,"3 layer","medium large","Validation error",26.3958015441895,TRUE
+"517",7,"3 layer","medium large","Validation error",24.2952251434326,TRUE
+"518",8,"3 layer","medium large","Validation error",22.8714771270752,TRUE
+"519",9,"3 layer","medium large","Validation error",24.8383884429932,TRUE
+"520",10,"3 layer","medium large","Validation error",24.7300624847412,TRUE
+"521",11,"3 layer","medium large","Validation error",24.0672187805176,TRUE
+"522",12,"3 layer","medium large","Validation error",23.5829372406006,TRUE
+"523",13,"3 layer","medium large","Validation error",23.4409999847412,TRUE
+"524",14,"3 layer","medium large","Validation error",23.7900123596191,TRUE
+"525",15,"3 layer","medium large","Validation error",27.132007598877,TRUE
+"526",16,"3 layer","medium large","Validation error",23.4528293609619,TRUE
+"527",17,"3 layer","medium large","Validation error",23.0287837982178,TRUE
+"528",18,"3 layer","medium large","Validation error",23.5042781829834,TRUE
+"529",19,"3 layer","medium large","Validation error",22.8308734893799,TRUE
+"530",20,"3 layer","medium large","Validation error",24.4083728790283,TRUE
+"531",21,"3 layer","medium large","Validation error",23.4010601043701,TRUE
+"532",22,"3 layer","medium large","Validation error",23.9582862854004,TRUE
+"533",23,"3 layer","medium large","Validation error",24.4692974090576,TRUE
+"534",24,"3 layer","medium large","Validation error",24.2643489837646,TRUE
+"535",25,"3 layer","medium large","Validation error",23.1696815490723,TRUE
+"536",26,"3 layer","medium large","Validation error",23.5377674102783,TRUE
+"537",27,"3 layer","medium large","Validation error",24.1016616821289,TRUE
+"538",28,"3 layer","medium large","Validation error",22.697696685791,TRUE
+"539",29,"3 layer","medium large","Validation error",23.2437763214111,TRUE
+"540",30,"3 layer","medium large","Validation error",23.3605690002441,TRUE
+"541",1,"3 layer","medium small","Validation error",82.383903503418,TRUE
+"542",2,"3 layer","medium small","Validation error",45.0646362304688,TRUE
+"543",3,"3 layer","medium small","Validation error",27.6884078979492,TRUE
+"544",4,"3 layer","medium small","Validation error",25.5961570739746,TRUE
+"545",5,"3 layer","medium small","Validation error",25.414722442627,TRUE
+"546",6,"3 layer","medium small","Validation error",25.1342105865479,TRUE
+"547",7,"3 layer","medium small","Validation error",25.2429428100586,TRUE
+"548",8,"3 layer","medium small","Validation error",25.4995498657227,TRUE
+"549",9,"3 layer","medium small","Validation error",25.2671298980713,TRUE
+"550",10,"3 layer","medium small","Validation error",24.0343837738037,TRUE
+"551",11,"3 layer","medium small","Validation error",24.9754161834717,TRUE
+"552",12,"3 layer","medium small","Validation error",25.7043952941895,TRUE
+"553",13,"3 layer","medium small","Validation error",24.5543098449707,TRUE
+"554",14,"3 layer","medium small","Validation error",23.7536888122559,TRUE
+"555",15,"3 layer","medium small","Validation error",24.6721019744873,TRUE
+"556",16,"3 layer","medium small","Validation error",25.5695323944092,TRUE
+"557",17,"3 layer","medium small","Validation error",24.190315246582,TRUE
+"558",18,"3 layer","medium small","Validation error",24.4705371856689,TRUE
+"559",19,"3 layer","medium small","Validation error",23.1424980163574,TRUE
+"560",20,"3 layer","medium small","Validation error",24.4070301055908,TRUE
+"561",21,"3 layer","medium small","Validation error",24.5237445831299,TRUE
+"562",22,"3 layer","medium small","Validation error",24.0279808044434,TRUE
+"563",23,"3 layer","medium small","Validation error",24.6339797973633,TRUE
+"564",24,"3 layer","medium small","Validation error",23.5611057281494,TRUE
+"565",25,"3 layer","medium small","Validation error",23.4412517547607,TRUE
+"566",26,"3 layer","medium small","Validation error",24.0591106414795,TRUE
+"567",27,"3 layer","medium small","Validation error",24.7480602264404,TRUE
+"568",28,"3 layer","medium small","Validation error",23.6010684967041,TRUE
+"569",29,"3 layer","medium small","Validation error",23.4353618621826,TRUE
+"570",30,"3 layer","medium small","Validation error",24.6011390686035,TRUE
+"571",1,"3 layer","mega","Validation error",33.9319229125977,TRUE
+"572",2,"3 layer","mega","Validation error",25.4123802185059,TRUE
+"573",3,"3 layer","mega","Validation error",25.0590648651123,TRUE
+"574",4,"3 layer","mega","Validation error",26.4703998565674,TRUE
+"575",5,"3 layer","mega","Validation error",24.8636894226074,TRUE
+"576",6,"3 layer","mega","Validation error",24.8786926269531,TRUE
+"577",7,"3 layer","mega","Validation error",23.6166095733643,TRUE
+"578",8,"3 layer","mega","Validation error",23.7756958007812,TRUE
+"579",9,"3 layer","mega","Validation error",27.361255645752,TRUE
+"580",10,"3 layer","mega","Validation error",23.6336517333984,TRUE
+"581",11,"3 layer","mega","Validation error",24.1305713653564,TRUE
+"582",12,"3 layer","mega","Validation error",24.1856384277344,TRUE
+"583",13,"3 layer","mega","Validation error",25.518274307251,TRUE
+"584",14,"3 layer","mega","Validation error",23.5551853179932,TRUE
+"585",15,"3 layer","mega","Validation error",24.8027839660645,TRUE
+"586",16,"3 layer","mega","Validation error",24.6120014190674,TRUE
+"587",17,"3 layer","mega","Validation error",25.336763381958,TRUE
+"588",18,"3 layer","mega","Validation error",25.1614837646484,TRUE
+"589",19,"3 layer","mega","Validation error",23.8210887908936,TRUE
+"590",20,"3 layer","mega","Validation error",23.626012802124,TRUE
+"591",21,"3 layer","mega","Validation error",23.6574039459229,TRUE
+"592",22,"3 layer","mega","Validation error",26.9724941253662,TRUE
+"593",23,"3 layer","mega","Validation error",29.3199920654297,TRUE
+"594",24,"3 layer","mega","Validation error",23.7422618865967,TRUE
+"595",25,"3 layer","mega","Validation error",23.6155853271484,TRUE
+"596",26,"3 layer","mega","Validation error",24.1051006317139,TRUE
+"597",27,"3 layer","mega","Validation error",23.3370456695557,TRUE
+"598",28,"3 layer","mega","Validation error",23.9728412628174,TRUE
+"599",29,"3 layer","mega","Validation error",24.2214126586914,TRUE
+"600",30,"3 layer","mega","Validation error",23.9811859130859,TRUE
+"601",1,"3 layer","small","Validation error",117.424438476562,TRUE
+"602",2,"3 layer","small","Validation error",98.9401931762695,TRUE
+"603",3,"3 layer","small","Validation error",72.5982971191406,TRUE
+"604",4,"3 layer","small","Validation error",41.1265449523926,TRUE
+"605",5,"3 layer","small","Validation error",28.1878318786621,TRUE
+"606",6,"3 layer","small","Validation error",24.652063369751,TRUE
+"607",7,"3 layer","small","Validation error",25.1080207824707,TRUE
+"608",8,"3 layer","small","Validation error",24.4113121032715,TRUE
+"609",9,"3 layer","small","Validation error",24.0509014129639,TRUE
+"610",10,"3 layer","small","Validation error",23.8882179260254,TRUE
+"611",11,"3 layer","small","Validation error",24.2305717468262,TRUE
+"612",12,"3 layer","small","Validation error",24.5598430633545,TRUE
+"613",13,"3 layer","small","Validation error",24.6401958465576,TRUE
+"614",14,"3 layer","small","Validation error",24.1089191436768,TRUE
+"615",15,"3 layer","small","Validation error",24.1774215698242,TRUE
+"616",16,"3 layer","small","Validation error",24.1309413909912,TRUE
+"617",17,"3 layer","small","Validation error",24.0310039520264,TRUE
+"618",18,"3 layer","small","Validation error",24.0048542022705,TRUE
+"619",19,"3 layer","small","Validation error",24.7075748443604,TRUE
+"620",20,"3 layer","small","Validation error",24.0915565490723,TRUE
+"621",21,"3 layer","small","Validation error",23.9853363037109,TRUE
+"622",22,"3 layer","small","Validation error",24.557014465332,TRUE
+"623",23,"3 layer","small","Validation error",24.0705718994141,TRUE
+"624",24,"3 layer","small","Validation error",24.2162837982178,TRUE
+"625",25,"3 layer","small","Validation error",24.5685882568359,TRUE
+"626",26,"3 layer","small","Validation error",24.1661834716797,TRUE
+"627",27,"3 layer","small","Validation error",24.4402198791504,TRUE
+"628",28,"3 layer","small","Validation error",24.1123142242432,TRUE
+"629",29,"3 layer","small","Validation error",24.4387531280518,TRUE
+"630",30,"3 layer","small","Validation error",24.034029006958,TRUE
+"631",1,"4 layer","huge","Validation error",33.0252113342285,TRUE
+"632",2,"4 layer","huge","Validation error",25.5401725769043,TRUE
+"633",3,"4 layer","huge","Validation error",26.238187789917,TRUE
+"634",4,"4 layer","huge","Validation error",24.1796131134033,TRUE
+"635",5,"4 layer","huge","Validation error",24.6979942321777,TRUE
+"636",6,"4 layer","huge","Validation error",26.4485187530518,TRUE
+"637",7,"4 layer","huge","Validation error",23.5518054962158,TRUE
+"638",8,"4 layer","huge","Validation error",22.8799228668213,TRUE
+"639",9,"4 layer","huge","Validation error",25.1308307647705,TRUE
+"640",10,"4 layer","huge","Validation error",29.1079883575439,TRUE
+"641",11,"4 layer","huge","Validation error",26.3280563354492,TRUE
+"642",12,"4 layer","huge","Validation error",23.8595504760742,TRUE
+"643",13,"4 layer","huge","Validation error",25.2642383575439,TRUE
+"644",14,"4 layer","huge","Validation error",24.9398708343506,TRUE
+"645",15,"4 layer","huge","Validation error",25.5376873016357,TRUE
+"646",16,"4 layer","huge","Validation error",23.9446086883545,TRUE
+"647",17,"4 layer","huge","Validation error",23.662317276001,TRUE
+"648",18,"4 layer","huge","Validation error",23.9585647583008,TRUE
+"649",19,"4 layer","huge","Validation error",23.6748085021973,TRUE
+"650",20,"4 layer","huge","Validation error",23.6685485839844,TRUE
+"651",21,"4 layer","huge","Validation error",25.0610733032227,TRUE
+"652",22,"4 layer","huge","Validation error",22.955961227417,TRUE
+"653",23,"4 layer","huge","Validation error",24.2330188751221,TRUE
+"654",24,"4 layer","huge","Validation error",23.4450950622559,TRUE
+"655",25,"4 layer","huge","Validation error",22.9850158691406,TRUE
+"656",26,"4 layer","huge","Validation error",24.382381439209,TRUE
+"657",27,"4 layer","huge","Validation error",23.492488861084,TRUE
+"658",28,"4 layer","huge","Validation error",25.540563583374,TRUE
+"659",29,"4 layer","huge","Validation error",23.4892272949219,TRUE
+"660",30,"4 layer","huge","Validation error",26.339075088501,TRUE
+"661",1,"4 layer","large","Validation error",52.5257873535156,TRUE
+"662",2,"4 layer","large","Validation error",25.1056537628174,TRUE
+"663",3,"4 layer","large","Validation error",24.8532905578613,TRUE
+"664",4,"4 layer","large","Validation error",26.3404846191406,TRUE
+"665",5,"4 layer","large","Validation error",26.6442451477051,TRUE
+"666",6,"4 layer","large","Validation error",24.7861156463623,TRUE
+"667",7,"4 layer","large","Validation error",24.8806819915771,TRUE
+"668",8,"4 layer","large","Validation error",25.3636627197266,TRUE
+"669",9,"4 layer","large","Validation error",25.4167327880859,TRUE
+"670",10,"4 layer","large","Validation error",23.251106262207,TRUE
+"671",11,"4 layer","large","Validation error",23.0445995330811,TRUE
+"672",12,"4 layer","large","Validation error",25.5515213012695,TRUE
+"673",13,"4 layer","large","Validation error",25.6611022949219,TRUE
+"674",14,"4 layer","large","Validation error",23.0515575408936,TRUE
+"675",15,"4 layer","large","Validation error",23.1182422637939,TRUE
+"676",16,"4 layer","large","Validation error",24.7901020050049,TRUE
+"677",17,"4 layer","large","Validation error",23.3941497802734,TRUE
+"678",18,"4 layer","large","Validation error",23.1645183563232,TRUE
+"679",19,"4 layer","large","Validation error",23.0684394836426,TRUE
+"680",20,"4 layer","large","Validation error",22.8165035247803,TRUE
+"681",21,"4 layer","large","Validation error",23.0438251495361,TRUE
+"682",22,"4 layer","large","Validation error",22.955041885376,TRUE
+"683",23,"4 layer","large","Validation error",23.714448928833,TRUE
+"684",24,"4 layer","large","Validation error",23.2668743133545,TRUE
+"685",25,"4 layer","large","Validation error",23.0939254760742,TRUE
+"686",26,"4 layer","large","Validation error",23.2582130432129,TRUE
+"687",27,"4 layer","large","Validation error",22.9689846038818,TRUE
+"688",28,"4 layer","large","Validation error",23.6280689239502,TRUE
+"689",29,"4 layer","large","Validation error",22.7541084289551,TRUE
+"690",30,"4 layer","large","Validation error",23.6425895690918,TRUE
+"691",1,"4 layer","medium","Validation error",88.9714965820312,TRUE
+"692",2,"4 layer","medium","Validation error",46.5314979553223,TRUE
+"693",3,"4 layer","medium","Validation error",27.7516498565674,TRUE
+"694",4,"4 layer","medium","Validation error",24.8369369506836,TRUE
+"695",5,"4 layer","medium","Validation error",23.4093246459961,TRUE
+"696",6,"4 layer","medium","Validation error",23.8307514190674,TRUE
+"697",7,"4 layer","medium","Validation error",25.6246547698975,TRUE
+"698",8,"4 layer","medium","Validation error",24.8221263885498,TRUE
+"699",9,"4 layer","medium","Validation error",23.7286853790283,TRUE
+"700",10,"4 layer","medium","Validation error",22.9314212799072,TRUE
+"701",11,"4 layer","medium","Validation error",22.7798690795898,TRUE
+"702",12,"4 layer","medium","Validation error",23.3409576416016,TRUE
+"703",13,"4 layer","medium","Validation error",22.9262542724609,TRUE
+"704",14,"4 layer","medium","Validation error",22.9503746032715,TRUE
+"705",15,"4 layer","medium","Validation error",23.8322296142578,TRUE
+"706",16,"4 layer","medium","Validation error",22.9830131530762,TRUE
+"707",17,"4 layer","medium","Validation error",22.9827251434326,TRUE
+"708",18,"4 layer","medium","Validation error",23.0207824707031,TRUE
+"709",19,"4 layer","medium","Validation error",24.1733055114746,TRUE
+"710",20,"4 layer","medium","Validation error",23.1438407897949,TRUE
+"711",21,"4 layer","medium","Validation error",23.3260746002197,TRUE
+"712",22,"4 layer","medium","Validation error",24.3184547424316,TRUE
+"713",23,"4 layer","medium","Validation error",23.15163230896,TRUE
+"714",24,"4 layer","medium","Validation error",23.1550331115723,TRUE
+"715",25,"4 layer","medium","Validation error",23.36594581604,TRUE
+"716",26,"4 layer","medium","Validation error",23.1444931030273,TRUE
+"717",27,"4 layer","medium","Validation error",23.2085094451904,TRUE
+"718",28,"4 layer","medium","Validation error",23.814754486084,TRUE
+"719",29,"4 layer","medium","Validation error",22.9976863861084,TRUE
+"720",30,"4 layer","medium","Validation error",23.1498870849609,TRUE
+"721",1,"4 layer","medium large","Validation error",53.9705810546875,TRUE
+"722",2,"4 layer","medium large","Validation error",33.6506309509277,TRUE
+"723",3,"4 layer","medium large","Validation error",26.1827011108398,TRUE
+"724",4,"4 layer","medium large","Validation error",23.8076839447021,TRUE
+"725",5,"4 layer","medium large","Validation error",24.7286167144775,TRUE
+"726",6,"4 layer","medium large","Validation error",26.3526210784912,TRUE
+"727",7,"4 layer","medium large","Validation error",24.7379779815674,TRUE
+"728",8,"4 layer","medium large","Validation error",24.2427101135254,TRUE
+"729",9,"4 layer","medium large","Validation error",24.7580146789551,TRUE
+"730",10,"4 layer","medium large","Validation error",22.8576240539551,TRUE
+"731",11,"4 layer","medium large","Validation error",23.6097011566162,TRUE
+"732",12,"4 layer","medium large","Validation error",23.4151954650879,TRUE
+"733",13,"4 layer","medium large","Validation error",23.8325653076172,TRUE
+"734",14,"4 layer","medium large","Validation error",25.9475021362305,TRUE
+"735",15,"4 layer","medium large","Validation error",24.0666046142578,TRUE
+"736",16,"4 layer","medium large","Validation error",24.2256526947021,TRUE
+"737",17,"4 layer","medium large","Validation error",23.7434062957764,TRUE
+"738",18,"4 layer","medium large","Validation error",22.7865715026855,TRUE
+"739",19,"4 layer","medium large","Validation error",23.191801071167,TRUE
+"740",20,"4 layer","medium large","Validation error",23.1497688293457,TRUE
+"741",21,"4 layer","medium large","Validation error",22.6422538757324,TRUE
+"742",22,"4 layer","medium large","Validation error",23.9618759155273,TRUE
+"743",23,"4 layer","medium large","Validation error",23.6224708557129,TRUE
+"744",24,"4 layer","medium large","Validation error",23.187858581543,TRUE
+"745",25,"4 layer","medium large","Validation error",23.2232093811035,TRUE
+"746",26,"4 layer","medium large","Validation error",23.2725639343262,TRUE
+"747",27,"4 layer","medium large","Validation error",22.8325939178467,TRUE
+"748",28,"4 layer","medium large","Validation error",22.9577293395996,TRUE
+"749",29,"4 layer","medium large","Validation error",23.1294956207275,TRUE
+"750",30,"4 layer","medium large","Validation error",22.997709274292,TRUE
+"751",1,"4 layer","medium small","Validation error",119.161987304688,TRUE
+"752",2,"4 layer","medium small","Validation error",88.5613632202148,TRUE
+"753",3,"4 layer","medium small","Validation error",50.8870086669922,TRUE
+"754",4,"4 layer","medium small","Validation error",30.0151557922363,TRUE
+"755",5,"4 layer","medium small","Validation error",26.1788444519043,TRUE
+"756",6,"4 layer","medium small","Validation error",24.1728420257568,TRUE
+"757",7,"4 layer","medium small","Validation error",25.0151195526123,TRUE
+"758",8,"4 layer","medium small","Validation error",24.1967926025391,TRUE
+"759",9,"4 layer","medium small","Validation error",25.0997161865234,TRUE
+"760",10,"4 layer","medium small","Validation error",24.3525733947754,TRUE
+"761",11,"4 layer","medium small","Validation error",23.7717971801758,TRUE
+"762",12,"4 layer","medium small","Validation error",23.8082237243652,TRUE
+"763",13,"4 layer","medium small","Validation error",23.41086769104,TRUE
+"764",14,"4 layer","medium small","Validation error",24.2419300079346,TRUE
+"765",15,"4 layer","medium small","Validation error",23.6126766204834,TRUE
+"766",16,"4 layer","medium small","Validation error",22.6837768554688,TRUE
+"767",17,"4 layer","medium small","Validation error",23.8047142028809,TRUE
+"768",18,"4 layer","medium small","Validation error",23.0299434661865,TRUE
+"769",19,"4 layer","medium small","Validation error",23.1696071624756,TRUE
+"770",20,"4 layer","medium small","Validation error",22.7700176239014,TRUE
+"771",21,"4 layer","medium small","Validation error",23.4399242401123,TRUE
+"772",22,"4 layer","medium small","Validation error",23.2627487182617,TRUE
+"773",23,"4 layer","medium small","Validation error",22.7508544921875,TRUE
+"774",24,"4 layer","medium small","Validation error",23.0305290222168,TRUE
+"775",25,"4 layer","medium small","Validation error",22.919361114502,TRUE
+"776",26,"4 layer","medium small","Validation error",22.710750579834,TRUE
+"777",27,"4 layer","medium small","Validation error",22.6669673919678,TRUE
+"778",28,"4 layer","medium small","Validation error",22.6741199493408,TRUE
+"779",29,"4 layer","medium small","Validation error",23.3725872039795,TRUE
+"780",30,"4 layer","medium small","Validation error",22.7113704681396,TRUE
+"781",1,"4 layer","mega","Validation error",36.0293350219727,TRUE
+"782",2,"4 layer","mega","Validation error",25.9202861785889,TRUE
+"783",3,"4 layer","mega","Validation error",34.2739295959473,TRUE
+"784",4,"4 layer","mega","Validation error",29.9155960083008,TRUE
+"785",5,"4 layer","mega","Validation error",29.2627773284912,TRUE
+"786",6,"4 layer","mega","Validation error",22.8203525543213,TRUE
+"787",7,"4 layer","mega","Validation error",30.4243412017822,TRUE
+"788",8,"4 layer","mega","Validation error",24.3714447021484,TRUE
+"789",9,"4 layer","mega","Validation error",22.6614589691162,TRUE
+"790",10,"4 layer","mega","Validation error",23.5707130432129,TRUE
+"791",11,"4 layer","mega","Validation error",23.8898506164551,TRUE
+"792",12,"4 layer","mega","Validation error",23.4426116943359,TRUE
+"793",13,"4 layer","mega","Validation error",24.7627143859863,TRUE
+"794",14,"4 layer","mega","Validation error",23.0218353271484,TRUE
+"795",15,"4 layer","mega","Validation error",26.1847114562988,TRUE
+"796",16,"4 layer","mega","Validation error",23.501594543457,TRUE
+"797",17,"4 layer","mega","Validation error",23.2461795806885,TRUE
+"798",18,"4 layer","mega","Validation error",23.6149997711182,TRUE
+"799",19,"4 layer","mega","Validation error",23.724889755249,TRUE
+"800",20,"4 layer","mega","Validation error",25.8776340484619,TRUE
+"801",21,"4 layer","mega","Validation error",23.8326835632324,TRUE
+"802",22,"4 layer","mega","Validation error",23.8512878417969,TRUE
+"803",23,"4 layer","mega","Validation error",28.8198146820068,TRUE
+"804",24,"4 layer","mega","Validation error",23.9903564453125,TRUE
+"805",25,"4 layer","mega","Validation error",25.3962535858154,TRUE
+"806",26,"4 layer","mega","Validation error",23.6512756347656,TRUE
+"807",27,"4 layer","mega","Validation error",23.690299987793,TRUE
+"808",28,"4 layer","mega","Validation error",23.6604843139648,TRUE
+"809",29,"4 layer","mega","Validation error",23.2929744720459,TRUE
+"810",30,"4 layer","mega","Validation error",23.5645790100098,TRUE
+"811",1,"4 layer","small","Validation error",106.930511474609,TRUE
+"812",2,"4 layer","small","Validation error",86.7965240478516,TRUE
+"813",3,"4 layer","small","Validation error",67.1199035644531,TRUE
+"814",4,"4 layer","small","Validation error",47.3149681091309,TRUE
+"815",5,"4 layer","small","Validation error",34.5827789306641,TRUE
+"816",6,"4 layer","small","Validation error",25.7894268035889,TRUE
+"817",7,"4 layer","small","Validation error",25.2716484069824,TRUE
+"818",8,"4 layer","small","Validation error",25.1836128234863,TRUE
+"819",9,"4 layer","small","Validation error",24.8400115966797,TRUE
+"820",10,"4 layer","small","Validation error",24.5273723602295,TRUE
+"821",11,"4 layer","small","Validation error",24.2590465545654,TRUE
+"822",12,"4 layer","small","Validation error",24.3280086517334,TRUE
+"823",13,"4 layer","small","Validation error",24.4943733215332,TRUE
+"824",14,"4 layer","small","Validation error",24.0307025909424,TRUE
+"825",15,"4 layer","small","Validation error",24.321870803833,TRUE
+"826",16,"4 layer","small","Validation error",24.2116298675537,TRUE
+"827",17,"4 layer","small","Validation error",24.264196395874,TRUE
+"828",18,"4 layer","small","Validation error",24.1634998321533,TRUE
+"829",19,"4 layer","small","Validation error",24.4771175384521,TRUE
+"830",20,"4 layer","small","Validation error",24.3691997528076,TRUE
+"831",21,"4 layer","small","Validation error",24.1800556182861,TRUE
+"832",22,"4 layer","small","Validation error",24.1635894775391,TRUE
+"833",23,"4 layer","small","Validation error",24.2035522460938,TRUE
+"834",24,"4 layer","small","Validation error",23.9644355773926,TRUE
+"835",25,"4 layer","small","Validation error",24.5135135650635,TRUE
+"836",26,"4 layer","small","Validation error",23.708423614502,TRUE
+"837",27,"4 layer","small","Validation error",24.5436134338379,TRUE
+"838",28,"4 layer","small","Validation error",24.3617858886719,TRUE
+"839",29,"4 layer","small","Validation error",24.1039695739746,TRUE
+"840",30,"4 layer","small","Validation error",24.1858139038086,TRUE
+"841",1,"5 layer","huge","Validation error",47.9169502258301,TRUE
+"842",2,"5 layer","huge","Validation error",27.1134414672852,TRUE
+"843",3,"5 layer","huge","Validation error",27.4089431762695,TRUE
+"844",4,"5 layer","huge","Validation error",24.502965927124,TRUE
+"845",5,"5 layer","huge","Validation error",26.7151508331299,TRUE
+"846",6,"5 layer","huge","Validation error",25.9780540466309,TRUE
+"847",7,"5 layer","huge","Validation error",23.4472904205322,TRUE
+"848",8,"5 layer","huge","Validation error",24.8475704193115,TRUE
+"849",9,"5 layer","huge","Validation error",27.0477237701416,TRUE
+"850",10,"5 layer","huge","Validation error",23.5844860076904,TRUE
+"851",11,"5 layer","huge","Validation error",23.1782569885254,TRUE
+"852",12,"5 layer","huge","Validation error",24.0673065185547,TRUE
+"853",13,"5 layer","huge","Validation error",22.8576793670654,TRUE
+"854",14,"5 layer","huge","Validation error",24.9687271118164,TRUE
+"855",15,"5 layer","huge","Validation error",23.4561710357666,TRUE
+"856",16,"5 layer","huge","Validation error",23.2541408538818,TRUE
+"857",17,"5 layer","huge","Validation error",24.1202793121338,TRUE
+"858",18,"5 layer","huge","Validation error",27.0104370117188,TRUE
+"859",19,"5 layer","huge","Validation error",23.7816104888916,TRUE
+"860",20,"5 layer","huge","Validation error",23.9600353240967,TRUE
+"861",21,"5 layer","huge","Validation error",23.5766124725342,TRUE
+"862",22,"5 layer","huge","Validation error",23.0669326782227,TRUE
+"863",23,"5 layer","huge","Validation error",24.6470794677734,TRUE
+"864",24,"5 layer","huge","Validation error",23.2683773040771,TRUE
+"865",25,"5 layer","huge","Validation error",23.4941501617432,TRUE
+"866",26,"5 layer","huge","Validation error",23.6479721069336,TRUE
+"867",27,"5 layer","huge","Validation error",23.1128215789795,TRUE
+"868",28,"5 layer","huge","Validation error",23.1785430908203,TRUE
+"869",29,"5 layer","huge","Validation error",23.2753829956055,TRUE
+"870",30,"5 layer","huge","Validation error",23.6165828704834,TRUE
+"871",1,"5 layer","large","Validation error",59.8925476074219,TRUE
+"872",2,"5 layer","large","Validation error",33.0024147033691,TRUE
+"873",3,"5 layer","large","Validation error",24.583740234375,TRUE
+"874",4,"5 layer","large","Validation error",24.9543018341064,TRUE
+"875",5,"5 layer","large","Validation error",24.3990097045898,TRUE
+"876",6,"5 layer","large","Validation error",24.8498210906982,TRUE
+"877",7,"5 layer","large","Validation error",24.3820896148682,TRUE
+"878",8,"5 layer","large","Validation error",23.9890689849854,TRUE
+"879",9,"5 layer","large","Validation error",24.3415603637695,TRUE
+"880",10,"5 layer","large","Validation error",24.1876125335693,TRUE
+"881",11,"5 layer","large","Validation error",23.8371772766113,TRUE
+"882",12,"5 layer","large","Validation error",25.2895889282227,TRUE
+"883",13,"5 layer","large","Validation error",24.4619312286377,TRUE
+"884",14,"5 layer","large","Validation error",23.9119338989258,TRUE
+"885",15,"5 layer","large","Validation error",23.6245899200439,TRUE
+"886",16,"5 layer","large","Validation error",24.0444183349609,TRUE
+"887",17,"5 layer","large","Validation error",22.962121963501,TRUE
+"888",18,"5 layer","large","Validation error",22.8648624420166,TRUE
+"889",19,"5 layer","large","Validation error",23.4302577972412,TRUE
+"890",20,"5 layer","large","Validation error",23.4564971923828,TRUE
+"891",21,"5 layer","large","Validation error",22.8699131011963,TRUE
+"892",22,"5 layer","large","Validation error",23.0303897857666,TRUE
+"893",23,"5 layer","large","Validation error",22.9022579193115,TRUE
+"894",24,"5 layer","large","Validation error",24.046968460083,TRUE
+"895",25,"5 layer","large","Validation error",23.3959140777588,TRUE
+"896",26,"5 layer","large","Validation error",23.9133434295654,TRUE
+"897",27,"5 layer","large","Validation error",23.0712833404541,TRUE
+"898",28,"5 layer","large","Validation error",23.2454509735107,TRUE
+"899",29,"5 layer","large","Validation error",22.7646675109863,TRUE
+"900",30,"5 layer","large","Validation error",23.4316062927246,TRUE
+"901",1,"5 layer","medium","Validation error",128.137466430664,TRUE
+"902",2,"5 layer","medium","Validation error",94.5788269042969,TRUE
+"903",3,"5 layer","medium","Validation error",60.5550994873047,TRUE
+"904",4,"5 layer","medium","Validation error",34.2721939086914,TRUE
+"905",5,"5 layer","medium","Validation error",26.6433506011963,TRUE
+"906",6,"5 layer","medium","Validation error",25.00364112854,TRUE
+"907",7,"5 layer","medium","Validation error",24.5445613861084,TRUE
+"908",8,"5 layer","medium","Validation error",24.5989284515381,TRUE
+"909",9,"5 layer","medium","Validation error",24.9658451080322,TRUE
+"910",10,"5 layer","medium","Validation error",23.8938903808594,TRUE
+"911",11,"5 layer","medium","Validation error",24.0467643737793,TRUE
+"912",12,"5 layer","medium","Validation error",24.2161083221436,TRUE
+"913",13,"5 layer","medium","Validation error",23.5825176239014,TRUE
+"914",14,"5 layer","medium","Validation error",23.7285709381104,TRUE
+"915",15,"5 layer","medium","Validation error",24.2801952362061,TRUE
+"916",16,"5 layer","medium","Validation error",23.6152305603027,TRUE
+"917",17,"5 layer","medium","Validation error",23.0560894012451,TRUE
+"918",18,"5 layer","medium","Validation error",23.2840137481689,TRUE
+"919",19,"5 layer","medium","Validation error",23.1895217895508,TRUE
+"920",20,"5 layer","medium","Validation error",23.2143096923828,TRUE
+"921",21,"5 layer","medium","Validation error",23.3524150848389,TRUE
+"922",22,"5 layer","medium","Validation error",22.8366184234619,TRUE
+"923",23,"5 layer","medium","Validation error",22.9535522460938,TRUE
+"924",24,"5 layer","medium","Validation error",23.8891315460205,TRUE
+"925",25,"5 layer","medium","Validation error",22.7310390472412,TRUE
+"926",26,"5 layer","medium","Validation error",23.0610084533691,TRUE
+"927",27,"5 layer","medium","Validation error",23.3462562561035,TRUE
+"928",28,"5 layer","medium","Validation error",22.9258766174316,TRUE
+"929",29,"5 layer","medium","Validation error",22.9070053100586,TRUE
+"930",30,"5 layer","medium","Validation error",22.9781265258789,TRUE
+"931",1,"5 layer","medium large","Validation error",93.8269500732422,TRUE
+"932",2,"5 layer","medium large","Validation error",55.9763526916504,TRUE
+"933",3,"5 layer","medium large","Validation error",33.636302947998,TRUE
+"934",4,"5 layer","medium large","Validation error",25.5959548950195,TRUE
+"935",5,"5 layer","medium large","Validation error",30.8851203918457,TRUE
+"936",6,"5 layer","medium large","Validation error",23.3455410003662,TRUE
+"937",7,"5 layer","medium large","Validation error",23.9000053405762,TRUE
+"938",8,"5 layer","medium large","Validation error",24.0266532897949,TRUE
+"939",9,"5 layer","medium large","Validation error",24.5300025939941,TRUE
+"940",10,"5 layer","medium large","Validation error",23.0314807891846,TRUE
+"941",11,"5 layer","medium large","Validation error",22.9067840576172,TRUE
+"942",12,"5 layer","medium large","Validation error",23.1378498077393,TRUE
+"943",13,"5 layer","medium large","Validation error",22.838773727417,TRUE
+"944",14,"5 layer","medium large","Validation error",23.0570373535156,TRUE
+"945",15,"5 layer","medium large","Validation error",22.519474029541,TRUE
+"946",16,"5 layer","medium large","Validation error",23.1918506622314,TRUE
+"947",17,"5 layer","medium large","Validation error",26.1768684387207,TRUE
+"948",18,"5 layer","medium large","Validation error",23.107442855835,TRUE
+"949",19,"5 layer","medium large","Validation error",23.1560401916504,TRUE
+"950",20,"5 layer","medium large","Validation error",23.089506149292,TRUE
+"951",21,"5 layer","medium large","Validation error",22.7477569580078,TRUE
+"952",22,"5 layer","medium large","Validation error",22.8741912841797,TRUE
+"953",23,"5 layer","medium large","Validation error",22.9207954406738,TRUE
+"954",24,"5 layer","medium large","Validation error",22.5585021972656,TRUE
+"955",25,"5 layer","medium large","Validation error",23.2007808685303,TRUE
+"956",26,"5 layer","medium large","Validation error",23.0846290588379,TRUE
+"957",27,"5 layer","medium large","Validation error",22.4951400756836,TRUE
+"958",28,"5 layer","medium large","Validation error",24.44118309021,TRUE
+"959",29,"5 layer","medium large","Validation error",23.1290092468262,TRUE
+"960",30,"5 layer","medium large","Validation error",35.4842147827148,TRUE
+"961",1,"5 layer","medium small","Validation error",114.583251953125,TRUE
+"962",2,"5 layer","medium small","Validation error",92.7457427978516,TRUE
+"963",3,"5 layer","medium small","Validation error",74.8009796142578,TRUE
+"964",4,"5 layer","medium small","Validation error",57.1485595703125,TRUE
+"965",5,"5 layer","medium small","Validation error",44.4073600769043,TRUE
+"966",6,"5 layer","medium small","Validation error",30.9628677368164,TRUE
+"967",7,"5 layer","medium small","Validation error",23.9782657623291,TRUE
+"968",8,"5 layer","medium small","Validation error",24.2349681854248,TRUE
+"969",9,"5 layer","medium small","Validation error",23.8261661529541,TRUE
+"970",10,"5 layer","medium small","Validation error",23.5791091918945,TRUE
+"971",11,"5 layer","medium small","Validation error",23.2824077606201,TRUE
+"972",12,"5 layer","medium small","Validation error",23.8085803985596,TRUE
+"973",13,"5 layer","medium small","Validation error",23.3286991119385,TRUE
+"974",14,"5 layer","medium small","Validation error",23.2816772460938,TRUE
+"975",15,"5 layer","medium small","Validation error",23.1258525848389,TRUE
+"976",16,"5 layer","medium small","Validation error",23.3780059814453,TRUE
+"977",17,"5 layer","medium small","Validation error",23.1316223144531,TRUE
+"978",18,"5 layer","medium small","Validation error",23.3390789031982,TRUE
+"979",19,"5 layer","medium small","Validation error",23.8938102722168,TRUE
+"980",20,"5 layer","medium small","Validation error",24.1749572753906,TRUE
+"981",21,"5 layer","medium small","Validation error",23.4592723846436,TRUE
+"982",22,"5 layer","medium small","Validation error",23.1725521087646,TRUE
+"983",23,"5 layer","medium small","Validation error",23.9109230041504,TRUE
+"984",24,"5 layer","medium small","Validation error",22.9576511383057,TRUE
+"985",25,"5 layer","medium small","Validation error",22.8113613128662,TRUE
+"986",26,"5 layer","medium small","Validation error",22.8413505554199,TRUE
+"987",27,"5 layer","medium small","Validation error",23.6869125366211,TRUE
+"988",28,"5 layer","medium small","Validation error",23.4636325836182,TRUE
+"989",29,"5 layer","medium small","Validation error",23.5740623474121,TRUE
+"990",30,"5 layer","medium small","Validation error",22.86865234375,TRUE
+"991",1,"5 layer","mega","Validation error",37.1622695922852,TRUE
+"992",2,"5 layer","mega","Validation error",27.1577224731445,TRUE
+"993",3,"5 layer","mega","Validation error",32.0903854370117,TRUE
+"994",4,"5 layer","mega","Validation error",26.1110877990723,TRUE
+"995",5,"5 layer","mega","Validation error",24.0236434936523,TRUE
+"996",6,"5 layer","mega","Validation error",24.6971530914307,TRUE
+"997",7,"5 layer","mega","Validation error",24.8582286834717,TRUE
+"998",8,"5 layer","mega","Validation error",25.3573570251465,TRUE
+"999",9,"5 layer","mega","Validation error",26.2865810394287,TRUE
+"1000",10,"5 layer","mega","Validation error",24.9818782806396,TRUE
+"1001",11,"5 layer","mega","Validation error",26.2736759185791,TRUE
+"1002",12,"5 layer","mega","Validation error",24.1471195220947,TRUE
+"1003",13,"5 layer","mega","Validation error",28.6382217407227,TRUE
+"1004",14,"5 layer","mega","Validation error",24.0436820983887,TRUE
+"1005",15,"5 layer","mega","Validation error",24.4055728912354,TRUE
+"1006",16,"5 layer","mega","Validation error",24.2023487091064,TRUE
+"1007",17,"5 layer","mega","Validation error",23.9394721984863,TRUE
+"1008",18,"5 layer","mega","Validation error",27.9004802703857,TRUE
+"1009",19,"5 layer","mega","Validation error",23.7261047363281,TRUE
+"1010",20,"5 layer","mega","Validation error",23.0820064544678,TRUE
+"1011",21,"5 layer","mega","Validation error",22.8416385650635,TRUE
+"1012",22,"5 layer","mega","Validation error",25.0641708374023,TRUE
+"1013",23,"5 layer","mega","Validation error",23.4652900695801,TRUE
+"1014",24,"5 layer","mega","Validation error",25.6933078765869,TRUE
+"1015",25,"5 layer","mega","Validation error",27.6464614868164,TRUE
+"1016",26,"5 layer","mega","Validation error",22.7684268951416,TRUE
+"1017",27,"5 layer","mega","Validation error",24.1658897399902,TRUE
+"1018",28,"5 layer","mega","Validation error",22.7188568115234,TRUE
+"1019",29,"5 layer","mega","Validation error",23.0253582000732,TRUE
+"1020",30,"5 layer","mega","Validation error",25.759313583374,TRUE
+"1021",1,"5 layer","small","Validation error",95.6052703857422,TRUE
+"1022",2,"5 layer","small","Validation error",97.6191635131836,TRUE
+"1023",3,"5 layer","small","Validation error",100.816528320312,TRUE
+"1024",4,"5 layer","small","Validation error",92.5272598266602,TRUE
+"1025",5,"5 layer","small","Validation error",55.218807220459,TRUE
+"1026",6,"5 layer","small","Validation error",30.2463283538818,TRUE
+"1027",7,"5 layer","small","Validation error",23.3237781524658,TRUE
+"1028",8,"5 layer","small","Validation error",23.6359844207764,TRUE
+"1029",9,"5 layer","small","Validation error",23.2336101531982,TRUE
+"1030",10,"5 layer","small","Validation error",23.5038070678711,TRUE
+"1031",11,"5 layer","small","Validation error",23.3872261047363,TRUE
+"1032",12,"5 layer","small","Validation error",23.1528949737549,TRUE
+"1033",13,"5 layer","small","Validation error",23.0602722167969,TRUE
+"1034",14,"5 layer","small","Validation error",23.173095703125,TRUE
+"1035",15,"5 layer","small","Validation error",23.2324771881104,TRUE
+"1036",16,"5 layer","small","Validation error",22.9916076660156,TRUE
+"1037",17,"5 layer","small","Validation error",23.4527549743652,TRUE
+"1038",18,"5 layer","small","Validation error",23.0693893432617,TRUE
+"1039",19,"5 layer","small","Validation error",23.1357955932617,TRUE
+"1040",20,"5 layer","small","Validation error",23.3716659545898,TRUE
+"1041",21,"5 layer","small","Validation error",23.2741718292236,TRUE
+"1042",22,"5 layer","small","Validation error",23.1305599212646,TRUE
+"1043",23,"5 layer","small","Validation error",23.1100921630859,TRUE
+"1044",24,"5 layer","small","Validation error",23.384593963623,TRUE
+"1045",25,"5 layer","small","Validation error",23.3191566467285,TRUE
+"1046",26,"5 layer","small","Validation error",23.0118980407715,TRUE
+"1047",27,"5 layer","small","Validation error",23.2395038604736,TRUE
+"1048",28,"5 layer","small","Validation error",22.9766216278076,TRUE
+"1049",29,"5 layer","small","Validation error",22.9795761108398,TRUE
+"1050",30,"5 layer","small","Validation error",22.9514713287354,TRUE
+"1051",1,"1 layer","huge","Training error",50.2118492126465,TRUE
+"1052",2,"1 layer","huge","Training error",30.8123798370361,TRUE
+"1053",3,"1 layer","huge","Training error",30.7481155395508,TRUE
+"1054",4,"1 layer","huge","Training error",30.6384010314941,TRUE
+"1055",5,"1 layer","huge","Training error",30.5147800445557,TRUE
+"1056",6,"1 layer","huge","Training error",30.4874515533447,TRUE
+"1057",7,"1 layer","huge","Training error",30.4074649810791,TRUE
+"1058",8,"1 layer","huge","Training error",30.2785758972168,TRUE
+"1059",9,"1 layer","huge","Training error",30.291446685791,TRUE
+"1060",10,"1 layer","huge","Training error",30.2853469848633,TRUE
+"1061",11,"1 layer","huge","Training error",30.2193832397461,TRUE
+"1062",12,"1 layer","huge","Training error",30.1468868255615,TRUE
+"1063",13,"1 layer","huge","Training error",30.2479038238525,TRUE
+"1064",14,"1 layer","huge","Training error",30.1239910125732,TRUE
+"1065",15,"1 layer","huge","Training error",30.0903987884521,TRUE
+"1066",16,"1 layer","huge","Training error",30.1257648468018,TRUE
+"1067",17,"1 layer","huge","Training error",30.0675010681152,TRUE
+"1068",18,"1 layer","huge","Training error",30.0400867462158,TRUE
+"1069",19,"1 layer","huge","Training error",29.9876499176025,TRUE
+"1070",20,"1 layer","huge","Training error",29.9687747955322,TRUE
+"1071",21,"1 layer","huge","Training error",30.0107822418213,TRUE
+"1072",22,"1 layer","huge","Training error",29.8705520629883,TRUE
+"1073",23,"1 layer","huge","Training error",30.0395240783691,TRUE
+"1074",24,"1 layer","huge","Training error",29.8381443023682,TRUE
+"1075",25,"1 layer","huge","Training error",29.8989887237549,TRUE
+"1076",26,"1 layer","huge","Training error",29.8431148529053,TRUE
+"1077",27,"1 layer","huge","Training error",29.869571685791,TRUE
+"1078",28,"1 layer","huge","Training error",29.8307037353516,TRUE
+"1079",29,"1 layer","huge","Training error",29.8204250335693,TRUE
+"1080",30,"1 layer","huge","Training error",29.7689647674561,TRUE
+"1081",1,"1 layer","large","Training error",57.9341583251953,TRUE
+"1082",2,"1 layer","large","Training error",30.7400665283203,TRUE
+"1083",3,"1 layer","large","Training error",30.6619071960449,TRUE
+"1084",4,"1 layer","large","Training error",30.5577030181885,TRUE
+"1085",5,"1 layer","large","Training error",30.4682579040527,TRUE
+"1086",6,"1 layer","large","Training error",30.4528026580811,TRUE
+"1087",7,"1 layer","large","Training error",30.3514060974121,TRUE
+"1088",8,"1 layer","large","Training error",30.3369579315186,TRUE
+"1089",9,"1 layer","large","Training error",30.3237342834473,TRUE
+"1090",10,"1 layer","large","Training error",30.2484722137451,TRUE
+"1091",11,"1 layer","large","Training error",30.2088088989258,TRUE
+"1092",12,"1 layer","large","Training error",30.2140216827393,TRUE
+"1093",13,"1 layer","large","Training error",30.218204498291,TRUE
+"1094",14,"1 layer","large","Training error",30.1958522796631,TRUE
+"1095",15,"1 layer","large","Training error",30.1226291656494,TRUE
+"1096",16,"1 layer","large","Training error",30.2376079559326,TRUE
+"1097",17,"1 layer","large","Training error",30.0009174346924,TRUE
+"1098",18,"1 layer","large","Training error",30.055347442627,TRUE
+"1099",19,"1 layer","large","Training error",30.0410404205322,TRUE
+"1100",20,"1 layer","large","Training error",30.0650310516357,TRUE
+"1101",21,"1 layer","large","Training error",30.0537910461426,TRUE
+"1102",22,"1 layer","large","Training error",30.0065727233887,TRUE
+"1103",23,"1 layer","large","Training error",29.9065074920654,TRUE
+"1104",24,"1 layer","large","Training error",29.9814434051514,TRUE
+"1105",25,"1 layer","large","Training error",29.9704895019531,TRUE
+"1106",26,"1 layer","large","Training error",29.9818649291992,TRUE
+"1107",27,"1 layer","large","Training error",29.9353256225586,TRUE
+"1108",28,"1 layer","large","Training error",29.8445987701416,TRUE
+"1109",29,"1 layer","large","Training error",29.8277263641357,TRUE
+"1110",30,"1 layer","large","Training error",29.9090194702148,TRUE
+"1111",1,"1 layer","medium","Training error",85.4579772949219,TRUE
+"1112",2,"1 layer","medium","Training error",32.9784622192383,TRUE
+"1113",3,"1 layer","medium","Training error",30.7940673828125,TRUE
+"1114",4,"1 layer","medium","Training error",30.7095642089844,TRUE
+"1115",5,"1 layer","medium","Training error",30.7339134216309,TRUE
+"1116",6,"1 layer","medium","Training error",30.6665534973145,TRUE
+"1117",7,"1 layer","medium","Training error",30.6432266235352,TRUE
+"1118",8,"1 layer","medium","Training error",30.6436309814453,TRUE
+"1119",9,"1 layer","medium","Training error",30.5649185180664,TRUE
+"1120",10,"1 layer","medium","Training error",30.5564460754395,TRUE
+"1121",11,"1 layer","medium","Training error",30.5260734558105,TRUE
+"1122",12,"1 layer","medium","Training error",30.5094890594482,TRUE
+"1123",13,"1 layer","medium","Training error",30.4580745697021,TRUE
+"1124",14,"1 layer","medium","Training error",30.45725440979,TRUE
+"1125",15,"1 layer","medium","Training error",30.4276161193848,TRUE
+"1126",16,"1 layer","medium","Training error",30.3800659179688,TRUE
+"1127",17,"1 layer","medium","Training error",30.3813896179199,TRUE
+"1128",18,"1 layer","medium","Training error",30.3334045410156,TRUE
+"1129",19,"1 layer","medium","Training error",30.3378448486328,TRUE
+"1130",20,"1 layer","medium","Training error",30.2925643920898,TRUE
+"1131",21,"1 layer","medium","Training error",30.2865886688232,TRUE
+"1132",22,"1 layer","medium","Training error",30.2454109191895,TRUE
+"1133",23,"1 layer","medium","Training error",30.2765522003174,TRUE
+"1134",24,"1 layer","medium","Training error",30.2408294677734,TRUE
+"1135",25,"1 layer","medium","Training error",30.228343963623,TRUE
+"1136",26,"1 layer","medium","Training error",30.1957321166992,TRUE
+"1137",27,"1 layer","medium","Training error",30.186840057373,TRUE
+"1138",28,"1 layer","medium","Training error",30.2201347351074,TRUE
+"1139",29,"1 layer","medium","Training error",30.213846206665,TRUE
+"1140",30,"1 layer","medium","Training error",30.1305370330811,TRUE
+"1141",1,"1 layer","medium large","Training error",69.5879440307617,TRUE
+"1142",2,"1 layer","medium large","Training error",30.7625045776367,TRUE
+"1143",3,"1 layer","medium large","Training error",30.5885028839111,TRUE
+"1144",4,"1 layer","medium large","Training error",30.5143184661865,TRUE
+"1145",5,"1 layer","medium large","Training error",30.3754196166992,TRUE
+"1146",6,"1 layer","medium large","Training error",30.3760662078857,TRUE
+"1147",7,"1 layer","medium large","Training error",30.383171081543,TRUE
+"1148",8,"1 layer","medium large","Training error",30.3283882141113,TRUE
+"1149",9,"1 layer","medium large","Training error",30.2596702575684,TRUE
+"1150",10,"1 layer","medium large","Training error",30.2751960754395,TRUE
+"1151",11,"1 layer","medium large","Training error",30.2120609283447,TRUE
+"1152",12,"1 layer","medium large","Training error",30.2289085388184,TRUE
+"1153",13,"1 layer","medium large","Training error",30.1401596069336,TRUE
+"1154",14,"1 layer","medium large","Training error",30.1667861938477,TRUE
+"1155",15,"1 layer","medium large","Training error",30.1104545593262,TRUE
+"1156",16,"1 layer","medium large","Training error",30.1210155487061,TRUE
+"1157",17,"1 layer","medium large","Training error",30.092170715332,TRUE
+"1158",18,"1 layer","medium large","Training error",30.0824680328369,TRUE
+"1159",19,"1 layer","medium large","Training error",30.0784015655518,TRUE
+"1160",20,"1 layer","medium large","Training error",30.022289276123,TRUE
+"1161",21,"1 layer","medium large","Training error",29.9500179290771,TRUE
+"1162",22,"1 layer","medium large","Training error",30.0115356445312,TRUE
+"1163",23,"1 layer","medium large","Training error",29.9606475830078,TRUE
+"1164",24,"1 layer","medium large","Training error",29.9334907531738,TRUE
+"1165",25,"1 layer","medium large","Training error",29.9278774261475,TRUE
+"1166",26,"1 layer","medium large","Training error",29.7786884307861,TRUE
+"1167",27,"1 layer","medium large","Training error",29.9799385070801,TRUE
+"1168",28,"1 layer","medium large","Training error",29.8742065429688,TRUE
+"1169",29,"1 layer","medium large","Training error",29.8914890289307,TRUE
+"1170",30,"1 layer","medium large","Training error",29.8501968383789,TRUE
+"1171",1,"1 layer","medium small","Training error",104.211723327637,TRUE
+"1172",2,"1 layer","medium small","Training error",46.2666168212891,TRUE
+"1173",3,"1 layer","medium small","Training error",31.0573978424072,TRUE
+"1174",4,"1 layer","medium small","Training error",30.9254951477051,TRUE
+"1175",5,"1 layer","medium small","Training error",30.9360313415527,TRUE
+"1176",6,"1 layer","medium small","Training error",30.8849353790283,TRUE
+"1177",7,"1 layer","medium small","Training error",30.7856349945068,TRUE
+"1178",8,"1 layer","medium small","Training error",30.6982822418213,TRUE
+"1179",9,"1 layer","medium small","Training error",30.6711540222168,TRUE
+"1180",10,"1 layer","medium small","Training error",30.6188468933105,TRUE
+"1181",11,"1 layer","medium small","Training error",30.5339679718018,TRUE
+"1182",12,"1 layer","medium small","Training error",30.4828319549561,TRUE
+"1183",13,"1 layer","medium small","Training error",30.4858131408691,TRUE
+"1184",14,"1 layer","medium small","Training error",30.4338359832764,TRUE
+"1185",15,"1 layer","medium small","Training error",30.4228096008301,TRUE
+"1186",16,"1 layer","medium small","Training error",30.4325256347656,TRUE
+"1187",17,"1 layer","medium small","Training error",30.4234790802002,TRUE
+"1188",18,"1 layer","medium small","Training error",30.3992862701416,TRUE
+"1189",19,"1 layer","medium small","Training error",30.3712329864502,TRUE
+"1190",20,"1 layer","medium small","Training error",30.3559074401855,TRUE
+"1191",21,"1 layer","medium small","Training error",30.3343849182129,TRUE
+"1192",22,"1 layer","medium small","Training error",30.3427982330322,TRUE
+"1193",23,"1 layer","medium small","Training error",30.2453060150146,TRUE
+"1194",24,"1 layer","medium small","Training error",30.3001518249512,TRUE
+"1195",25,"1 layer","medium small","Training error",30.2823677062988,TRUE
+"1196",26,"1 layer","medium small","Training error",30.2747936248779,TRUE
+"1197",27,"1 layer","medium small","Training error",30.3102760314941,TRUE
+"1198",28,"1 layer","medium small","Training error",30.2054405212402,TRUE
+"1199",29,"1 layer","medium small","Training error",30.2312908172607,TRUE
+"1200",30,"1 layer","medium small","Training error",30.2772998809814,TRUE
+"1201",1,"1 layer","mega","Training error",45.8868598937988,TRUE
+"1202",2,"1 layer","mega","Training error",31.3418827056885,TRUE
+"1203",3,"1 layer","mega","Training error",31.1165657043457,TRUE
+"1204",4,"1 layer","mega","Training error",30.9686679840088,TRUE
+"1205",5,"1 layer","mega","Training error",30.8257446289062,TRUE
+"1206",6,"1 layer","mega","Training error",30.7129135131836,TRUE
+"1207",7,"1 layer","mega","Training error",30.4679927825928,TRUE
+"1208",8,"1 layer","mega","Training error",30.4560050964355,TRUE
+"1209",9,"1 layer","mega","Training error",30.5450401306152,TRUE
+"1210",10,"1 layer","mega","Training error",30.3301830291748,TRUE
+"1211",11,"1 layer","mega","Training error",30.3366222381592,TRUE
+"1212",12,"1 layer","mega","Training error",30.3218040466309,TRUE
+"1213",13,"1 layer","mega","Training error",30.338794708252,TRUE
+"1214",14,"1 layer","mega","Training error",30.1815147399902,TRUE
+"1215",15,"1 layer","mega","Training error",30.2177066802979,TRUE
+"1216",16,"1 layer","mega","Training error",30.1400299072266,TRUE
+"1217",17,"1 layer","mega","Training error",30.1840782165527,TRUE
+"1218",18,"1 layer","mega","Training error",30.0787010192871,TRUE
+"1219",19,"1 layer","mega","Training error",29.9630432128906,TRUE
+"1220",20,"1 layer","mega","Training error",29.9126129150391,TRUE
+"1221",21,"1 layer","mega","Training error",30.0904674530029,TRUE
+"1222",22,"1 layer","mega","Training error",29.925365447998,TRUE
+"1223",23,"1 layer","mega","Training error",29.7432384490967,TRUE
+"1224",24,"1 layer","mega","Training error",29.8482074737549,TRUE
+"1225",25,"1 layer","mega","Training error",29.8404426574707,TRUE
+"1226",26,"1 layer","mega","Training error",29.7075042724609,TRUE
+"1227",27,"1 layer","mega","Training error",29.7904605865479,TRUE
+"1228",28,"1 layer","mega","Training error",29.7319793701172,TRUE
+"1229",29,"1 layer","mega","Training error",29.7967643737793,TRUE
+"1230",30,"1 layer","mega","Training error",29.7377891540527,TRUE
+"1231",1,"1 layer","small","Training error",120.602577209473,TRUE
+"1232",2,"1 layer","small","Training error",67.2378616333008,TRUE
+"1233",3,"1 layer","small","Training error",35.860725402832,TRUE
+"1234",4,"1 layer","small","Training error",30.9844932556152,TRUE
+"1235",5,"1 layer","small","Training error",30.9944152832031,TRUE
+"1236",6,"1 layer","small","Training error",30.8997020721436,TRUE
+"1237",7,"1 layer","small","Training error",30.8545589447021,TRUE
+"1238",8,"1 layer","small","Training error",30.8622932434082,TRUE
+"1239",9,"1 layer","small","Training error",30.7949047088623,TRUE
+"1240",10,"1 layer","small","Training error",30.8116569519043,TRUE
+"1241",11,"1 layer","small","Training error",30.8127536773682,TRUE
+"1242",12,"1 layer","small","Training error",30.7498683929443,TRUE
+"1243",13,"1 layer","small","Training error",30.6800537109375,TRUE
+"1244",14,"1 layer","small","Training error",30.7743244171143,TRUE
+"1245",15,"1 layer","small","Training error",30.7509632110596,TRUE
+"1246",16,"1 layer","small","Training error",30.7295608520508,TRUE
+"1247",17,"1 layer","small","Training error",30.6959934234619,TRUE
+"1248",18,"1 layer","small","Training error",30.6476917266846,TRUE
+"1249",19,"1 layer","small","Training error",30.6963329315186,TRUE
+"1250",20,"1 layer","small","Training error",30.700345993042,TRUE
+"1251",21,"1 layer","small","Training error",30.6778240203857,TRUE
+"1252",22,"1 layer","small","Training error",30.6321296691895,TRUE
+"1253",23,"1 layer","small","Training error",30.6289119720459,TRUE
+"1254",24,"1 layer","small","Training error",30.6087074279785,TRUE
+"1255",25,"1 layer","small","Training error",30.6293506622314,TRUE
+"1256",26,"1 layer","small","Training error",30.6026992797852,TRUE
+"1257",27,"1 layer","small","Training error",30.5890159606934,TRUE
+"1258",28,"1 layer","small","Training error",30.5855255126953,TRUE
+"1259",29,"1 layer","small","Training error",30.6153869628906,TRUE
+"1260",30,"1 layer","small","Training error",30.5866527557373,TRUE
+"1261",1,"2 layer","huge","Training error",59.9234504699707,TRUE
+"1262",2,"2 layer","huge","Training error",31.0081233978271,TRUE
+"1263",3,"2 layer","huge","Training error",30.6583957672119,TRUE
+"1264",4,"2 layer","huge","Training error",30.6772747039795,TRUE
+"1265",5,"2 layer","huge","Training error",30.3981876373291,TRUE
+"1266",6,"2 layer","huge","Training error",30.3062400817871,TRUE
+"1267",7,"2 layer","huge","Training error",30.2779560089111,TRUE
+"1268",8,"2 layer","huge","Training error",29.9475231170654,TRUE
+"1269",9,"2 layer","huge","Training error",29.9426898956299,TRUE
+"1270",10,"2 layer","huge","Training error",29.8966617584229,TRUE
+"1271",11,"2 layer","huge","Training error",29.8971195220947,TRUE
+"1272",12,"2 layer","huge","Training error",29.8063335418701,TRUE
+"1273",13,"2 layer","huge","Training error",29.8777084350586,TRUE
+"1274",14,"2 layer","huge","Training error",29.6949977874756,TRUE
+"1275",15,"2 layer","huge","Training error",29.7000408172607,TRUE
+"1276",16,"2 layer","huge","Training error",29.6400203704834,TRUE
+"1277",17,"2 layer","huge","Training error",29.7532520294189,TRUE
+"1278",18,"2 layer","huge","Training error",29.4006271362305,TRUE
+"1279",19,"2 layer","huge","Training error",29.5444869995117,TRUE
+"1280",20,"2 layer","huge","Training error",29.4778003692627,TRUE
+"1281",21,"2 layer","huge","Training error",29.3055000305176,TRUE
+"1282",22,"2 layer","huge","Training error",29.4507999420166,TRUE
+"1283",23,"2 layer","huge","Training error",29.497802734375,TRUE
+"1284",24,"2 layer","huge","Training error",29.346622467041,TRUE
+"1285",25,"2 layer","huge","Training error",29.2918510437012,TRUE
+"1286",26,"2 layer","huge","Training error",29.5296173095703,TRUE
+"1287",27,"2 layer","huge","Training error",29.2947044372559,TRUE
+"1288",28,"2 layer","huge","Training error",29.1833305358887,TRUE
+"1289",29,"2 layer","huge","Training error",29.2880878448486,TRUE
+"1290",30,"2 layer","huge","Training error",29.0742893218994,TRUE
+"1291",1,"2 layer","large","Training error",68.0675964355469,TRUE
+"1292",2,"2 layer","large","Training error",30.8314590454102,TRUE
+"1293",3,"2 layer","large","Training error",30.6307411193848,TRUE
+"1294",4,"2 layer","large","Training error",30.5860977172852,TRUE
+"1295",5,"2 layer","large","Training error",30.5295257568359,TRUE
+"1296",6,"2 layer","large","Training error",30.3010215759277,TRUE
+"1297",7,"2 layer","large","Training error",30.1327610015869,TRUE
+"1298",8,"2 layer","large","Training error",30.2550392150879,TRUE
+"1299",9,"2 layer","large","Training error",30.0832347869873,TRUE
+"1300",10,"2 layer","large","Training error",29.8648204803467,TRUE
+"1301",11,"2 layer","large","Training error",29.7987499237061,TRUE
+"1302",12,"2 layer","large","Training error",29.8723812103271,TRUE
+"1303",13,"2 layer","large","Training error",29.5636959075928,TRUE
+"1304",14,"2 layer","large","Training error",29.6509265899658,TRUE
+"1305",15,"2 layer","large","Training error",29.650899887085,TRUE
+"1306",16,"2 layer","large","Training error",29.6018524169922,TRUE
+"1307",17,"2 layer","large","Training error",29.5110473632812,TRUE
+"1308",18,"2 layer","large","Training error",29.5480937957764,TRUE
+"1309",19,"2 layer","large","Training error",29.4328136444092,TRUE
+"1310",20,"2 layer","large","Training error",29.5011291503906,TRUE
+"1311",21,"2 layer","large","Training error",29.4721221923828,TRUE
+"1312",22,"2 layer","large","Training error",29.2790946960449,TRUE
+"1313",23,"2 layer","large","Training error",29.484712600708,TRUE
+"1314",24,"2 layer","large","Training error",29.2589950561523,TRUE
+"1315",25,"2 layer","large","Training error",29.3241233825684,TRUE
+"1316",26,"2 layer","large","Training error",29.3322925567627,TRUE
+"1317",27,"2 layer","large","Training error",29.3053493499756,TRUE
+"1318",28,"2 layer","large","Training error",29.1980171203613,TRUE
+"1319",29,"2 layer","large","Training error",29.3025550842285,TRUE
+"1320",30,"2 layer","large","Training error",29.2137336730957,TRUE
+"1321",1,"2 layer","medium","Training error",91.6371383666992,TRUE
+"1322",2,"2 layer","medium","Training error",40.848461151123,TRUE
+"1323",3,"2 layer","medium","Training error",30.5415992736816,TRUE
+"1324",4,"2 layer","medium","Training error",30.4849224090576,TRUE
+"1325",5,"2 layer","medium","Training error",30.401668548584,TRUE
+"1326",6,"2 layer","medium","Training error",30.3504428863525,TRUE
+"1327",7,"2 layer","medium","Training error",30.2916221618652,TRUE
+"1328",8,"2 layer","medium","Training error",30.2895565032959,TRUE
+"1329",9,"2 layer","medium","Training error",30.168062210083,TRUE
+"1330",10,"2 layer","medium","Training error",30.1040229797363,TRUE
+"1331",11,"2 layer","medium","Training error",29.9678421020508,TRUE
+"1332",12,"2 layer","medium","Training error",29.9303188323975,TRUE
+"1333",13,"2 layer","medium","Training error",29.775936126709,TRUE
+"1334",14,"2 layer","medium","Training error",29.8916759490967,TRUE
+"1335",15,"2 layer","medium","Training error",29.7847175598145,TRUE
+"1336",16,"2 layer","medium","Training error",29.7088394165039,TRUE
+"1337",17,"2 layer","medium","Training error",29.7813549041748,TRUE
+"1338",18,"2 layer","medium","Training error",29.6195945739746,TRUE
+"1339",19,"2 layer","medium","Training error",29.7253112792969,TRUE
+"1340",20,"2 layer","medium","Training error",29.6762847900391,TRUE
+"1341",21,"2 layer","medium","Training error",29.6552333831787,TRUE
+"1342",22,"2 layer","medium","Training error",29.5821647644043,TRUE
+"1343",23,"2 layer","medium","Training error",29.5675754547119,TRUE
+"1344",24,"2 layer","medium","Training error",29.5840187072754,TRUE
+"1345",25,"2 layer","medium","Training error",29.5593070983887,TRUE
+"1346",26,"2 layer","medium","Training error",29.4458351135254,TRUE
+"1347",27,"2 layer","medium","Training error",29.4704666137695,TRUE
+"1348",28,"2 layer","medium","Training error",29.4205627441406,TRUE
+"1349",29,"2 layer","medium","Training error",29.4906024932861,TRUE
+"1350",30,"2 layer","medium","Training error",29.3724918365479,TRUE
+"1351",1,"2 layer","medium large","Training error",79.2387847900391,TRUE
+"1352",2,"2 layer","medium large","Training error",32.3090744018555,TRUE
+"1353",3,"2 layer","medium large","Training error",30.7320957183838,TRUE
+"1354",4,"2 layer","medium large","Training error",30.5795612335205,TRUE
+"1355",5,"2 layer","medium large","Training error",30.4609928131104,TRUE
+"1356",6,"2 layer","medium large","Training error",30.480920791626,TRUE
+"1357",7,"2 layer","medium large","Training error",30.4190807342529,TRUE
+"1358",8,"2 layer","medium large","Training error",30.2483291625977,TRUE
+"1359",9,"2 layer","medium large","Training error",30.2044105529785,TRUE
+"1360",10,"2 layer","medium large","Training error",30.0336685180664,TRUE
+"1361",11,"2 layer","medium large","Training error",30.0160980224609,TRUE
+"1362",12,"2 layer","medium large","Training error",30.0080490112305,TRUE
+"1363",13,"2 layer","medium large","Training error",29.8888835906982,TRUE
+"1364",14,"2 layer","medium large","Training error",29.7886924743652,TRUE
+"1365",15,"2 layer","medium large","Training error",29.9312896728516,TRUE
+"1366",16,"2 layer","medium large","Training error",29.7347850799561,TRUE
+"1367",17,"2 layer","medium large","Training error",29.6906127929688,TRUE
+"1368",18,"2 layer","medium large","Training error",29.667013168335,TRUE
+"1369",19,"2 layer","medium large","Training error",29.6139602661133,TRUE
+"1370",20,"2 layer","medium large","Training error",29.5156154632568,TRUE
+"1371",21,"2 layer","medium large","Training error",29.644401550293,TRUE
+"1372",22,"2 layer","medium large","Training error",29.4312381744385,TRUE
+"1373",23,"2 layer","medium large","Training error",29.5911159515381,TRUE
+"1374",24,"2 layer","medium large","Training error",29.443754196167,TRUE
+"1375",25,"2 layer","medium large","Training error",29.3235187530518,TRUE
+"1376",26,"2 layer","medium large","Training error",29.2254600524902,TRUE
+"1377",27,"2 layer","medium large","Training error",29.3111515045166,TRUE
+"1378",28,"2 layer","medium large","Training error",29.3650665283203,TRUE
+"1379",29,"2 layer","medium large","Training error",29.3632011413574,TRUE
+"1380",30,"2 layer","medium large","Training error",29.4516124725342,TRUE
+"1381",1,"2 layer","medium small","Training error",103.287048339844,TRUE
+"1382",2,"2 layer","medium small","Training error",58.8677406311035,TRUE
+"1383",3,"2 layer","medium small","Training error",32.9124412536621,TRUE
+"1384",4,"2 layer","medium small","Training error",30.6260280609131,TRUE
+"1385",5,"2 layer","medium small","Training error",30.5683269500732,TRUE
+"1386",6,"2 layer","medium small","Training error",30.5553283691406,TRUE
+"1387",7,"2 layer","medium small","Training error",30.4915962219238,TRUE
+"1388",8,"2 layer","medium small","Training error",30.5609149932861,TRUE
+"1389",9,"2 layer","medium small","Training error",30.4599571228027,TRUE
+"1390",10,"2 layer","medium small","Training error",30.4600601196289,TRUE
+"1391",11,"2 layer","medium small","Training error",30.4209327697754,TRUE
+"1392",12,"2 layer","medium small","Training error",30.3927803039551,TRUE
+"1393",13,"2 layer","medium small","Training error",30.3552665710449,TRUE
+"1394",14,"2 layer","medium small","Training error",30.3285331726074,TRUE
+"1395",15,"2 layer","medium small","Training error",30.3698329925537,TRUE
+"1396",16,"2 layer","medium small","Training error",30.3400402069092,TRUE
+"1397",17,"2 layer","medium small","Training error",30.2346725463867,TRUE
+"1398",18,"2 layer","medium small","Training error",30.2526111602783,TRUE
+"1399",19,"2 layer","medium small","Training error",30.2094898223877,TRUE
+"1400",20,"2 layer","medium small","Training error",30.1517677307129,TRUE
+"1401",21,"2 layer","medium small","Training error",30.2065029144287,TRUE
+"1402",22,"2 layer","medium small","Training error",30.0849304199219,TRUE
+"1403",23,"2 layer","medium small","Training error",30.0947208404541,TRUE
+"1404",24,"2 layer","medium small","Training error",30.0611019134521,TRUE
+"1405",25,"2 layer","medium small","Training error",30.1442317962646,TRUE
+"1406",26,"2 layer","medium small","Training error",30.0625228881836,TRUE
+"1407",27,"2 layer","medium small","Training error",30.0546455383301,TRUE
+"1408",28,"2 layer","medium small","Training error",30.0142440795898,TRUE
+"1409",29,"2 layer","medium small","Training error",29.9651565551758,TRUE
+"1410",30,"2 layer","medium small","Training error",29.90478515625,TRUE
+"1411",1,"2 layer","mega","Training error",54.9846687316895,TRUE
+"1412",2,"2 layer","mega","Training error",31.242826461792,TRUE
+"1413",3,"2 layer","mega","Training error",30.9270687103271,TRUE
+"1414",4,"2 layer","mega","Training error",30.7337818145752,TRUE
+"1415",5,"2 layer","mega","Training error",30.5390510559082,TRUE
+"1416",6,"2 layer","mega","Training error",30.4156169891357,TRUE
+"1417",7,"2 layer","mega","Training error",30.3106288909912,TRUE
+"1418",8,"2 layer","mega","Training error",30.1410064697266,TRUE
+"1419",9,"2 layer","mega","Training error",30.2066040039062,TRUE
+"1420",10,"2 layer","mega","Training error",30.0726585388184,TRUE
+"1421",11,"2 layer","mega","Training error",29.9643402099609,TRUE
+"1422",12,"2 layer","mega","Training error",29.9277763366699,TRUE
+"1423",13,"2 layer","mega","Training error",29.8556270599365,TRUE
+"1424",14,"2 layer","mega","Training error",29.7440414428711,TRUE
+"1425",15,"2 layer","mega","Training error",29.8412303924561,TRUE
+"1426",16,"2 layer","mega","Training error",29.6919078826904,TRUE
+"1427",17,"2 layer","mega","Training error",29.4659767150879,TRUE
+"1428",18,"2 layer","mega","Training error",29.6201000213623,TRUE
+"1429",19,"2 layer","mega","Training error",29.6265487670898,TRUE
+"1430",20,"2 layer","mega","Training error",29.4387340545654,TRUE
+"1431",21,"2 layer","mega","Training error",29.5764961242676,TRUE
+"1432",22,"2 layer","mega","Training error",29.4228687286377,TRUE
+"1433",23,"2 layer","mega","Training error",29.4665393829346,TRUE
+"1434",24,"2 layer","mega","Training error",29.2476577758789,TRUE
+"1435",25,"2 layer","mega","Training error",29.2548789978027,TRUE
+"1436",26,"2 layer","mega","Training error",29.371898651123,TRUE
+"1437",27,"2 layer","mega","Training error",29.5080642700195,TRUE
+"1438",28,"2 layer","mega","Training error",29.2591609954834,TRUE
+"1439",29,"2 layer","mega","Training error",29.2227764129639,TRUE
+"1440",30,"2 layer","mega","Training error",29.3422927856445,TRUE
+"1441",1,"2 layer","small","Training error",111.266983032227,TRUE
+"1442",2,"2 layer","small","Training error",74.4234924316406,TRUE
+"1443",3,"2 layer","small","Training error",45.9033622741699,TRUE
+"1444",4,"2 layer","small","Training error",32.074821472168,TRUE
+"1445",5,"2 layer","small","Training error",31.0292892456055,TRUE
+"1446",6,"2 layer","small","Training error",31.017822265625,TRUE
+"1447",7,"2 layer","small","Training error",30.8833465576172,TRUE
+"1448",8,"2 layer","small","Training error",30.9093723297119,TRUE
+"1449",9,"2 layer","small","Training error",30.9034614562988,TRUE
+"1450",10,"2 layer","small","Training error",30.8828582763672,TRUE
+"1451",11,"2 layer","small","Training error",30.8431396484375,TRUE
+"1452",12,"2 layer","small","Training error",30.8607654571533,TRUE
+"1453",13,"2 layer","small","Training error",30.8629703521729,TRUE
+"1454",14,"2 layer","small","Training error",30.8463153839111,TRUE
+"1455",15,"2 layer","small","Training error",30.8392906188965,TRUE
+"1456",16,"2 layer","small","Training error",30.7592163085938,TRUE
+"1457",17,"2 layer","small","Training error",30.7372169494629,TRUE
+"1458",18,"2 layer","small","Training error",30.7586517333984,TRUE
+"1459",19,"2 layer","small","Training error",30.7286796569824,TRUE
+"1460",20,"2 layer","small","Training error",30.7998161315918,TRUE
+"1461",21,"2 layer","small","Training error",30.7285003662109,TRUE
+"1462",22,"2 layer","small","Training error",30.6631755828857,TRUE
+"1463",23,"2 layer","small","Training error",30.6807079315186,TRUE
+"1464",24,"2 layer","small","Training error",30.6032085418701,TRUE
+"1465",25,"2 layer","small","Training error",30.6818618774414,TRUE
+"1466",26,"2 layer","small","Training error",30.6545791625977,TRUE
+"1467",27,"2 layer","small","Training error",30.588903427124,TRUE
+"1468",28,"2 layer","small","Training error",30.5879249572754,TRUE
+"1469",29,"2 layer","small","Training error",30.5021686553955,TRUE
+"1470",30,"2 layer","small","Training error",30.5132923126221,TRUE
+"1471",1,"3 layer","huge","Training error",69.0216598510742,TRUE
+"1472",2,"3 layer","huge","Training error",31.099781036377,TRUE
+"1473",3,"3 layer","huge","Training error",30.7780628204346,TRUE
+"1474",4,"3 layer","huge","Training error",30.681827545166,TRUE
+"1475",5,"3 layer","huge","Training error",30.4104404449463,TRUE
+"1476",6,"3 layer","huge","Training error",30.3576068878174,TRUE
+"1477",7,"3 layer","huge","Training error",30.1086311340332,TRUE
+"1478",8,"3 layer","huge","Training error",30.2727680206299,TRUE
+"1479",9,"3 layer","huge","Training error",30.0660781860352,TRUE
+"1480",10,"3 layer","huge","Training error",30.1332263946533,TRUE
+"1481",11,"3 layer","huge","Training error",29.9076347351074,TRUE
+"1482",12,"3 layer","huge","Training error",29.768928527832,TRUE
+"1483",13,"3 layer","huge","Training error",29.7579212188721,TRUE
+"1484",14,"3 layer","huge","Training error",29.8435382843018,TRUE
+"1485",15,"3 layer","huge","Training error",29.703369140625,TRUE
+"1486",16,"3 layer","huge","Training error",29.6110324859619,TRUE
+"1487",17,"3 layer","huge","Training error",29.3269786834717,TRUE
+"1488",18,"3 layer","huge","Training error",29.4235496520996,TRUE
+"1489",19,"3 layer","huge","Training error",29.4193687438965,TRUE
+"1490",20,"3 layer","huge","Training error",29.4607009887695,TRUE
+"1491",21,"3 layer","huge","Training error",29.1979637145996,TRUE
+"1492",22,"3 layer","huge","Training error",29.28098487854,TRUE
+"1493",23,"3 layer","huge","Training error",29.1343002319336,TRUE
+"1494",24,"3 layer","huge","Training error",29.2875118255615,TRUE
+"1495",25,"3 layer","huge","Training error",29.3605499267578,TRUE
+"1496",26,"3 layer","huge","Training error",29.2365875244141,TRUE
+"1497",27,"3 layer","huge","Training error",29.2671890258789,TRUE
+"1498",28,"3 layer","huge","Training error",29.1832180023193,TRUE
+"1499",29,"3 layer","huge","Training error",29.2863330841064,TRUE
+"1500",30,"3 layer","huge","Training error",29.1759662628174,TRUE
+"1501",1,"3 layer","large","Training error",79.9182052612305,TRUE
+"1502",2,"3 layer","large","Training error",32.3553924560547,TRUE
+"1503",3,"3 layer","large","Training error",30.8199424743652,TRUE
+"1504",4,"3 layer","large","Training error",30.5732517242432,TRUE
+"1505",5,"3 layer","large","Training error",30.5621490478516,TRUE
+"1506",6,"3 layer","large","Training error",30.3874912261963,TRUE
+"1507",7,"3 layer","large","Training error",30.3034858703613,TRUE
+"1508",8,"3 layer","large","Training error",30.2240333557129,TRUE
+"1509",9,"3 layer","large","Training error",30.0542259216309,TRUE
+"1510",10,"3 layer","large","Training error",29.959415435791,TRUE
+"1511",11,"3 layer","large","Training error",29.7418804168701,TRUE
+"1512",12,"3 layer","large","Training error",29.8285236358643,TRUE
+"1513",13,"3 layer","large","Training error",29.7967147827148,TRUE
+"1514",14,"3 layer","large","Training error",29.6487998962402,TRUE
+"1515",15,"3 layer","large","Training error",29.6581783294678,TRUE
+"1516",16,"3 layer","large","Training error",29.5024795532227,TRUE
+"1517",17,"3 layer","large","Training error",29.5439300537109,TRUE
+"1518",18,"3 layer","large","Training error",29.6328735351562,TRUE
+"1519",19,"3 layer","large","Training error",29.1669464111328,TRUE
+"1520",20,"3 layer","large","Training error",29.4217090606689,TRUE
+"1521",21,"3 layer","large","Training error",29.4662895202637,TRUE
+"1522",22,"3 layer","large","Training error",29.1836795806885,TRUE
+"1523",23,"3 layer","large","Training error",29.4476432800293,TRUE
+"1524",24,"3 layer","large","Training error",29.4827537536621,TRUE
+"1525",25,"3 layer","large","Training error",29.283239364624,TRUE
+"1526",26,"3 layer","large","Training error",29.1751537322998,TRUE
+"1527",27,"3 layer","large","Training error",29.1991500854492,TRUE
+"1528",28,"3 layer","large","Training error",29.3106098175049,TRUE
+"1529",29,"3 layer","large","Training error",29.2442474365234,TRUE
+"1530",30,"3 layer","large","Training error",29.120059967041,TRUE
+"1531",1,"3 layer","medium","Training error",96.9395751953125,TRUE
+"1532",2,"3 layer","medium","Training error",54.0779342651367,TRUE
+"1533",3,"3 layer","medium","Training error",31.6956481933594,TRUE
+"1534",4,"3 layer","medium","Training error",30.5730304718018,TRUE
+"1535",5,"3 layer","medium","Training error",30.5175285339355,TRUE
+"1536",6,"3 layer","medium","Training error",30.4224758148193,TRUE
+"1537",7,"3 layer","medium","Training error",30.3658275604248,TRUE
+"1538",8,"3 layer","medium","Training error",30.2446403503418,TRUE
+"1539",9,"3 layer","medium","Training error",30.2171077728271,TRUE
+"1540",10,"3 layer","medium","Training error",30.1635074615479,TRUE
+"1541",11,"3 layer","medium","Training error",30.2402114868164,TRUE
+"1542",12,"3 layer","medium","Training error",30.0530376434326,TRUE
+"1543",13,"3 layer","medium","Training error",30.0245800018311,TRUE
+"1544",14,"3 layer","medium","Training error",30.0023555755615,TRUE
+"1545",15,"3 layer","medium","Training error",29.9078903198242,TRUE
+"1546",16,"3 layer","medium","Training error",29.8081531524658,TRUE
+"1547",17,"3 layer","medium","Training error",29.7933006286621,TRUE
+"1548",18,"3 layer","medium","Training error",29.6444969177246,TRUE
+"1549",19,"3 layer","medium","Training error",29.6776275634766,TRUE
+"1550",20,"3 layer","medium","Training error",29.6281433105469,TRUE
+"1551",21,"3 layer","medium","Training error",29.6169261932373,TRUE
+"1552",22,"3 layer","medium","Training error",29.4928150177002,TRUE
+"1553",23,"3 layer","medium","Training error",29.7433624267578,TRUE
+"1554",24,"3 layer","medium","Training error",29.505880355835,TRUE
+"1555",25,"3 layer","medium","Training error",29.7719879150391,TRUE
+"1556",26,"3 layer","medium","Training error",29.6693916320801,TRUE
+"1557",27,"3 layer","medium","Training error",29.4505805969238,TRUE
+"1558",28,"3 layer","medium","Training error",29.4147396087646,TRUE
+"1559",29,"3 layer","medium","Training error",29.5424270629883,TRUE
+"1560",30,"3 layer","medium","Training error",29.415943145752,TRUE
+"1561",1,"3 layer","medium large","Training error",92.0171508789062,TRUE
+"1562",2,"3 layer","medium large","Training error",42.2488784790039,TRUE
+"1563",3,"3 layer","medium large","Training error",30.684362411499,TRUE
+"1564",4,"3 layer","medium large","Training error",30.6544437408447,TRUE
+"1565",5,"3 layer","medium large","Training error",30.4411602020264,TRUE
+"1566",6,"3 layer","medium large","Training error",30.6043338775635,TRUE
+"1567",7,"3 layer","medium large","Training error",30.3496379852295,TRUE
+"1568",8,"3 layer","medium large","Training error",30.1314430236816,TRUE
+"1569",9,"3 layer","medium large","Training error",30.1365756988525,TRUE
+"1570",10,"3 layer","medium large","Training error",30.1573677062988,TRUE
+"1571",11,"3 layer","medium large","Training error",30.1327972412109,TRUE
+"1572",12,"3 layer","medium large","Training error",29.857479095459,TRUE
+"1573",13,"3 layer","medium large","Training error",29.8014869689941,TRUE
+"1574",14,"3 layer","medium large","Training error",29.7479305267334,TRUE
+"1575",15,"3 layer","medium large","Training error",29.8596210479736,TRUE
+"1576",16,"3 layer","medium large","Training error",29.7668285369873,TRUE
+"1577",17,"3 layer","medium large","Training error",29.8498649597168,TRUE
+"1578",18,"3 layer","medium large","Training error",29.4924011230469,TRUE
+"1579",19,"3 layer","medium large","Training error",29.4859504699707,TRUE
+"1580",20,"3 layer","medium large","Training error",29.4458045959473,TRUE
+"1581",21,"3 layer","medium large","Training error",29.3978004455566,TRUE
+"1582",22,"3 layer","medium large","Training error",29.2642250061035,TRUE
+"1583",23,"3 layer","medium large","Training error",29.3699245452881,TRUE
+"1584",24,"3 layer","medium large","Training error",29.452938079834,TRUE
+"1585",25,"3 layer","medium large","Training error",29.4286041259766,TRUE
+"1586",26,"3 layer","medium large","Training error",29.1000747680664,TRUE
+"1587",27,"3 layer","medium large","Training error",29.5186901092529,TRUE
+"1588",28,"3 layer","medium large","Training error",29.1720409393311,TRUE
+"1589",29,"3 layer","medium large","Training error",29.2409534454346,TRUE
+"1590",30,"3 layer","medium large","Training error",29.1757698059082,TRUE
+"1591",1,"3 layer","medium small","Training error",104.886566162109,TRUE
+"1592",2,"3 layer","medium small","Training error",71.7806625366211,TRUE
+"1593",3,"3 layer","medium small","Training error",43.857852935791,TRUE
+"1594",4,"3 layer","medium small","Training error",31.3895797729492,TRUE
+"1595",5,"3 layer","medium small","Training error",30.7244300842285,TRUE
+"1596",6,"3 layer","medium small","Training error",30.6779155731201,TRUE
+"1597",7,"3 layer","medium small","Training error",30.7101936340332,TRUE
+"1598",8,"3 layer","medium small","Training error",30.6110343933105,TRUE
+"1599",9,"3 layer","medium small","Training error",30.5765628814697,TRUE
+"1600",10,"3 layer","medium small","Training error",30.5198822021484,TRUE
+"1601",11,"3 layer","medium small","Training error",30.4691104888916,TRUE
+"1602",12,"3 layer","medium small","Training error",30.4474601745605,TRUE
+"1603",13,"3 layer","medium small","Training error",30.4079742431641,TRUE
+"1604",14,"3 layer","medium small","Training error",30.4397735595703,TRUE
+"1605",15,"3 layer","medium small","Training error",30.3421230316162,TRUE
+"1606",16,"3 layer","medium small","Training error",30.3873748779297,TRUE
+"1607",17,"3 layer","medium small","Training error",30.407169342041,TRUE
+"1608",18,"3 layer","medium small","Training error",30.3486080169678,TRUE
+"1609",19,"3 layer","medium small","Training error",30.200756072998,TRUE
+"1610",20,"3 layer","medium small","Training error",30.2496719360352,TRUE
+"1611",21,"3 layer","medium small","Training error",30.271411895752,TRUE
+"1612",22,"3 layer","medium small","Training error",30.2025737762451,TRUE
+"1613",23,"3 layer","medium small","Training error",30.085298538208,TRUE
+"1614",24,"3 layer","medium small","Training error",30.0552158355713,TRUE
+"1615",25,"3 layer","medium small","Training error",30.1598224639893,TRUE
+"1616",26,"3 layer","medium small","Training error",30.0049743652344,TRUE
+"1617",27,"3 layer","medium small","Training error",30.0599155426025,TRUE
+"1618",28,"3 layer","medium small","Training error",30.0315017700195,TRUE
+"1619",29,"3 layer","medium small","Training error",29.9741058349609,TRUE
+"1620",30,"3 layer","medium small","Training error",29.9973659515381,TRUE
+"1621",1,"3 layer","mega","Training error",60.2615852355957,TRUE
+"1622",2,"3 layer","mega","Training error",31.0700778961182,TRUE
+"1623",3,"3 layer","mega","Training error",30.9156684875488,TRUE
+"1624",4,"3 layer","mega","Training error",30.8227596282959,TRUE
+"1625",5,"3 layer","mega","Training error",30.6255779266357,TRUE
+"1626",6,"3 layer","mega","Training error",30.6167831420898,TRUE
+"1627",7,"3 layer","mega","Training error",30.4708251953125,TRUE
+"1628",8,"3 layer","mega","Training error",30.3146781921387,TRUE
+"1629",9,"3 layer","mega","Training error",30.1413688659668,TRUE
+"1630",10,"3 layer","mega","Training error",30.0089893341064,TRUE
+"1631",11,"3 layer","mega","Training error",29.920503616333,TRUE
+"1632",12,"3 layer","mega","Training error",29.8924770355225,TRUE
+"1633",13,"3 layer","mega","Training error",29.6713943481445,TRUE
+"1634",14,"3 layer","mega","Training error",29.6580791473389,TRUE
+"1635",15,"3 layer","mega","Training error",29.7935066223145,TRUE
+"1636",16,"3 layer","mega","Training error",29.5892448425293,TRUE
+"1637",17,"3 layer","mega","Training error",29.7095184326172,TRUE
+"1638",18,"3 layer","mega","Training error",29.6865463256836,TRUE
+"1639",19,"3 layer","mega","Training error",29.6294898986816,TRUE
+"1640",20,"3 layer","mega","Training error",29.6256885528564,TRUE
+"1641",21,"3 layer","mega","Training error",29.6712646484375,TRUE
+"1642",22,"3 layer","mega","Training error",29.3764686584473,TRUE
+"1643",23,"3 layer","mega","Training error",29.4813041687012,TRUE
+"1644",24,"3 layer","mega","Training error",29.4869785308838,TRUE
+"1645",25,"3 layer","mega","Training error",29.3839530944824,TRUE
+"1646",26,"3 layer","mega","Training error",29.5585975646973,TRUE
+"1647",27,"3 layer","mega","Training error",29.3652458190918,TRUE
+"1648",28,"3 layer","mega","Training error",29.2982807159424,TRUE
+"1649",29,"3 layer","mega","Training error",29.2712783813477,TRUE
+"1650",30,"3 layer","mega","Training error",29.3774642944336,TRUE
+"1651",1,"3 layer","small","Training error",128.350128173828,TRUE
+"1652",2,"3 layer","small","Training error",103.26033782959,TRUE
+"1653",3,"3 layer","small","Training error",78.0061798095703,TRUE
+"1654",4,"3 layer","small","Training error",56.8150672912598,TRUE
+"1655",5,"3 layer","small","Training error",39.9382858276367,TRUE
+"1656",6,"3 layer","small","Training error",31.8419094085693,TRUE
+"1657",7,"3 layer","small","Training error",31.1076278686523,TRUE
+"1658",8,"3 layer","small","Training error",31.0921497344971,TRUE
+"1659",9,"3 layer","small","Training error",31.0366802215576,TRUE
+"1660",10,"3 layer","small","Training error",31.0794086456299,TRUE
+"1661",11,"3 layer","small","Training error",31.0115909576416,TRUE
+"1662",12,"3 layer","small","Training error",30.9823188781738,TRUE
+"1663",13,"3 layer","small","Training error",30.9480419158936,TRUE
+"1664",14,"3 layer","small","Training error",30.8889331817627,TRUE
+"1665",15,"3 layer","small","Training error",30.8966808319092,TRUE
+"1666",16,"3 layer","small","Training error",30.8766269683838,TRUE
+"1667",17,"3 layer","small","Training error",30.8376178741455,TRUE
+"1668",18,"3 layer","small","Training error",30.8562316894531,TRUE
+"1669",19,"3 layer","small","Training error",30.8382530212402,TRUE
+"1670",20,"3 layer","small","Training error",30.7940006256104,TRUE
+"1671",21,"3 layer","small","Training error",30.811767578125,TRUE
+"1672",22,"3 layer","small","Training error",30.804744720459,TRUE
+"1673",23,"3 layer","small","Training error",30.8299980163574,TRUE
+"1674",24,"3 layer","small","Training error",30.7834529876709,TRUE
+"1675",25,"3 layer","small","Training error",30.769926071167,TRUE
+"1676",26,"3 layer","small","Training error",30.7572898864746,TRUE
+"1677",27,"3 layer","small","Training error",30.7675342559814,TRUE
+"1678",28,"3 layer","small","Training error",30.7442684173584,TRUE
+"1679",29,"3 layer","small","Training error",30.7214813232422,TRUE
+"1680",30,"3 layer","small","Training error",30.7716846466064,TRUE
+"1681",1,"4 layer","huge","Training error",79.14599609375,TRUE
+"1682",2,"4 layer","huge","Training error",32.3189544677734,TRUE
+"1683",3,"4 layer","huge","Training error",30.6685924530029,TRUE
+"1684",4,"4 layer","huge","Training error",30.6521453857422,TRUE
+"1685",5,"4 layer","huge","Training error",30.5906639099121,TRUE
+"1686",6,"4 layer","huge","Training error",30.3753147125244,TRUE
+"1687",7,"4 layer","huge","Training error",30.3571224212646,TRUE
+"1688",8,"4 layer","huge","Training error",30.2541408538818,TRUE
+"1689",9,"4 layer","huge","Training error",30.1212062835693,TRUE
+"1690",10,"4 layer","huge","Training error",29.9643859863281,TRUE
+"1691",11,"4 layer","huge","Training error",29.7817268371582,TRUE
+"1692",12,"4 layer","huge","Training error",29.5627346038818,TRUE
+"1693",13,"4 layer","huge","Training error",29.6200466156006,TRUE
+"1694",14,"4 layer","huge","Training error",29.5881195068359,TRUE
+"1695",15,"4 layer","huge","Training error",29.5793876647949,TRUE
+"1696",16,"4 layer","huge","Training error",29.3819561004639,TRUE
+"1697",17,"4 layer","huge","Training error",29.8485221862793,TRUE
+"1698",18,"4 layer","huge","Training error",29.4582366943359,TRUE
+"1699",19,"4 layer","huge","Training error",29.384090423584,TRUE
+"1700",20,"4 layer","huge","Training error",29.4562911987305,TRUE
+"1701",21,"4 layer","huge","Training error",29.3052597045898,TRUE
+"1702",22,"4 layer","huge","Training error",29.4982490539551,TRUE
+"1703",23,"4 layer","huge","Training error",29.2334671020508,TRUE
+"1704",24,"4 layer","huge","Training error",29.1554298400879,TRUE
+"1705",25,"4 layer","huge","Training error",29.0853271484375,TRUE
+"1706",26,"4 layer","huge","Training error",29.0985355377197,TRUE
+"1707",27,"4 layer","huge","Training error",29.3810539245605,TRUE
+"1708",28,"4 layer","huge","Training error",29.3430423736572,TRUE
+"1709",29,"4 layer","huge","Training error",29.1311264038086,TRUE
+"1710",30,"4 layer","huge","Training error",29.0798568725586,TRUE
+"1711",1,"4 layer","large","Training error",87.8592758178711,TRUE
+"1712",2,"4 layer","large","Training error",38.8412017822266,TRUE
+"1713",3,"4 layer","large","Training error",30.6837940216064,TRUE
+"1714",4,"4 layer","large","Training error",30.5794906616211,TRUE
+"1715",5,"4 layer","large","Training error",30.5158081054688,TRUE
+"1716",6,"4 layer","large","Training error",30.4340152740479,TRUE
+"1717",7,"4 layer","large","Training error",30.2651519775391,TRUE
+"1718",8,"4 layer","large","Training error",30.2423286437988,TRUE
+"1719",9,"4 layer","large","Training error",30.0627155303955,TRUE
+"1720",10,"4 layer","large","Training error",30.0377922058105,TRUE
+"1721",11,"4 layer","large","Training error",29.9904174804688,TRUE
+"1722",12,"4 layer","large","Training error",29.9223346710205,TRUE
+"1723",13,"4 layer","large","Training error",29.9881992340088,TRUE
+"1724",14,"4 layer","large","Training error",29.8763256072998,TRUE
+"1725",15,"4 layer","large","Training error",29.489875793457,TRUE
+"1726",16,"4 layer","large","Training error",29.7738399505615,TRUE
+"1727",17,"4 layer","large","Training error",29.4368667602539,TRUE
+"1728",18,"4 layer","large","Training error",29.3212337493896,TRUE
+"1729",19,"4 layer","large","Training error",29.6232852935791,TRUE
+"1730",20,"4 layer","large","Training error",29.2341384887695,TRUE
+"1731",21,"4 layer","large","Training error",29.3746013641357,TRUE
+"1732",22,"4 layer","large","Training error",29.4278583526611,TRUE
+"1733",23,"4 layer","large","Training error",29.5262145996094,TRUE
+"1734",24,"4 layer","large","Training error",29.4330730438232,TRUE
+"1735",25,"4 layer","large","Training error",29.0290298461914,TRUE
+"1736",26,"4 layer","large","Training error",29.3196868896484,TRUE
+"1737",27,"4 layer","large","Training error",29.3542404174805,TRUE
+"1738",28,"4 layer","large","Training error",29.261381149292,TRUE
+"1739",29,"4 layer","large","Training error",29.1727981567383,TRUE
+"1740",30,"4 layer","large","Training error",29.2605113983154,TRUE
+"1741",1,"4 layer","medium","Training error",103.234596252441,TRUE
+"1742",2,"4 layer","medium","Training error",70.037841796875,TRUE
+"1743",3,"4 layer","medium","Training error",42.4508514404297,TRUE
+"1744",4,"4 layer","medium","Training error",31.0005779266357,TRUE
+"1745",5,"4 layer","medium","Training error",30.6007957458496,TRUE
+"1746",6,"4 layer","medium","Training error",30.4563465118408,TRUE
+"1747",7,"4 layer","medium","Training error",30.3885688781738,TRUE
+"1748",8,"4 layer","medium","Training error",30.3428821563721,TRUE
+"1749",9,"4 layer","medium","Training error",30.2810611724854,TRUE
+"1750",10,"4 layer","medium","Training error",30.1746654510498,TRUE
+"1751",11,"4 layer","medium","Training error",30.2231006622314,TRUE
+"1752",12,"4 layer","medium","Training error",30.0867538452148,TRUE
+"1753",13,"4 layer","medium","Training error",30.0784339904785,TRUE
+"1754",14,"4 layer","medium","Training error",29.9677753448486,TRUE
+"1755",15,"4 layer","medium","Training error",30.0108470916748,TRUE
+"1756",16,"4 layer","medium","Training error",29.867992401123,TRUE
+"1757",17,"4 layer","medium","Training error",29.8750457763672,TRUE
+"1758",18,"4 layer","medium","Training error",29.8334903717041,TRUE
+"1759",19,"4 layer","medium","Training error",29.8504867553711,TRUE
+"1760",20,"4 layer","medium","Training error",29.8829689025879,TRUE
+"1761",21,"4 layer","medium","Training error",29.9509563446045,TRUE
+"1762",22,"4 layer","medium","Training error",29.7230339050293,TRUE
+"1763",23,"4 layer","medium","Training error",29.7969093322754,TRUE
+"1764",24,"4 layer","medium","Training error",29.5139999389648,TRUE
+"1765",25,"4 layer","medium","Training error",29.7112216949463,TRUE
+"1766",26,"4 layer","medium","Training error",29.5396118164062,TRUE
+"1767",27,"4 layer","medium","Training error",29.5816707611084,TRUE
+"1768",28,"4 layer","medium","Training error",29.5395412445068,TRUE
+"1769",29,"4 layer","medium","Training error",29.5008144378662,TRUE
+"1770",30,"4 layer","medium","Training error",29.4285621643066,TRUE
+"1771",1,"4 layer","medium large","Training error",98.4428634643555,TRUE
+"1772",2,"4 layer","medium large","Training error",57.3616943359375,TRUE
+"1773",3,"4 layer","medium large","Training error",32.4265060424805,TRUE
+"1774",4,"4 layer","medium large","Training error",30.5758113861084,TRUE
+"1775",5,"4 layer","medium large","Training error",30.5062561035156,TRUE
+"1776",6,"4 layer","medium large","Training error",30.5053901672363,TRUE
+"1777",7,"4 layer","medium large","Training error",30.2921924591064,TRUE
+"1778",8,"4 layer","medium large","Training error",30.3345394134521,TRUE
+"1779",9,"4 layer","medium large","Training error",30.2485084533691,TRUE
+"1780",10,"4 layer","medium large","Training error",30.1799201965332,TRUE
+"1781",11,"4 layer","medium large","Training error",30.1103324890137,TRUE
+"1782",12,"4 layer","medium large","Training error",29.9933032989502,TRUE
+"1783",13,"4 layer","medium large","Training error",30.0293464660645,TRUE
+"1784",14,"4 layer","medium large","Training error",29.8770065307617,TRUE
+"1785",15,"4 layer","medium large","Training error",29.7956218719482,TRUE
+"1786",16,"4 layer","medium large","Training error",29.818286895752,TRUE
+"1787",17,"4 layer","medium large","Training error",29.7759227752686,TRUE
+"1788",18,"4 layer","medium large","Training error",29.6853866577148,TRUE
+"1789",19,"4 layer","medium large","Training error",29.5678863525391,TRUE
+"1790",20,"4 layer","medium large","Training error",29.508918762207,TRUE
+"1791",21,"4 layer","medium large","Training error",29.650899887085,TRUE
+"1792",22,"4 layer","medium large","Training error",29.4441719055176,TRUE
+"1793",23,"4 layer","medium large","Training error",29.356107711792,TRUE
+"1794",24,"4 layer","medium large","Training error",29.6806640625,TRUE
+"1795",25,"4 layer","medium large","Training error",29.3517551422119,TRUE
+"1796",26,"4 layer","medium large","Training error",29.5428714752197,TRUE
+"1797",27,"4 layer","medium large","Training error",29.3101577758789,TRUE
+"1798",28,"4 layer","medium large","Training error",29.3436374664307,TRUE
+"1799",29,"4 layer","medium large","Training error",29.2587833404541,TRUE
+"1800",30,"4 layer","medium large","Training error",29.2827205657959,TRUE
+"1801",1,"4 layer","medium small","Training error",121.468841552734,TRUE
+"1802",2,"4 layer","medium small","Training error",93.3067092895508,TRUE
+"1803",3,"4 layer","medium small","Training error",69.3290481567383,TRUE
+"1804",4,"4 layer","medium small","Training error",49.1607131958008,TRUE
+"1805",5,"4 layer","medium small","Training error",34.9814491271973,TRUE
+"1806",6,"4 layer","medium small","Training error",30.8722248077393,TRUE
+"1807",7,"4 layer","medium small","Training error",30.7037315368652,TRUE
+"1808",8,"4 layer","medium small","Training error",30.6033115386963,TRUE
+"1809",9,"4 layer","medium small","Training error",30.6049518585205,TRUE
+"1810",10,"4 layer","medium small","Training error",30.6134853363037,TRUE
+"1811",11,"4 layer","medium small","Training error",30.4826946258545,TRUE
+"1812",12,"4 layer","medium small","Training error",30.4986972808838,TRUE
+"1813",13,"4 layer","medium small","Training error",30.4752311706543,TRUE
+"1814",14,"4 layer","medium small","Training error",30.4126052856445,TRUE
+"1815",15,"4 layer","medium small","Training error",30.3486022949219,TRUE
+"1816",16,"4 layer","medium small","Training error",30.4032382965088,TRUE
+"1817",17,"4 layer","medium small","Training error",30.3485202789307,TRUE
+"1818",18,"4 layer","medium small","Training error",30.1881713867188,TRUE
+"1819",19,"4 layer","medium small","Training error",30.286413192749,TRUE
+"1820",20,"4 layer","medium small","Training error",30.1943073272705,TRUE
+"1821",21,"4 layer","medium small","Training error",30.2537269592285,TRUE
+"1822",22,"4 layer","medium small","Training error",30.1346435546875,TRUE
+"1823",23,"4 layer","medium small","Training error",30.1799201965332,TRUE
+"1824",24,"4 layer","medium small","Training error",30.1995296478271,TRUE
+"1825",25,"4 layer","medium small","Training error",30.1445980072021,TRUE
+"1826",26,"4 layer","medium small","Training error",30.2032241821289,TRUE
+"1827",27,"4 layer","medium small","Training error",30.1433010101318,TRUE
+"1828",28,"4 layer","medium small","Training error",30.024715423584,TRUE
+"1829",29,"4 layer","medium small","Training error",30.0551605224609,TRUE
+"1830",30,"4 layer","medium small","Training error",30.0148792266846,TRUE
+"1831",1,"4 layer","mega","Training error",68.6940689086914,TRUE
+"1832",2,"4 layer","mega","Training error",31.1040668487549,TRUE
+"1833",3,"4 layer","mega","Training error",30.8954296112061,TRUE
+"1834",4,"4 layer","mega","Training error",30.6871929168701,TRUE
+"1835",5,"4 layer","mega","Training error",30.7134895324707,TRUE
+"1836",6,"4 layer","mega","Training error",30.5913257598877,TRUE
+"1837",7,"4 layer","mega","Training error",30.3279647827148,TRUE
+"1838",8,"4 layer","mega","Training error",30.2264919281006,TRUE
+"1839",9,"4 layer","mega","Training error",30.3339500427246,TRUE
+"1840",10,"4 layer","mega","Training error",30.2182807922363,TRUE
+"1841",11,"4 layer","mega","Training error",30.0505065917969,TRUE
+"1842",12,"4 layer","mega","Training error",30.0502433776855,TRUE
+"1843",13,"4 layer","mega","Training error",30.2351932525635,TRUE
+"1844",14,"4 layer","mega","Training error",29.9354019165039,TRUE
+"1845",15,"4 layer","mega","Training error",29.8072776794434,TRUE
+"1846",16,"4 layer","mega","Training error",29.7633438110352,TRUE
+"1847",17,"4 layer","mega","Training error",29.7049007415771,TRUE
+"1848",18,"4 layer","mega","Training error",29.6150608062744,TRUE
+"1849",19,"4 layer","mega","Training error",29.5351314544678,TRUE
+"1850",20,"4 layer","mega","Training error",29.7065830230713,TRUE
+"1851",21,"4 layer","mega","Training error",29.517126083374,TRUE
+"1852",22,"4 layer","mega","Training error",29.5369739532471,TRUE
+"1853",23,"4 layer","mega","Training error",29.4610919952393,TRUE
+"1854",24,"4 layer","mega","Training error",29.32177734375,TRUE
+"1855",25,"4 layer","mega","Training error",29.3913021087646,TRUE
+"1856",26,"4 layer","mega","Training error",29.35325050354,TRUE
+"1857",27,"4 layer","mega","Training error",29.1090145111084,TRUE
+"1858",28,"4 layer","mega","Training error",29.259916305542,TRUE
+"1859",29,"4 layer","mega","Training error",29.0674991607666,TRUE
+"1860",30,"4 layer","mega","Training error",29.1402320861816,TRUE
+"1861",1,"4 layer","small","Training error",121.658882141113,TRUE
+"1862",2,"4 layer","small","Training error",99.2294616699219,TRUE
+"1863",3,"4 layer","small","Training error",78.4496612548828,TRUE
+"1864",4,"4 layer","small","Training error",60.6396713256836,TRUE
+"1865",5,"4 layer","small","Training error",46.1820983886719,TRUE
+"1866",6,"4 layer","small","Training error",35.8959808349609,TRUE
+"1867",7,"4 layer","small","Training error",31.3246078491211,TRUE
+"1868",8,"4 layer","small","Training error",30.99924659729,TRUE
+"1869",9,"4 layer","small","Training error",30.9557781219482,TRUE
+"1870",10,"4 layer","small","Training error",30.9079914093018,TRUE
+"1871",11,"4 layer","small","Training error",30.8925380706787,TRUE
+"1872",12,"4 layer","small","Training error",30.8258876800537,TRUE
+"1873",13,"4 layer","small","Training error",30.8027534484863,TRUE
+"1874",14,"4 layer","small","Training error",30.8005084991455,TRUE
+"1875",15,"4 layer","small","Training error",30.8210048675537,TRUE
+"1876",16,"4 layer","small","Training error",30.7414073944092,TRUE
+"1877",17,"4 layer","small","Training error",30.7130966186523,TRUE
+"1878",18,"4 layer","small","Training error",30.7059669494629,TRUE
+"1879",19,"4 layer","small","Training error",30.7371215820312,TRUE
+"1880",20,"4 layer","small","Training error",30.6600875854492,TRUE
+"1881",21,"4 layer","small","Training error",30.6080875396729,TRUE
+"1882",22,"4 layer","small","Training error",30.6134223937988,TRUE
+"1883",23,"4 layer","small","Training error",30.6276378631592,TRUE
+"1884",24,"4 layer","small","Training error",30.5805797576904,TRUE
+"1885",25,"4 layer","small","Training error",30.5622062683105,TRUE
+"1886",26,"4 layer","small","Training error",30.5433540344238,TRUE
+"1887",27,"4 layer","small","Training error",30.5471267700195,TRUE
+"1888",28,"4 layer","small","Training error",30.4956035614014,TRUE
+"1889",29,"4 layer","small","Training error",30.5235347747803,TRUE
+"1890",30,"4 layer","small","Training error",30.5326671600342,TRUE
+"1891",1,"5 layer","huge","Training error",89.4650268554688,TRUE
+"1892",2,"5 layer","huge","Training error",39.8770866394043,TRUE
+"1893",3,"5 layer","huge","Training error",30.8156929016113,TRUE
+"1894",4,"5 layer","huge","Training error",30.7107524871826,TRUE
+"1895",5,"5 layer","huge","Training error",30.536901473999,TRUE
+"1896",6,"5 layer","huge","Training error",30.5693016052246,TRUE
+"1897",7,"5 layer","huge","Training error",30.371997833252,TRUE
+"1898",8,"5 layer","huge","Training error",30.4466075897217,TRUE
+"1899",9,"5 layer","huge","Training error",30.3179683685303,TRUE
+"1900",10,"5 layer","huge","Training error",30.1697158813477,TRUE
+"1901",11,"5 layer","huge","Training error",30.0692920684814,TRUE
+"1902",12,"5 layer","huge","Training error",30.0317039489746,TRUE
+"1903",13,"5 layer","huge","Training error",29.9262104034424,TRUE
+"1904",14,"5 layer","huge","Training error",29.7836418151855,TRUE
+"1905",15,"5 layer","huge","Training error",29.8974800109863,TRUE
+"1906",16,"5 layer","huge","Training error",29.7282524108887,TRUE
+"1907",17,"5 layer","huge","Training error",29.637020111084,TRUE
+"1908",18,"5 layer","huge","Training error",29.583911895752,TRUE
+"1909",19,"5 layer","huge","Training error",29.6144695281982,TRUE
+"1910",20,"5 layer","huge","Training error",29.4637851715088,TRUE
+"1911",21,"5 layer","huge","Training error",29.4164333343506,TRUE
+"1912",22,"5 layer","huge","Training error",29.4447364807129,TRUE
+"1913",23,"5 layer","huge","Training error",29.3121318817139,TRUE
+"1914",24,"5 layer","huge","Training error",29.3391017913818,TRUE
+"1915",25,"5 layer","huge","Training error",29.198917388916,TRUE
+"1916",26,"5 layer","huge","Training error",29.3613567352295,TRUE
+"1917",27,"5 layer","huge","Training error",29.3747463226318,TRUE
+"1918",28,"5 layer","huge","Training error",29.3332042694092,TRUE
+"1919",29,"5 layer","huge","Training error",29.3589420318604,TRUE
+"1920",30,"5 layer","huge","Training error",29.2739276885986,TRUE
+"1921",1,"5 layer","large","Training error",98.1005477905273,TRUE
+"1922",2,"5 layer","large","Training error",56.4388809204102,TRUE
+"1923",3,"5 layer","large","Training error",32.4209365844727,TRUE
+"1924",4,"5 layer","large","Training error",30.5569343566895,TRUE
+"1925",5,"5 layer","large","Training error",30.5739936828613,TRUE
+"1926",6,"5 layer","large","Training error",30.5331897735596,TRUE
+"1927",7,"5 layer","large","Training error",30.4398345947266,TRUE
+"1928",8,"5 layer","large","Training error",30.3755149841309,TRUE
+"1929",9,"5 layer","large","Training error",30.185230255127,TRUE
+"1930",10,"5 layer","large","Training error",30.0173873901367,TRUE
+"1931",11,"5 layer","large","Training error",29.8774585723877,TRUE
+"1932",12,"5 layer","large","Training error",29.8517665863037,TRUE
+"1933",13,"5 layer","large","Training error",29.7488994598389,TRUE
+"1934",14,"5 layer","large","Training error",29.8694553375244,TRUE
+"1935",15,"5 layer","large","Training error",29.8082942962646,TRUE
+"1936",16,"5 layer","large","Training error",29.8027286529541,TRUE
+"1937",17,"5 layer","large","Training error",29.5975017547607,TRUE
+"1938",18,"5 layer","large","Training error",29.5005474090576,TRUE
+"1939",19,"5 layer","large","Training error",29.4771633148193,TRUE
+"1940",20,"5 layer","large","Training error",29.6304550170898,TRUE
+"1941",21,"5 layer","large","Training error",29.291187286377,TRUE
+"1942",22,"5 layer","large","Training error",29.3158702850342,TRUE
+"1943",23,"5 layer","large","Training error",29.393741607666,TRUE
+"1944",24,"5 layer","large","Training error",29.2829456329346,TRUE
+"1945",25,"5 layer","large","Training error",29.2902431488037,TRUE
+"1946",26,"5 layer","large","Training error",29.2900505065918,TRUE
+"1947",27,"5 layer","large","Training error",29.2530307769775,TRUE
+"1948",28,"5 layer","large","Training error",29.23388671875,TRUE
+"1949",29,"5 layer","large","Training error",29.156909942627,TRUE
+"1950",30,"5 layer","large","Training error",29.2573490142822,TRUE
+"1951",1,"5 layer","medium","Training error",123.860771179199,TRUE
+"1952",2,"5 layer","medium","Training error",96.1917495727539,TRUE
+"1953",3,"5 layer","medium","Training error",71.2127532958984,TRUE
+"1954",4,"5 layer","medium","Training error",50.4639129638672,TRUE
+"1955",5,"5 layer","medium","Training error",35.8580741882324,TRUE
+"1956",6,"5 layer","medium","Training error",31.0595703125,TRUE
+"1957",7,"5 layer","medium","Training error",30.9684753417969,TRUE
+"1958",8,"5 layer","medium","Training error",30.9005374908447,TRUE
+"1959",9,"5 layer","medium","Training error",30.8675289154053,TRUE
+"1960",10,"5 layer","medium","Training error",30.7567672729492,TRUE
+"1961",11,"5 layer","medium","Training error",30.8048152923584,TRUE
+"1962",12,"5 layer","medium","Training error",30.7226715087891,TRUE
+"1963",13,"5 layer","medium","Training error",30.6513576507568,TRUE
+"1964",14,"5 layer","medium","Training error",30.6435413360596,TRUE
+"1965",15,"5 layer","medium","Training error",30.6116390228271,TRUE
+"1966",16,"5 layer","medium","Training error",30.6609039306641,TRUE
+"1967",17,"5 layer","medium","Training error",30.5782241821289,TRUE
+"1968",18,"5 layer","medium","Training error",30.6636524200439,TRUE
+"1969",19,"5 layer","medium","Training error",30.6097030639648,TRUE
+"1970",20,"5 layer","medium","Training error",30.4444694519043,TRUE
+"1971",21,"5 layer","medium","Training error",30.5568065643311,TRUE
+"1972",22,"5 layer","medium","Training error",30.4920253753662,TRUE
+"1973",23,"5 layer","medium","Training error",30.439510345459,TRUE
+"1974",24,"5 layer","medium","Training error",30.4265098571777,TRUE
+"1975",25,"5 layer","medium","Training error",30.4150524139404,TRUE
+"1976",26,"5 layer","medium","Training error",30.3861618041992,TRUE
+"1977",27,"5 layer","medium","Training error",30.3672294616699,TRUE
+"1978",28,"5 layer","medium","Training error",30.1817989349365,TRUE
+"1979",29,"5 layer","medium","Training error",30.2330551147461,TRUE
+"1980",30,"5 layer","medium","Training error",30.1883983612061,TRUE
+"1981",1,"5 layer","medium large","Training error",109.895393371582,TRUE
+"1982",2,"5 layer","medium large","Training error",78.0199813842773,TRUE
+"1983",3,"5 layer","medium large","Training error",49.6879844665527,TRUE
+"1984",4,"5 layer","medium large","Training error",32.667896270752,TRUE
+"1985",5,"5 layer","medium large","Training error",30.4987773895264,TRUE
+"1986",6,"5 layer","medium large","Training error",30.4135131835938,TRUE
+"1987",7,"5 layer","medium large","Training error",30.3310489654541,TRUE
+"1988",8,"5 layer","medium large","Training error",30.1369915008545,TRUE
+"1989",9,"5 layer","medium large","Training error",30.2052116394043,TRUE
+"1990",10,"5 layer","medium large","Training error",30.0995712280273,TRUE
+"1991",11,"5 layer","medium large","Training error",30.0012111663818,TRUE
+"1992",12,"5 layer","medium large","Training error",29.9457454681396,TRUE
+"1993",13,"5 layer","medium large","Training error",29.8390655517578,TRUE
+"1994",14,"5 layer","medium large","Training error",29.7756061553955,TRUE
+"1995",15,"5 layer","medium large","Training error",29.8522338867188,TRUE
+"1996",16,"5 layer","medium large","Training error",29.7578258514404,TRUE
+"1997",17,"5 layer","medium large","Training error",29.7166614532471,TRUE
+"1998",18,"5 layer","medium large","Training error",29.7715587615967,TRUE
+"1999",19,"5 layer","medium large","Training error",29.6460742950439,TRUE
+"2000",20,"5 layer","medium large","Training error",29.6896877288818,TRUE
+"2001",21,"5 layer","medium large","Training error",29.5106258392334,TRUE
+"2002",22,"5 layer","medium large","Training error",29.3980159759521,TRUE
+"2003",23,"5 layer","medium large","Training error",29.5964794158936,TRUE
+"2004",24,"5 layer","medium large","Training error",29.505687713623,TRUE
+"2005",25,"5 layer","medium large","Training error",29.3949756622314,TRUE
+"2006",26,"5 layer","medium large","Training error",29.4872093200684,TRUE
+"2007",27,"5 layer","medium large","Training error",29.3540344238281,TRUE
+"2008",28,"5 layer","medium large","Training error",29.501163482666,TRUE
+"2009",29,"5 layer","medium large","Training error",29.5148620605469,TRUE
+"2010",30,"5 layer","medium large","Training error",29.3416481018066,TRUE
+"2011",1,"5 layer","medium small","Training error",131.131393432617,TRUE
+"2012",2,"5 layer","medium small","Training error",112.231033325195,TRUE
+"2013",3,"5 layer","medium small","Training error",92.1097717285156,TRUE
+"2014",4,"5 layer","medium small","Training error",72.4116287231445,TRUE
+"2015",5,"5 layer","medium small","Training error",55.7644271850586,TRUE
+"2016",6,"5 layer","medium small","Training error",42.9285926818848,TRUE
+"2017",7,"5 layer","medium small","Training error",34.5836791992188,TRUE
+"2018",8,"5 layer","medium small","Training error",31.6287364959717,TRUE
+"2019",9,"5 layer","medium small","Training error",31.4240703582764,TRUE
+"2020",10,"5 layer","medium small","Training error",31.335807800293,TRUE
+"2021",11,"5 layer","medium small","Training error",31.3141536712646,TRUE
+"2022",12,"5 layer","medium small","Training error",31.1908397674561,TRUE
+"2023",13,"5 layer","medium small","Training error",31.1114368438721,TRUE
+"2024",14,"5 layer","medium small","Training error",31.1198997497559,TRUE
+"2025",15,"5 layer","medium small","Training error",31.0698642730713,TRUE
+"2026",16,"5 layer","medium small","Training error",30.9627380371094,TRUE
+"2027",17,"5 layer","medium small","Training error",30.9583034515381,TRUE
+"2028",18,"5 layer","medium small","Training error",30.8592529296875,TRUE
+"2029",19,"5 layer","medium small","Training error",30.854513168335,TRUE
+"2030",20,"5 layer","medium small","Training error",30.8331832885742,TRUE
+"2031",21,"5 layer","medium small","Training error",30.7270412445068,TRUE
+"2032",22,"5 layer","medium small","Training error",30.8662433624268,TRUE
+"2033",23,"5 layer","medium small","Training error",30.8259773254395,TRUE
+"2034",24,"5 layer","medium small","Training error",30.8147621154785,TRUE
+"2035",25,"5 layer","medium small","Training error",30.7682991027832,TRUE
+"2036",26,"5 layer","medium small","Training error",30.6565723419189,TRUE
+"2037",27,"5 layer","medium small","Training error",30.7437782287598,TRUE
+"2038",28,"5 layer","medium small","Training error",30.5803108215332,TRUE
+"2039",29,"5 layer","medium small","Training error",30.5834865570068,TRUE
+"2040",30,"5 layer","medium small","Training error",30.673656463623,TRUE
+"2041",1,"5 layer","mega","Training error",80.2324066162109,TRUE
+"2042",2,"5 layer","mega","Training error",32.6138038635254,TRUE
+"2043",3,"5 layer","mega","Training error",30.7994747161865,TRUE
+"2044",4,"5 layer","mega","Training error",30.6446475982666,TRUE
+"2045",5,"5 layer","mega","Training error",30.6036434173584,TRUE
+"2046",6,"5 layer","mega","Training error",30.62917137146,TRUE
+"2047",7,"5 layer","mega","Training error",30.4471893310547,TRUE
+"2048",8,"5 layer","mega","Training error",30.3840370178223,TRUE
+"2049",9,"5 layer","mega","Training error",30.3954257965088,TRUE
+"2050",10,"5 layer","mega","Training error",30.0731239318848,TRUE
+"2051",11,"5 layer","mega","Training error",30.0840396881104,TRUE
+"2052",12,"5 layer","mega","Training error",30.0866146087646,TRUE
+"2053",13,"5 layer","mega","Training error",29.9238433837891,TRUE
+"2054",14,"5 layer","mega","Training error",29.662296295166,TRUE
+"2055",15,"5 layer","mega","Training error",29.9297466278076,TRUE
+"2056",16,"5 layer","mega","Training error",29.814661026001,TRUE
+"2057",17,"5 layer","mega","Training error",29.8363418579102,TRUE
+"2058",18,"5 layer","mega","Training error",29.5304355621338,TRUE
+"2059",19,"5 layer","mega","Training error",29.5144214630127,TRUE
+"2060",20,"5 layer","mega","Training error",29.5618171691895,TRUE
+"2061",21,"5 layer","mega","Training error",29.6618213653564,TRUE
+"2062",22,"5 layer","mega","Training error",29.2185459136963,TRUE
+"2063",23,"5 layer","mega","Training error",29.4327621459961,TRUE
+"2064",24,"5 layer","mega","Training error",29.218957901001,TRUE
+"2065",25,"5 layer","mega","Training error",29.287618637085,TRUE
+"2066",26,"5 layer","mega","Training error",29.4332008361816,TRUE
+"2067",27,"5 layer","mega","Training error",29.0976390838623,TRUE
+"2068",28,"5 layer","mega","Training error",29.379222869873,TRUE
+"2069",29,"5 layer","mega","Training error",29.3210964202881,TRUE
+"2070",30,"5 layer","mega","Training error",29.39892578125,TRUE
+"2071",1,"5 layer","small","Training error",131.967346191406,TRUE
+"2072",2,"5 layer","small","Training error",112.24683380127,TRUE
+"2073",3,"5 layer","small","Training error",88.5644836425781,TRUE
+"2074",4,"5 layer","small","Training error",67.3226318359375,TRUE
+"2075",5,"5 layer","small","Training error",49.8845329284668,TRUE
+"2076",6,"5 layer","small","Training error",38.2063179016113,TRUE
+"2077",7,"5 layer","small","Training error",32.8601875305176,TRUE
+"2078",8,"5 layer","small","Training error",32.2097930908203,TRUE
+"2079",9,"5 layer","small","Training error",32.0839958190918,TRUE
+"2080",10,"5 layer","small","Training error",31.9860305786133,TRUE
+"2081",11,"5 layer","small","Training error",31.8750343322754,TRUE
+"2082",12,"5 layer","small","Training error",31.7619800567627,TRUE
+"2083",13,"5 layer","small","Training error",31.6674194335938,TRUE
+"2084",14,"5 layer","small","Training error",31.5840129852295,TRUE
+"2085",15,"5 layer","small","Training error",31.5618114471436,TRUE
+"2086",16,"5 layer","small","Training error",31.4656963348389,TRUE
+"2087",17,"5 layer","small","Training error",31.4271278381348,TRUE
+"2088",18,"5 layer","small","Training error",31.4035587310791,TRUE
+"2089",19,"5 layer","small","Training error",31.3681945800781,TRUE
+"2090",20,"5 layer","small","Training error",31.2770042419434,TRUE
+"2091",21,"5 layer","small","Training error",31.2942886352539,TRUE
+"2092",22,"5 layer","small","Training error",31.2026233673096,TRUE
+"2093",23,"5 layer","small","Training error",31.1511898040771,TRUE
+"2094",24,"5 layer","small","Training error",31.1421546936035,TRUE
+"2095",25,"5 layer","small","Training error",31.1337928771973,TRUE
+"2096",26,"5 layer","small","Training error",31.093900680542,TRUE
+"2097",27,"5 layer","small","Training error",31.0387535095215,TRUE
+"2098",28,"5 layer","small","Training error",30.9780158996582,TRUE
+"2099",29,"5 layer","small","Training error",30.9918537139893,TRUE
+"2100",30,"5 layer","small","Training error",31.0015163421631,TRUE

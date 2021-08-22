@@ -1,5 +1,7 @@
 # Directories
 out/*
+runs/*
+*/runs/*
 
 # Data
 data/raw/CA/*.csv
@@ -8,8 +10,13 @@ data/tidy/CA/pa_join.RData
 data/tidy/EPA/pm2.5_CA_reduced_cov.RData
 data/tidy/EPA/epa_reduced.RData
 
+# Code
+code/example/*
+
 # Figures
 *.png
+*.Rmd
+*.html
 
 # R related files
 .Rhistory

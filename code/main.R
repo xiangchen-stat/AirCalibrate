@@ -28,6 +28,7 @@
 # }
 
 install.packages("pacman")
+if(TRUE){
 library(pacman)
 
 # Packages for data import and data wrangling
@@ -35,7 +36,7 @@ pacman::p_load(here,reshape2,lubridate,hms)
 # Packages for data visualization
 p_load(skimr,GGally,RColorBrewer,viridis,ggpubr)
 # Packages for building machine learning algorithm
-p_load(randomForest,gbm,yardstick)
+p_load(yardstick,randomForest,ranger,gbm,keras,tfruns,tfestimators)
 # Packages for creating map/spatial operation
 # p_load(sf,lwgeom,geosphere,units,ggmap,MBA)
 p_load(sf,geosphere,units,ggmap,MBA)
@@ -46,7 +47,7 @@ theme_set(theme_minimal(base_size = 22))
 
 # Check working directory
 print(here())
-
+}
 ##################1. Data import and wrangling##################
 ##################1.1 EPA Data import and reduce##################
 
@@ -910,8 +911,64 @@ dat_loc_ran_train <- dat %>%
 dat_loc_ran_test <- dat %>% 
         filter(dat$lat_pa %in% lat_pa_test)
 
+
+## Split data to X and Y and normalized X and Y
+# Time
+X_train_time <- dat_time_train[, c("pm2.5_cf1_a","temp","hum")]
+Y_train_time <- dat_time_train[, "pm2.5_epa"]
+
+X_test_time  <- dat_time_test[, c("pm2.5_cf1_a","temp","hum")]
+Y_test_time  <- dat_time_test[, "pm2.5_epa"]
+
+
+# Location farthest
+X_train_loc_far <- dat_loc_far_train[, c("pm2.5_cf1_a","temp","hum")]
+Y_train_loc_far <- dat_loc_far_train[, "pm2.5_epa"]
+
+X_test_loc_far  <- dat_loc_far_test[, c("pm2.5_cf1_a","temp","hum")]
+Y_test_loc_far  <- dat_loc_far_test[, "pm2.5_epa"]
+
+# Location random
+X_train_loc_ran <- dat_loc_ran_train[, c("pm2.5_cf1_a","temp","hum")]
+Y_train_loc_ran <- dat_loc_ran_train[, "pm2.5_epa"]
+
+X_test_loc_ran  <- dat_loc_ran_test[, c("pm2.5_cf1_a","temp","hum")]
+Y_test_loc_ran  <- dat_loc_ran_test[, "pm2.5_epa"]
+
+
+## Normalizing data
+norm_dt <- function(train_data, test_data){
+        if(is.list(train_data)){
+                mean <- apply(train_data, 2, mean)
+                std <- apply(train_data, 2, sd)
+                train_data <- scale(train_data, center = mean, scale = std) %>% 
+                        as.matrix()
+                test_data <- scale(test_data, center = mean, scale = std) %>% 
+                        as.matrix()
+
+        }else{
+                mean <- mean(train_data)
+                std <- sd(train_data)
+                train_data <- scale(train_data, center = mean, scale = std) %>% 
+                        as.matrix()
+                test_data <- scale(test_data, center = mean, scale = std) %>% 
+                        as.matrix()
+        }
+
+        return(list(train = train_data, test = test_data))
+}
+
+c(X_train_time_norm, X_test_time_norm) %<-% norm_dt(X_train_time, X_test_time)
+c(X_train_loc_far_norm, X_test_loc_far_norm) %<-% norm_dt(X_train_loc_far, X_test_loc_far)
+c(X_train_loc_ran_norm, X_test_loc_ran_norm) %<-% norm_dt(X_train_loc_ran, X_test_loc_ran)
+
+
+
 ## Model fitting and prediction
 met_all <- c()
+
+
+
 ### EPA model
 ## Time
 pre_epa_time <- 0.52*(dat_time_test$pm2.5_cf1_a+dat_time_test$pm2.5_cf1_b)/2-0.085*dat_time_test$hum+5.71
@@ -922,12 +979,12 @@ met_epa_time <- metrics(pre_epa_time, truth = obs, estimate = pre)
 met_all <- rbind(met_all, met_epa_time)
 
 ## Location Farthest
-pre_epa_loc <- 0.52*(dat_loc_far_test$pm2.5_cf1_a+dat_loc_far_test$pm2.5_cf1_b)/2-0.085*dat_loc_far_test$hum+5.71
-pre_epa_loc <- pre_epa_loc %>% 
+pre_epa_loc_far <- 0.52*(dat_loc_far_test$pm2.5_cf1_a+dat_loc_far_test$pm2.5_cf1_b)/2-0.085*dat_loc_far_test$hum+5.71
+pre_epa_loc_far <- pre_epa_loc_far %>% 
         cbind(pre = ., obs = dat_loc_far_test$pm2.5_epa) %>% 
         as_tibble()
-met_epa_loc <- metrics(pre_epa_loc, truth = obs, estimate = pre)
-met_all <- cbind(met_all, met_epa_loc)
+met_epa_loc_far <- metrics(pre_epa_loc_far, truth = obs, estimate = pre)
+met_all <- cbind(met_all, met_epa_loc_far)
 
 ## Location Random
 pre_epa_loc_ran <- 0.52*(dat_loc_ran_test$pm2.5_cf1_a+dat_loc_ran_test$pm2.5_cf1_b)/2-0.085*dat_loc_ran_test$hum+5.71
@@ -951,14 +1008,14 @@ met_epare_time <- metrics(pre_epare_time, truth = obs, estimate = pre)
 met_all <- cbind(met_all, met_epare_time)
 
 ## Location Farthest
-mod_epare_loc <- lm(pm2.5_epa ~ pm2.5_cf1_m + temp + hum,
+mod_epare_loc_far <- lm(pm2.5_epa ~ pm2.5_cf1_m + temp + hum,
                     data = dat_loc_far_train)
-summary(mod_epare_loc)
-pre_epare_loc <- predict(mod_epare_loc,newdata = dat_loc_far_test) %>% 
+summary(mod_epare_loc_far)
+pre_epare_loc_far <- predict(mod_epare_loc_far,newdata = dat_loc_far_test) %>% 
         cbind(pre = ., obs = dat_loc_far_test$pm2.5_epa) %>% 
         as_tibble()
-met_epare_loc <- metrics(pre_epare_loc, truth = obs, estimate = pre)
-met_all <- cbind(met_all, met_epare_loc)
+met_epare_loc_far <- metrics(pre_epare_loc_far, truth = obs, estimate = pre)
+met_all <- cbind(met_all, met_epare_loc_far)
 
 ## Location Random
 mod_epare_loc_ran <- lm(pm2.5_epa ~ pm2.5_cf1_m + temp + hum,
@@ -985,14 +1042,14 @@ met_lm_time <- metrics(pre_lm_time, truth = obs, estimate = pre)
 met_all <- cbind(met_all, met_lm_time)
 
 ## Location Farthest
-mod_lm_loc <- lm(pm2.5_epa ~ pm2.5_cf1_a + temp + hum,
+mod_lm_loc_far <- lm(pm2.5_epa ~ pm2.5_cf1_a + temp + hum,
                  data = dat_loc_far_train)
-summary(mod_lm_loc)
-pre_lm_loc <- predict(mod_lm_loc,newdata = dat_loc_far_test) %>% 
+summary(mod_lm_loc_far)
+pre_lm_loc_far <- predict(mod_lm_loc_far,newdata = dat_loc_far_test) %>% 
         cbind(pre = ., obs = dat_loc_far_test$pm2.5_epa) %>% 
         as_tibble()
-met_lm_loc <- metrics(pre_lm_loc, truth = obs, estimate = pre)
-met_all <- cbind(met_all, met_lm_loc)
+met_lm_loc_far <- metrics(pre_lm_loc_far, truth = obs, estimate = pre)
+met_all <- cbind(met_all, met_lm_loc_far)
 
 ## Location Random
 mod_lm_loc_ran <- lm(pm2.5_epa ~ pm2.5_cf1_a + temp + hum,
@@ -1019,14 +1076,14 @@ met_lmint_time <- metrics(pre_lmint_time, truth = obs, estimate = pre)
 met_all <- cbind(met_all, met_lmint_time)
 
 ## Location Farthest
-mod_lmint_loc <- lm(pm2.5_epa ~ pm2.5_cf1_a * (temp + hum),
+mod_lmint_loc_far <- lm(pm2.5_epa ~ pm2.5_cf1_a * (temp + hum),
                     data = dat_loc_far_train)
-summary(mod_lmint_loc)
-pre_lmint_loc <- predict(mod_lmint_loc, newdata = dat_loc_far_test) %>% 
+summary(mod_lmint_loc_far)
+pre_lmint_loc_far <- predict(mod_lmint_loc_far, newdata = dat_loc_far_test) %>% 
         cbind(pre = ., obs = dat_loc_far_test$pm2.5_epa) %>% 
         as_tibble()
-met_lmint_loc <- metrics(pre_lmint_loc, truth = obs, estimate = pre)
-met_all <- cbind(met_all, met_lmint_loc)
+met_lmint_loc_far <- metrics(pre_lmint_loc_far, truth = obs, estimate = pre)
+met_all <- cbind(met_all, met_lmint_loc_far)
 
 ## Location Random
 mod_lmint_loc_ran <- lm(pm2.5_epa ~ pm2.5_cf1_a * (temp + hum),
@@ -1037,7 +1094,6 @@ pre_lmint_loc_ran <- predict(mod_lmint_loc_ran, newdata = dat_loc_ran_test) %>%
         as_tibble()
 met_lmint_loc_ran <- metrics(pre_lmint_loc_ran, truth = obs, estimate = pre)
 met_all <- cbind(met_all, met_lmint_loc_ran)
-
 
 
 
@@ -1067,7 +1123,7 @@ met_gbm_time <- metrics(pre_gbm_time, truth = obs, estimate = pre)
 met_all <- cbind(met_all, met_gbm_time)
 
 ## Location Farthest
-mod_gbm_loc <- gbm(
+mod_gbm_loc_far <- gbm(
         formula = pm2.5_epa ~ pm2.5_cf1_a + temp + hum,
         data = dat_loc_far_train,
         distribution = "gaussian",  # SSE loss function
@@ -1081,14 +1137,14 @@ best <- which.min(mod_gbm_loc$cv.error)
 # get MSE and compute RMSE
 sqrt(mod_gbm_loc$cv.error[best])
 # plot error curve
-gbm.perf(mod_gbm_loc, method = "cv")
-summary(mod_gbm_loc)
+gbm.perf(mod_gbm_loc_far, method = "cv")
+summary(mod_gbm_loc_far)
 
-pre_gbm_loc <- predict(mod_gbm_loc, newdata = dat_loc_far_test) %>% 
+pre_gbm_loc_far <- predict(mod_gbm_loc_far, newdata = dat_loc_far_test) %>% 
         cbind(pre = ., obs = dat_loc_far_test$pm2.5_epa) %>% 
         as_tibble()
-met_gbm_loc <- metrics(pre_gbm_loc, truth = obs, estimate = pre)
-met_all <- cbind(met_all, met_gbm_loc)
+met_gbm_loc_far <- metrics(pre_gbm_loc_far, truth = obs, estimate = pre)
+met_all <- cbind(met_all, met_gbm_loc_far)
 
 ## Location Random
 mod_gbm_loc_ran <- gbm(
@@ -1118,12 +1174,6 @@ met_all <- cbind(met_all, met_gbm_loc_ran)
 
 ### Random forest
 ## Time
-X_train_time <- dat_time_train[, c("pm2.5_cf1_a","temp","hum")]
-Y_train_time <- dat_time_train[, "pm2.5_epa"]
-
-X_test_time  <- dat_time_test[, c("pm2.5_cf1_a","temp","hum")]
-Y_test_time  <- dat_time_test[, "pm2.5_epa"]
-
 p <- 3
 n_tree <- 50
 
@@ -1151,27 +1201,21 @@ legend("topright", c("m=3"),
        cex = 1, lty = 1)
 
 ## Location Farthest
-X_train_loc <- dat_loc_far_train[, c("pm2.5_cf1_a","temp","hum")]
-Y_train_loc <- dat_loc_far_train[, "pm2.5_epa"]
-
-X_test_loc  <- dat_loc_far_test[, c("pm2.5_cf1_a","temp","hum")]
-Y_test_loc  <- dat_loc_far_test[, "pm2.5_epa"]
-
 p <- 3
 n_tree <- 50
 
 # mtry = p is basically just bagging, as above
-mod_rf_loc <- randomForest(X_train_loc, Y_train_loc, 
-                           xtest = X_test_loc, 
-                           ytest = Y_test_loc, 
+mod_rf_loc_far <- randomForest(X_train_loc_far, Y_train_loc_far, 
+                           xtest = X_test_loc_far, 
+                           ytest = Y_test_loc_far, 
                            mtry = p, 
                            ntree = n_tree)
 
-pre_rf_loc <- mod_rf_loc$test$predicted %>% 
+pre_rf_loc_far <- mod_rf_loc$test$predicted %>% 
         cbind(pre = ., obs = dat_loc_far_test$pm2.5_epa) %>% 
         as_tibble()
-met_rf_loc <- metrics(pre_rf_loc, truth = obs, estimate = pre)
-met_all <- cbind(met_all, met_rf_loc)
+met_rf_loc_far <- metrics(pre_rf_loc_far, truth = obs, estimate = pre)
+met_all <- cbind(met_all, met_rf_loc_far)
 
 # plot test RMSE
 plot(1:n_tree, sqrt(mod_rf_loc$test$mse), 
@@ -1184,12 +1228,6 @@ legend("topright", c("m=3"),
        cex = 1, lty = 1)
 
 ## Location Random
-X_train_loc_ran <- dat_loc_ran_train[, c("pm2.5_cf1_a","temp","hum")]
-Y_train_loc_ran <- dat_loc_ran_train[, "pm2.5_epa"]
-
-X_test_loc_ran  <- dat_loc_ran_test[, c("pm2.5_cf1_a","temp","hum")]
-Y_test_loc_ran  <- dat_loc_ran_test[, "pm2.5_epa"]
-
 p <- 3
 n_tree <- 50
 
@@ -1219,6 +1257,290 @@ legend("topright", c("m=3"),
 write.csv(round(met_all[,seq(from = 3, to = length(met_all[1,]), by = 3)],2), here("results", "met_all_fit.csv"))
 
 
+
+### Neuaral Network -------------------------------------
+## Time
+FLAGS <- flags(
+        # nodes
+        flag_numeric("nodes1", 256),
+        flag_numeric("nodes2", 128),
+        flag_numeric("nodes3", 64),
+        flag_numeric("nodes4", 32),
+        flag_numeric("nodes5", 16),
+        # dropout
+        flag_numeric("dropout1", 0.4),
+        flag_numeric("dropout2", 0.3),
+        flag_numeric("dropout3", 0.2),
+        flag_numeric("dropout4", 0.1),
+        flag_numeric("dropout5", 0.05),
+        # learning parameters
+        flag_string("optimizer", "rmsprop"),
+        flag_numeric("lr_annealing", 0.1)
+)
+
+## Define Model
+
+model <- keras_model_sequential() %>%
+        layer_dense(units = FLAGS$nodes1, activation = "relu", input_shape = ncol(X_train_time_norm)) %>%
+        layer_batch_normalization() %>%
+        layer_dropout(rate = FLAGS$dropout1) %>%
+        layer_dense(units = FLAGS$nodes2, activation = "relu") %>%
+        layer_batch_normalization() %>%
+        layer_dropout(rate = FLAGS$dropout2) %>%
+        layer_dense(units = FLAGS$nodes3, activation = "relu") %>%
+        layer_batch_normalization() %>%
+        layer_dropout(rate = FLAGS$dropout3) %>%
+        layer_dense(units = FLAGS$nodes4, activation = "relu") %>%
+        layer_batch_normalization() %>%
+        layer_dropout(rate = FLAGS$dropout4) %>%
+        layer_dense(units = FLAGS$nodes5, activation = "relu") %>%
+        layer_batch_normalization() %>%
+        layer_dropout(rate = FLAGS$dropout5) %>%
+        layer_dense(units = 1, activation = "linear") %>%
+        compile(
+                loss = 'mse',
+                metrics = c('mae'),
+                optimizer = FLAGS$optimizer
+        ) %>%
+        fit(
+                x = X_train_time_norm,
+                y = Y_train_time,
+                epochs = 30,
+                batch_size = 4096,
+                validation_split = 0.2,
+                callbacks = list(
+                        callback_early_stopping(patience = 5),
+                        callback_reduce_lr_on_plateau(factor = FLAGS$lr_annealing)
+                ),
+                verbose = TRUE
+        )
+
+test_model <- keras_model_sequential() %>%
+        layer_dense(units = 256, activation = "relu", input_shape = ncol(X_train_time_norm)) %>%
+        layer_dense(units = 256, activation = "relu") %>%
+        layer_dense(units = 128, activation = "relu") %>%
+        layer_dense(units = 1, activation = "linear") %>%
+        compile(
+                loss = 'mse',
+                metrics = c('mae'),
+                optimizer = FLAGS$optimizer
+        ) %>%
+        fit(
+                x = X_train_time_norm,
+                y = Y_train_time,
+                epochs = 30,
+                batch_size = 4096,
+                validation_split = 0.2,
+                verbose = TRUE
+        )
+min(test_model$metrics$val_loss)
+min(test_model$metrics$loss)
+
+result <- test_model %>% evaluate(X_test_time_norm, Y_test_time)
+result
+
+compiler <- function(model){
+        model %>% compile(
+                loss = 'mse',
+                metrics = c('mae'),
+                optimizer = FLAGS$optimizer
+        )
+}
+
+trainer <- function(model){
+        model %>% fit(
+                x = X_train_time_norm,
+                y = Y_train_time,
+                epochs = 30,
+                batch_size = 4096,
+                validation_split = 0.2,
+                verbose = TRUE
+        )
+}
+
+# One layer models -------------------------------------------------------------
+# small capacity model
+`1 layer_small` <- keras_model_sequential() %>%
+        layer_dense(units = 16, activation = "relu", input_shape = ncol(X_train_time_norm)) %>%
+        layer_batch_normalization() %>%
+        layer_dense(units = 1, activation = "linear") %>%
+        compiler() %>%
+        trainer()
+
+# medium
+`1 layer_medium` <- keras_model_sequential() %>%
+        layer_dense(units = 64, activation = "relu", input_shape = ncol(X_train_time_norm)) %>%
+        layer_batch_normalization() %>%
+        layer_dense(units = 1, activation = "linear") %>%
+        compiler() %>%
+        trainer()
+
+# large
+`1 layer_large` <- keras_model_sequential() %>%
+        layer_dense(units = 256, activation = "relu", input_shape = ncol(X_train_time_norm)) %>%
+        layer_batch_normalization() %>%
+        layer_dense(units = 1, activation = "linear") %>%
+        compiler() %>%
+        trainer()
+
+# Two layer models -------------------------------------------------------------
+# small capacity model
+`2 layer_small` <- keras_model_sequential() %>%
+        layer_dense(units = 16, activation = "relu", input_shape = ncol(X_train_time_norm)) %>%
+        layer_batch_normalization() %>%
+        layer_dense(units = 8, activation = "relu") %>%
+        layer_batch_normalization() %>%
+        layer_dense(units = 1, activation = "linear") %>%
+        compiler() %>%
+        trainer()
+
+# medium
+`2 layer_medium` <- keras_model_sequential() %>%
+        layer_dense(units = 64, activation = "relu", input_shape = ncol(X_train_time_norm)) %>%
+        layer_batch_normalization() %>%
+        layer_dense(units = 32, activation = "relu") %>%
+        layer_batch_normalization() %>%
+        layer_dense(units = 1, activation = "linear") %>%
+        compiler() %>%
+        trainer()
+
+# large
+`2 layer_large` <- keras_model_sequential() %>%
+        layer_dense(units = 256, activation = "relu", input_shape = ncol(X_train_time_norm)) %>%
+        layer_batch_normalization() %>%
+        layer_dense(units = 128, activation = "relu") %>%
+        layer_batch_normalization() %>%
+        layer_dense(units = 1, activation = "linear") %>%
+        compiler() %>%
+        trainer()
+
+# Three layer models -------------------------------------------------------------
+# small capacity model
+`3 layer_small` <- keras_model_sequential() %>%
+        layer_dense(units = 16, activation = "relu", input_shape = ncol(X_train_time_norm)) %>%
+        layer_batch_normalization() %>%
+        layer_dense(units = 8, activation = "relu") %>%
+        layer_batch_normalization() %>%
+        layer_dense(units = 4, activation = "relu") %>%
+        layer_batch_normalization() %>%
+        layer_dense(units = 1, activation = "linear") %>%
+        compiler() %>%
+        trainer()
+
+# medium
+`3 layer_medium` <- keras_model_sequential() %>%
+        layer_dense(units = 64, activation = "relu", input_shape = ncol(X_train_time_norm)) %>%
+        layer_batch_normalization() %>%
+        layer_dense(units = 32, activation = "relu") %>%
+        layer_batch_normalization() %>%
+        layer_dense(units = 16, activation = "relu") %>%
+        layer_batch_normalization() %>%
+        layer_dense(units = 1, activation = "linear") %>%
+        compiler() %>%
+        trainer()
+
+# large
+`3 layer_large` <- keras_model_sequential() %>%
+        layer_dense(units = 256, activation = "relu", input_shape = ncol(X_train_time_norm)) %>%
+        layer_batch_normalization() %>%
+        layer_dense(units = 128, activation = "relu") %>%
+        layer_batch_normalization() %>%
+        layer_dense(units = 64, activation = "relu") %>%
+        layer_batch_normalization() %>%
+        layer_dense(units = 1, activation = "linear") %>%
+        compiler() %>%
+        trainer()
+
+# Four layer models -------------------------------------------------------------
+# small capacity model
+`4 layer_small` <- keras_model_sequential() %>%
+        layer_dense(units = 16, activation = "relu", input_shape = ncol(X_train_time_norm)) %>%
+        layer_batch_normalization() %>%
+        layer_dense(units = 8, activation = "relu") %>%
+        layer_batch_normalization() %>%
+        layer_dense(units = 4, activation = "relu") %>%
+        layer_batch_normalization() %>%
+        layer_dense(units = 2, activation = "relu") %>%
+        layer_batch_normalization() %>%
+        layer_dense(units = 1, activation = "linear") %>%
+        compiler() %>%
+        trainer()
+
+# medium
+`4 layer_medium` <- keras_model_sequential() %>%
+        layer_dense(units = 64, activation = "relu", input_shape = ncol(X_train_time_norm)) %>%
+        layer_batch_normalization() %>%
+        layer_dense(units = 32, activation = "relu") %>%
+        layer_batch_normalization() %>%
+        layer_dense(units = 16, activation = "relu") %>%
+        layer_batch_normalization() %>%
+        layer_dense(units = 8, activation = "relu") %>%
+        layer_batch_normalization() %>%
+        layer_dense(units = 1, activation = "linear") %>%
+        compiler() %>%
+        trainer()
+
+# large
+`4 layer_large` <- keras_model_sequential() %>%
+        layer_dense(units = 256, activation = "relu", input_shape = ncol(X_train_time_norm)) %>%
+        layer_batch_normalization() %>%
+        layer_dense(units = 128, activation = "relu") %>%
+        layer_batch_normalization() %>%
+        layer_dense(units = 64, activation = "relu") %>%
+        layer_batch_normalization() %>%
+        layer_dense(units = 32, activation = "relu") %>%
+        layer_batch_normalization() %>%
+        layer_dense(units = 1, activation = "linear") %>%
+        compiler() %>%
+        trainer()
+
+models <- ls(pattern = "layer_") 
+df_batch <- models %>%
+        map(get) %>%
+        map(~ data.frame(
+                `Validation error` = .$metrics$val_loss,
+                `Training error`   = .$metrics$loss,
+                epoch = seq_len(.$params$epoch)
+        )) %>%
+        map2_df(models, ~ mutate(.x, model = .y)) %>%
+        separate(model, into = c("Middle layers", "Number of nodes"), sep = "_") %>%
+        gather(Validation, Loss, Validation.error:Training.error) %>%
+        mutate(
+                Validation = str_replace_all(Validation, "\\.", " "),
+                `Number of nodes` = factor(`Number of nodes`, levels = c("small", "medium", "large")),
+                `Batch normalization` = TRUE
+        )
+
+df2 <- df_batch %>% 
+        filter(Validation == "Validation error")
+
+best <- df2 %>% 
+        filter(Validation == "Validation error") %>%
+        group_by(`Middle layers`, `Number of nodes`) %>% 
+        filter(Loss == min(Loss)) %>%
+        mutate(label = paste("Min loss:", round(Loss, 2)))
+
+ggplot(df2, aes(epoch, Loss, color = `Batch normalization`)) + 
+        geom_text(data = best, aes(x = 25, y = 0.95, label = label, size = 4, hjust = 0.7, vjust = -6)) + 
+        geom_point() +
+        geom_line() +
+        facet_grid(`Number of nodes` ~ `Middle layers`, scales = "free_y") +
+        scale_y_continuous(limits = c(0,120)) +
+        xlab("Epoch") +
+        scale_color_discrete("Batch normalization") +
+        theme(legend.position = "none")
+
+ggplot(df2, aes(epoch, Loss, color = `Batch normalization`)) + 
+        geom_point() +
+        geom_line() +
+        geom_text(data = best, aes(x = 25, y = 0.95, label = label, size = 12, hjust = 0.7, vjust = -1)) + 
+        facet_grid(`Number of nodes` ~ `Middle layers`, scales = "free_y") +
+        scale_y_continuous(limits = c(20,40)) +
+        xlab("Epoch") +
+        scale_color_discrete("Batch normalization") +
+        theme(legend.position = "none")
+p2
+
 save(pre_epa_time,  file = here("data", "model", "pre_epa_time.RData"))
 save(mod_epare_time,  file = here("data", "model", "mod_epare_time.RData"))
 save(pre_epare_time,  file = here("data", "model", "pre_epare_time.RData"))
@@ -1231,17 +1553,17 @@ save(pre_gbm_time,  file = here("data", "model", "pre_gbm_time.RData"))
 save(mod_rf_time,  file = here("data", "model", "mod_rf_time.RData"))
 save(pre_rf_time,  file = here("data", "model", "pre_rf_time.RData"))
 
-save(pre_epa_loc,  file = here("data", "model", "pre_epa_loc.RData"))
-save(mod_epare_loc,  file = here("data", "model", "mod_epare_loc.RData"))
-save(pre_epare_loc,  file = here("data", "model", "pre_epare_loc.RData"))
-save(mod_lm_loc,  file = here("data", "model", "mod_lm_loc.RData"))
-save(pre_lm_loc,  file = here("data", "model", "pre_lm_loc.RData"))
-save(mod_lmint_loc,  file = here("data", "model", "mod_lmint_loc.RData"))
-save(pre_lmint_loc,  file = here("data", "model", "pre_lmint_loc.RData"))
-save(mod_gbm_loc,  file = here("data", "model", "mod_gbm_loc.RData"))
-save(pre_gbm_loc,  file = here("data", "model", "pre_gbm_loc.RData"))
-save(mod_rf_loc,  file = here("data", "model", "mod_rf_loc.RData"))
-save(pre_rf_loc,  file = here("data", "model", "pre_rf_loc.RData"))
+save(pre_epa_loc_far,  file = here("data", "model", "pre_epa_loc.RData"))
+save(mod_epare_loc_far,  file = here("data", "model", "mod_epare_loc.RData"))
+save(pre_epare_loc_far,  file = here("data", "model", "pre_epare_loc.RData"))
+save(mod_lm_loc_far,  file = here("data", "model", "mod_lm_loc.RData"))
+save(pre_lm_loc_far,  file = here("data", "model", "pre_lm_loc.RData"))
+save(mod_lmint_loc_far,  file = here("data", "model", "mod_lmint_loc.RData"))
+save(pre_lmint_loc_far,  file = here("data", "model", "pre_lmint_loc.RData"))
+save(mod_gbm_loc_far,  file = here("data", "model", "mod_gbm_loc.RData"))
+save(pre_gbm_loc_far,  file = here("data", "model", "pre_gbm_loc.RData"))
+save(mod_rf_loc_far,  file = here("data", "model", "mod_rf_loc.RData"))
+save(pre_rf_loc_far,  file = here("data", "model", "pre_rf_loc.RData"))
 
 save(pre_epa_loc_ran,  file = here("data", "model", "pre_epa_loc_ran.RData"))
 save(mod_epare_loc_ran,  file = here("data", "model", "mod_epare_loc_ran.RData"))
@@ -1451,7 +1773,7 @@ nsim_test <- 20000
 set.seed(123)
 ind_time_train <- sample(1:length(dat_time_train$time), nsim_train, replace = F)
 
-ind_loc_train <- sample(1:length(dat_loc_far_train$time), nsim_train, replace = F)
+ind_loc_far_train <- sample(1:length(dat_loc_far_train$time), nsim_train, replace = F)
  
 
 # Create simulation model specific data set
@@ -1462,10 +1784,10 @@ dat_sim_epa_time_train <- dat_time_train %>%
 dat_sim_epa_time_test <- dat_time_test %>% 
         mutate(true_sim = 0.52*(dat_time_test$pm2.5_cf1_a+dat_time_test$pm2.5_cf1_b)/2-0.085*dat_time_test$hum+5.71)
 
-dat_sim_epa_loc_train <- dat_loc_far_train %>%
+dat_sim_epa_loc_far_train <- dat_loc_far_train %>%
         mutate(true_sim = 0.52*(dat_loc_far_train$pm2.5_cf1_a+dat_loc_far_train$pm2.5_cf1_b)/2-0.085*dat_loc_far_train$hum+5.71)
 
-dat_sim_epa_loc_test <- dat_loc_far_test %>% 
+dat_sim_epa_loc_far_test <- dat_loc_far_test %>% 
         mutate(true_sim = 0.52*(dat_loc_far_test$pm2.5_cf1_a+dat_loc_far_test$pm2.5_cf1_b)/2-0.085*dat_loc_far_test$hum+5.71)
 
 met_sim_epa <- vector(mode = "list", length = nsim)
@@ -1483,10 +1805,10 @@ for(i in 1:nsim){
         sim_time_test <- sim_time_test[1:nsim_test,] %>% 
                 mutate(pm2.5_sim = true_sim + e_test)
         
-        sim_loc_train <- dat_sim_epa_loc_train[ind_loc_train,] %>% 
+        sim_loc_far_train <- dat_sim_epa_loc_far_train[ind_loc_far_train,] %>% 
                 mutate(pm2.5_sim = true_sim + e_train)
-        sim_loc_test <- dat_sim_epa_loc_test[-ind_loc_train,]
-        sim_loc_test <- sim_loc_test[1:nsim_test,] %>% 
+        sim_loc_far_test <- dat_sim_epa_loc_far_test[-ind_loc_far_train,]
+        sim_loc_far_test <- sim_loc_far_test[1:nsim_test,] %>% 
                 mutate(pm2.5_sim = true_sim + e_test)
         
         ## Model fitting and prediction
@@ -1500,12 +1822,12 @@ for(i in 1:nsim){
         met_sim_epa[[i]] <- rbind(met_sim_epa[[i]], met_epa_time)
         
         ## Location Farthest
-        pre_epa_loc <- 0.52*(sim_loc_test$pm2.5_cf1_a+sim_loc_test$pm2.5_cf1_b)/2-0.085*sim_loc_test$hum+5.71
-        pre_epa_loc <- pre_epa_loc %>% 
-                cbind(pre = ., obs = sim_loc_test$pm2.5_sim) %>% 
+        pre_epa_loc_far <- 0.52*(sim_loc_far_test$pm2.5_cf1_a+sim_loc_far_test$pm2.5_cf1_b)/2-0.085*sim_loc_far_test$hum+5.71
+        pre_epa_loc_far <- pre_epa_loc_far %>% 
+                cbind(pre = ., obs = sim_loc_far_test$pm2.5_sim) %>% 
                 as_tibble()
-        met_epa_loc <- metrics(pre_epa_loc, truth = obs, estimate = pre)
-        met_sim_epa[[i]] <- rbind(met_sim_epa[[i]], met_epa_loc)
+        met_epa_loc_far <- metrics(pre_epa_loc_far, truth = obs, estimate = pre)
+        met_sim_epa[[i]] <- rbind(met_sim_epa[[i]], met_epa_loc_far)
         
         
         ### EPA-retrained MODEL
@@ -1520,14 +1842,14 @@ for(i in 1:nsim){
         met_sim_epa[[i]] <- rbind(met_sim_epa[[i]], met_epa_time)
         
         ## Location Farthest
-        mod_epa_loc <- lm(pm2.5_sim ~ pm2.5_cf1_m + temp + hum,
-                          data = sim_loc_train)
-        # summary(mod_epa_loc)
-        pre_epa_loc <- predict(mod_epa_loc,newdata = sim_loc_test) %>% 
-                cbind(pre = ., obs = sim_loc_test$pm2.5_sim) %>% 
+        mod_epa_loc_far <- lm(pm2.5_sim ~ pm2.5_cf1_m + temp + hum,
+                          data = sim_loc_far_train)
+        # summary(mod_epa_loc_far)
+        pre_epa_loc_far <- predict(mod_epa_loc_far,newdata = sim_loc_far_test) %>% 
+                cbind(pre = ., obs = sim_loc_far_test$pm2.5_sim) %>% 
                 as_tibble()
-        met_epa_loc <- metrics(pre_epa_loc, truth = obs, estimate = pre)
-        met_sim_epa[[i]] <- rbind(met_sim_epa[[i]], met_epa_loc)
+        met_epa_loc_far <- metrics(pre_epa_loc_far, truth = obs, estimate = pre)
+        met_sim_epa[[i]] <- rbind(met_sim_epa[[i]], met_epa_loc_far)
         
         
         ### LINEAR MODEL
@@ -1542,14 +1864,14 @@ for(i in 1:nsim){
         met_sim_epa[[i]] <- rbind(met_sim_epa[[i]], met_epa_time)
         
         ## Location Farthest
-        mod_epa_loc <- lm(pm2.5_sim ~ pm2.5_cf1_a + temp + hum,
-                          data = sim_loc_train)
-        # summary(mod_epa_loc)
-        pre_epa_loc <- predict(mod_epa_loc,newdata = sim_loc_test) %>% 
-                cbind(pre = ., obs = sim_loc_test$pm2.5_sim) %>% 
+        mod_epa_loc_far <- lm(pm2.5_sim ~ pm2.5_cf1_a + temp + hum,
+                          data = sim_loc_far_train)
+        # summary(mod_epa_loc_far)
+        pre_epa_loc_far <- predict(mod_epa_loc_far,newdata = sim_loc_far_test) %>% 
+                cbind(pre = ., obs = sim_loc_far_test$pm2.5_sim) %>% 
                 as_tibble()
-        met_epa_loc <- metrics(pre_epa_loc, truth = obs, estimate = pre)
-        met_sim_epa[[i]] <- rbind(met_sim_epa[[i]], met_epa_loc)
+        met_epa_loc_far <- metrics(pre_epa_loc_far, truth = obs, estimate = pre)
+        met_sim_epa[[i]] <- rbind(met_sim_epa[[i]], met_epa_loc_far)
         
         
         ### LINEAR MODEL INTERACTION
@@ -1564,14 +1886,14 @@ for(i in 1:nsim){
         met_sim_epa[[i]] <- rbind(met_sim_epa[[i]], met_epa_time)
         
         ## Location Farthest
-        mod_epa_loc <- lm(pm2.5_sim ~ pm2.5_cf1_a * (temp + hum),
-                          data = sim_loc_train)
-        # summary(mod_epa_loc)
-        pre_epa_loc <- predict(mod_epa_loc, newdata = sim_loc_test) %>% 
-                cbind(pre = ., obs = sim_loc_test$pm2.5_sim) %>% 
+        mod_epa_loc_far <- lm(pm2.5_sim ~ pm2.5_cf1_a * (temp + hum),
+                          data = sim_loc_far_train)
+        # summary(mod_epa_loc_far)
+        pre_epa_loc_far <- predict(mod_epa_loc_far, newdata = sim_loc_far_test) %>% 
+                cbind(pre = ., obs = sim_loc_far_test$pm2.5_sim) %>% 
                 as_tibble()
-        met_epa_loc <- metrics(pre_epa_loc, truth = obs, estimate = pre)
-        met_sim_epa[[i]] <- rbind(met_sim_epa[[i]], met_epa_loc)
+        met_epa_loc_far <- metrics(pre_epa_loc_far, truth = obs, estimate = pre)
+        met_sim_epa[[i]] <- rbind(met_sim_epa[[i]], met_epa_loc_far)
         
         
         ### Gradient Boosting
@@ -1593,9 +1915,9 @@ for(i in 1:nsim){
         met_sim_epa[[i]] <- rbind(met_sim_epa[[i]], met_epa_time)
         
         ## Location Farthest
-        mod_epa_loc <- gbm(
+        mod_epa_loc_far <- gbm(
                 formula = pm2.5_sim ~ pm2.5_cf1_a + temp + hum,
-                data = sim_loc_train,
+                data = sim_loc_far_train,
                 distribution = "gaussian",  # SSE loss function
                 n.trees = 400,
                 shrinkage = 0.1,
@@ -1603,11 +1925,11 @@ for(i in 1:nsim){
                 n.minobsinnode = 10,
                 cv.folds = 10
         )
-        pre_epa_loc <- predict(mod_epa_loc, newdata = sim_loc_test) %>% 
-                cbind(pre = ., obs = sim_loc_test$pm2.5_sim) %>% 
+        pre_epa_loc_far <- predict(mod_epa_loc_far, newdata = sim_loc_far_test) %>% 
+                cbind(pre = ., obs = sim_loc_far_test$pm2.5_sim) %>% 
                 as_tibble()
-        met_epa_loc <- metrics(pre_epa_loc, truth = obs, estimate = pre)
-        met_sim_epa[[i]] <- rbind(met_sim_epa[[i]], met_epa_loc)
+        met_epa_loc_far <- metrics(pre_epa_loc_far, truth = obs, estimate = pre)
+        met_sim_epa[[i]] <- rbind(met_sim_epa[[i]], met_epa_loc_far)
         
         ### Random forest
         ## Time
@@ -1635,27 +1957,27 @@ for(i in 1:nsim){
         
         
         ## Location Farthest
-        X_train_loc <- sim_loc_train[, c("pm2.5_cf1_a","temp","hum")]
-        Y_train_loc <- sim_loc_train[, "pm2.5_sim"]
+        X_train_loc_far <- sim_loc_far_train[, c("pm2.5_cf1_a","temp","hum")]
+        Y_train_loc_far <- sim_loc_far_train[, "pm2.5_sim"]
         
-        X_test_loc  <- sim_loc_test[, c("pm2.5_cf1_a","temp","hum")]
-        Y_test_loc  <- sim_loc_test[, "pm2.5_sim"]
+        X_test_loc_far  <- sim_loc_far_test[, c("pm2.5_cf1_a","temp","hum")]
+        Y_test_loc_far  <- sim_loc_far_test[, "pm2.5_sim"]
         
         p <- 3
         n_tree <- 30
         
         # mtry = p is basically just bagging, as above
-        mod_epa_loc <- randomForest(X_train_loc, Y_train_loc, 
-                                    xtest = X_test_loc, 
-                                    ytest = Y_test_loc, 
+        mod_epa_loc_far <- randomForest(X_train_loc_far, Y_train_loc_far, 
+                                    xtest = X_test_loc_far, 
+                                    ytest = Y_test_loc_far, 
                                     mtry = p, 
                                     ntree = n_tree)
         
-        pre_epa_loc <- mod_epa_loc$test$predicted %>% 
-                cbind(pre = ., obs = sim_loc_test$pm2.5_sim) %>% 
+        pre_epa_loc_far <- mod_epa_loc$test$predicted %>% 
+                cbind(pre = ., obs = sim_loc_far_test$pm2.5_sim) %>% 
                 as_tibble()
-        met_epa_loc <- metrics(pre_epa_loc, truth = obs, estimate = pre)
-        met_sim_epa[[i]] <- rbind(met_sim_epa[[i]], met_epa_loc)
+        met_epa_loc_far <- metrics(pre_epa_loc_far, truth = obs, estimate = pre)
+        met_sim_epa[[i]] <- rbind(met_sim_epa[[i]], met_epa_loc_far)
 }
 
 met_sim_epa
@@ -1700,7 +2022,7 @@ nsim_test <- 20000
 set.seed(123)
 ind_time_train <- sample(1:length(dat_time_train$time), nsim_train, replace = F)
 
-ind_loc_train <- sample(1:length(dat_loc_far_train$time), nsim_train, replace = F)
+ind_loc_far_train <- sample(1:length(dat_loc_far_train$time), nsim_train, replace = F)
 
 
 # Create simulation model specific data set
@@ -1715,11 +2037,11 @@ dat_sim_epare_time_train <- dat_time_train %>%
 dat_sim_epare_time_test <- dat_time_test %>% 
         mutate(true_sim = predict(mod_epare_time, newdata = dat_time_test))
 
-dat_sim_epare_loc_train <- dat_loc_far_train %>% 
+dat_sim_epare_loc_far_train <- dat_loc_far_train %>% 
         mutate(true_sim = mod_epare_loc$fitted.values)
 
-dat_sim_epare_loc_test <- dat_loc_far_test %>% 
-        mutate(true_sim = predict(mod_epare_loc, newdata = dat_loc_far_test))
+dat_sim_epare_loc_far_test <- dat_loc_far_test %>% 
+        mutate(true_sim = predict(mod_epare_loc_far, newdata = dat_loc_far_test))
 
 met_sim_epare <- vector(mode = "list", length = nsim)
 
@@ -1736,10 +2058,10 @@ for(i in 1:nsim){
         sim_time_test <- sim_time_test[1:nsim_test,] %>% 
                 mutate(pm2.5_sim = true_sim + e_test)
         
-        sim_loc_train <- dat_sim_epare_loc_train[ind_loc_train,] %>% 
+        sim_loc_far_train <- dat_sim_epare_loc_far_train[ind_loc_far_train,] %>% 
                 mutate(pm2.5_sim = true_sim + e_train)
-        sim_loc_test <- dat_sim_epare_loc_test[-ind_loc_train,] 
-        sim_loc_test <- sim_loc_test[1:nsim_test,] %>% 
+        sim_loc_far_test <- dat_sim_epare_loc_far_test[-ind_loc_far_train,] 
+        sim_loc_far_test <- sim_loc_far_test[1:nsim_test,] %>% 
                 mutate(pm2.5_sim = true_sim + e_test)
         
         ## Model fitting and prediction
@@ -1753,12 +2075,12 @@ for(i in 1:nsim){
         met_sim_epare[[i]] <- rbind(met_sim_epare[[i]], met_epa_time)
         
         ## Location Farthest
-        pre_epa_loc <- 0.52*(sim_loc_test$pm2.5_cf1_a+sim_loc_test$pm2.5_cf1_b)/2-0.085*sim_loc_test$hum+5.71
-        pre_epa_loc <- pre_epa_loc %>% 
-                cbind(pre = ., obs = sim_loc_test$pm2.5_sim) %>% 
+        pre_epa_loc_far <- 0.52*(sim_loc_far_test$pm2.5_cf1_a+sim_loc_far_test$pm2.5_cf1_b)/2-0.085*sim_loc_far_test$hum+5.71
+        pre_epa_loc_far <- pre_epa_loc_far %>% 
+                cbind(pre = ., obs = sim_loc_far_test$pm2.5_sim) %>% 
                 as_tibble()
-        met_epa_loc <- metrics(pre_epa_loc, truth = obs, estimate = pre)
-        met_sim_epare[[i]] <- rbind(met_sim_epare[[i]], met_epa_loc)
+        met_epa_loc_far <- metrics(pre_epa_loc_far, truth = obs, estimate = pre)
+        met_sim_epare[[i]] <- rbind(met_sim_epare[[i]], met_epa_loc_far)
         
         
         ### EPA-retrained MODEL
@@ -1773,14 +2095,14 @@ for(i in 1:nsim){
         met_sim_epare[[i]] <- rbind(met_sim_epare[[i]], met_epare_time)
         
         ## Location Farthest
-        mod_epare_loc <- lm(pm2.5_sim ~ pm2.5_cf1_m + temp + hum,
-                            data = sim_loc_train)
-        # summary(mod_epare_loc)
-        pre_epare_loc <- predict(mod_epare_loc,newdata = sim_loc_test) %>% 
-                cbind(pre = ., obs = sim_loc_test$pm2.5_sim) %>% 
+        mod_epare_loc_far <- lm(pm2.5_sim ~ pm2.5_cf1_m + temp + hum,
+                            data = sim_loc_far_train)
+        # summary(mod_epare_loc_far)
+        pre_epare_loc_far <- predict(mod_epare_loc_far,newdata = sim_loc_far_test) %>% 
+                cbind(pre = ., obs = sim_loc_far_test$pm2.5_sim) %>% 
                 as_tibble()
-        met_epare_loc <- metrics(pre_epare_loc, truth = obs, estimate = pre)
-        met_sim_epare[[i]] <- rbind(met_sim_epare[[i]], met_epare_loc)
+        met_epare_loc_far <- metrics(pre_epare_loc_far, truth = obs, estimate = pre)
+        met_sim_epare[[i]] <- rbind(met_sim_epare[[i]], met_epare_loc_far)
         
         
         ### LINEAR MODEL
@@ -1795,14 +2117,14 @@ for(i in 1:nsim){
         met_sim_epare[[i]] <- rbind(met_sim_epare[[i]], met_lm_time)
         
         ## Location Farthest
-        mod_lm_loc <- lm(pm2.5_sim ~ pm2.5_cf1_a + temp + hum,
-                         data = sim_loc_train)
-        # summary(mod_lm_loc)
-        pre_lm_loc <- predict(mod_lm_loc,newdata = sim_loc_test) %>% 
-                cbind(pre = ., obs = sim_loc_test$pm2.5_sim) %>% 
+        mod_lm_loc_far <- lm(pm2.5_sim ~ pm2.5_cf1_a + temp + hum,
+                         data = sim_loc_far_train)
+        # summary(mod_lm_loc_far)
+        pre_lm_loc_far <- predict(mod_lm_loc_far,newdata = sim_loc_far_test) %>% 
+                cbind(pre = ., obs = sim_loc_far_test$pm2.5_sim) %>% 
                 as_tibble()
-        met_lm_loc <- metrics(pre_lm_loc, truth = obs, estimate = pre)
-        met_sim_epare[[i]] <- rbind(met_sim_epare[[i]], met_lm_loc)
+        met_lm_loc_far <- metrics(pre_lm_loc_far, truth = obs, estimate = pre)
+        met_sim_epare[[i]] <- rbind(met_sim_epare[[i]], met_lm_loc_far)
         
         
         ### LINEAR MODEL INTERACTION
@@ -1817,14 +2139,14 @@ for(i in 1:nsim){
         met_sim_epare[[i]] <- rbind(met_sim_epare[[i]], met_epare_time)
         
         ## Location Farthest
-        mod_epare_loc <- lm(pm2.5_sim ~ pm2.5_cf1_a * (temp + hum),
-                            data = sim_loc_train)
-        # summary(mod_epare_loc)
-        pre_epare_loc <- predict(mod_epare_loc, newdata = sim_loc_test) %>% 
-                cbind(pre = ., obs = sim_loc_test$pm2.5_sim) %>% 
+        mod_epare_loc_far <- lm(pm2.5_sim ~ pm2.5_cf1_a * (temp + hum),
+                            data = sim_loc_far_train)
+        # summary(mod_epare_loc_far)
+        pre_epare_loc_far <- predict(mod_epare_loc_far, newdata = sim_loc_far_test) %>% 
+                cbind(pre = ., obs = sim_loc_far_test$pm2.5_sim) %>% 
                 as_tibble()
-        met_epare_loc <- metrics(pre_epare_loc, truth = obs, estimate = pre)
-        met_sim_epare[[i]] <- rbind(met_sim_epare[[i]], met_epare_loc)
+        met_epare_loc_far <- metrics(pre_epare_loc_far, truth = obs, estimate = pre)
+        met_sim_epare[[i]] <- rbind(met_sim_epare[[i]], met_epare_loc_far)
         
         
         ### Gradient Boosting Method
@@ -1846,9 +2168,9 @@ for(i in 1:nsim){
         met_sim_epare[[i]] <- rbind(met_sim_epare[[i]], met_gbm_time)
         
         ## Location Farthest
-        mod_gbm_loc <- gbm(
+        mod_gbm_loc_far <- gbm(
                 formula = pm2.5_sim ~ pm2.5_cf1_a + temp + hum,
-                data = sim_loc_train,
+                data = sim_loc_far_train,
                 distribution = "gaussian",  # SSE loss function
                 n.trees = 400,
                 shrinkage = 0.1,
@@ -1856,11 +2178,11 @@ for(i in 1:nsim){
                 n.minobsinnode = 10,
                 cv.folds = 10
         )
-        pre_gbm_loc <- predict(mod_gbm_loc, newdata = sim_loc_test) %>% 
-                cbind(pre = ., obs = sim_loc_test$pm2.5_sim) %>% 
+        pre_gbm_loc_far <- predict(mod_gbm_loc_far, newdata = sim_loc_far_test) %>% 
+                cbind(pre = ., obs = sim_loc_far_test$pm2.5_sim) %>% 
                 as_tibble()
-        met_gbm_loc <- metrics(pre_gbm_loc, truth = obs, estimate = pre)
-        met_sim_epare[[i]] <- rbind(met_sim_epare[[i]], met_gbm_loc)
+        met_gbm_loc_far <- metrics(pre_gbm_loc_far, truth = obs, estimate = pre)
+        met_sim_epare[[i]] <- rbind(met_sim_epare[[i]], met_gbm_loc_far)
         
         ### Random forest
         ## Time
@@ -1888,27 +2210,27 @@ for(i in 1:nsim){
         
         
         ## Location Farthest
-        X_train_loc <- sim_loc_train[, c("pm2.5_cf1_a","temp","hum")]
-        Y_train_loc <- sim_loc_train[, "pm2.5_sim"]
+        X_train_loc_far <- sim_loc_far_train[, c("pm2.5_cf1_a","temp","hum")]
+        Y_train_loc_far <- sim_loc_far_train[, "pm2.5_sim"]
         
-        X_test_loc  <- sim_loc_test[, c("pm2.5_cf1_a","temp","hum")]
-        Y_test_loc  <- sim_loc_test[, "pm2.5_sim"]
+        X_test_loc_far  <- sim_loc_far_test[, c("pm2.5_cf1_a","temp","hum")]
+        Y_test_loc_far  <- sim_loc_far_test[, "pm2.5_sim"]
         
         p <- 3
         n_tree <- 30
         
         # mtry = p is basically just bagging, as above
-        mod_epare_loc <- randomForest(X_train_loc, Y_train_loc, 
-                                      xtest = X_test_loc, 
-                                      ytest = Y_test_loc, 
+        mod_epare_loc_far <- randomForest(X_train_loc_far, Y_train_loc_far, 
+                                      xtest = X_test_loc_far, 
+                                      ytest = Y_test_loc_far, 
                                       mtry = p, 
                                       ntree = n_tree)
         
-        pre_epare_loc <- mod_epare_loc$test$predicted %>% 
-                cbind(pre = ., obs = sim_loc_test$pm2.5_sim) %>% 
+        pre_epare_loc_far <- mod_epare_loc$test$predicted %>% 
+                cbind(pre = ., obs = sim_loc_far_test$pm2.5_sim) %>% 
                 as_tibble()
-        met_epare_loc <- metrics(pre_epare_loc, truth = obs, estimate = pre)
-        met_sim_epare[[i]] <- rbind(met_sim_epare[[i]], met_epare_loc)
+        met_epare_loc_far <- metrics(pre_epare_loc_far, truth = obs, estimate = pre)
+        met_sim_epare[[i]] <- rbind(met_sim_epare[[i]], met_epare_loc_far)
 }
 
 met_sim_epare
@@ -1952,7 +2274,7 @@ nsim_test <- 20000
 set.seed(123)
 ind_time_train <- sample(1:length(dat_time_train$time), nsim_train, replace = F)
 
-ind_loc_train <- sample(1:length(dat_loc_far_train$time), nsim_train, replace = F)
+ind_loc_far_train <- sample(1:length(dat_loc_far_train$time), nsim_train, replace = F)
 
 
 # Create simulation model specific data set
@@ -1967,11 +2289,11 @@ dat_sim_lm_time_train <- dat_time_train %>%
 dat_sim_lm_time_test <- dat_time_test %>% 
         mutate(true_sim = predict(mod_lm_time, newdata = dat_time_test))
 
-dat_sim_lm_loc_train <- dat_loc_far_train %>% 
+dat_sim_lm_loc_far_train <- dat_loc_far_train %>% 
         mutate(true_sim = mod_lm_loc$fitted.values)
 
-dat_sim_lm_loc_test <- dat_loc_far_test %>% 
-        mutate(true_sim = predict(mod_lm_loc, newdata = dat_loc_far_test))
+dat_sim_lm_loc_far_test <- dat_loc_far_test %>% 
+        mutate(true_sim = predict(mod_lm_loc_far, newdata = dat_loc_far_test))
 
 met_sim_lm <- vector(mode = "list", length = nsim)
 
@@ -1988,10 +2310,10 @@ for(i in 1:nsim){
         sim_time_test <- sim_time_test[1:nsim_test,] %>% 
                 mutate(pm2.5_sim = true_sim + e_test)
         
-        sim_loc_train <- dat_sim_lm_loc_train[ind_loc_train,] %>% 
+        sim_loc_far_train <- dat_sim_lm_loc_far_train[ind_loc_far_train,] %>% 
                 mutate(pm2.5_sim = true_sim + e_train)
-        sim_loc_test <- dat_sim_lm_loc_test[-ind_loc_train,] 
-        sim_loc_test <- sim_loc_test[1:nsim_test,] %>% 
+        sim_loc_far_test <- dat_sim_lm_loc_far_test[-ind_loc_far_train,] 
+        sim_loc_far_test <- sim_loc_far_test[1:nsim_test,] %>% 
                 mutate(pm2.5_sim = true_sim + e_test)
         
         ## Model fitting and prediction
@@ -2005,12 +2327,12 @@ for(i in 1:nsim){
         met_sim_lm[[i]] <- rbind(met_sim_lm[[i]], met_epa_time)
         
         ## Location Farthest
-        pre_epa_loc <- 0.52*(sim_loc_test$pm2.5_cf1_a+sim_loc_test$pm2.5_cf1_b)/2-0.085*sim_loc_test$hum+5.71
-        pre_epa_loc <- pre_epa_loc %>% 
-                cbind(pre = ., obs = sim_loc_test$pm2.5_sim) %>% 
+        pre_epa_loc_far <- 0.52*(sim_loc_far_test$pm2.5_cf1_a+sim_loc_far_test$pm2.5_cf1_b)/2-0.085*sim_loc_far_test$hum+5.71
+        pre_epa_loc_far <- pre_epa_loc_far %>% 
+                cbind(pre = ., obs = sim_loc_far_test$pm2.5_sim) %>% 
                 as_tibble()
-        met_epa_loc <- metrics(pre_epa_loc, truth = obs, estimate = pre)
-        met_sim_lm[[i]] <- rbind(met_sim_lm[[i]], met_epa_loc)
+        met_epa_loc_far <- metrics(pre_epa_loc_far, truth = obs, estimate = pre)
+        met_sim_lm[[i]] <- rbind(met_sim_lm[[i]], met_epa_loc_far)
         
         
         ### EPA-retrained MODEL
@@ -2025,14 +2347,14 @@ for(i in 1:nsim){
         met_sim_lm[[i]] <- rbind(met_sim_lm[[i]], met_lm_time)
         
         ## Location Farthest
-        mod_lm_loc <- lm(pm2.5_sim ~ pm2.5_cf1_m + temp + hum,
-                         data = sim_loc_train)
-        # summary(mod_lm_loc)
-        pre_lm_loc <- predict(mod_lm_loc,newdata = sim_loc_test) %>% 
-                cbind(pre = ., obs = sim_loc_test$pm2.5_sim) %>% 
+        mod_lm_loc_far <- lm(pm2.5_sim ~ pm2.5_cf1_m + temp + hum,
+                         data = sim_loc_far_train)
+        # summary(mod_lm_loc_far)
+        pre_lm_loc_far <- predict(mod_lm_loc_far,newdata = sim_loc_far_test) %>% 
+                cbind(pre = ., obs = sim_loc_far_test$pm2.5_sim) %>% 
                 as_tibble()
-        met_lm_loc <- metrics(pre_lm_loc, truth = obs, estimate = pre)
-        met_sim_lm[[i]] <- rbind(met_sim_lm[[i]], met_lm_loc)
+        met_lm_loc_far <- metrics(pre_lm_loc_far, truth = obs, estimate = pre)
+        met_sim_lm[[i]] <- rbind(met_sim_lm[[i]], met_lm_loc_far)
         
         
         ### LINEAR MODEL
@@ -2047,14 +2369,14 @@ for(i in 1:nsim){
         met_sim_lm[[i]] <- rbind(met_sim_lm[[i]], met_lm_time)
         
         ## Location Farthest
-        mod_lm_loc <- lm(pm2.5_sim ~ pm2.5_cf1_a + temp + hum,
-                         data = sim_loc_train)
-        # summary(mod_lm_loc)
-        pre_lm_loc <- predict(mod_lm_loc,newdata = sim_loc_test) %>% 
-                cbind(pre = ., obs = sim_loc_test$pm2.5_sim) %>% 
+        mod_lm_loc_far <- lm(pm2.5_sim ~ pm2.5_cf1_a + temp + hum,
+                         data = sim_loc_far_train)
+        # summary(mod_lm_loc_far)
+        pre_lm_loc_far <- predict(mod_lm_loc_far,newdata = sim_loc_far_test) %>% 
+                cbind(pre = ., obs = sim_loc_far_test$pm2.5_sim) %>% 
                 as_tibble()
-        met_lm_loc <- metrics(pre_lm_loc, truth = obs, estimate = pre)
-        met_sim_lm[[i]] <- rbind(met_sim_lm[[i]], met_lm_loc)
+        met_lm_loc_far <- metrics(pre_lm_loc_far, truth = obs, estimate = pre)
+        met_sim_lm[[i]] <- rbind(met_sim_lm[[i]], met_lm_loc_far)
         
         
         ### LINEAR MODEL INTERACTION
@@ -2069,14 +2391,14 @@ for(i in 1:nsim){
         met_sim_lm[[i]] <- rbind(met_sim_lm[[i]], met_lm_time)
         
         ## Location Farthest
-        mod_lm_loc <- lm(pm2.5_sim ~ pm2.5_cf1_a * (temp + hum),
-                         data = sim_loc_train)
-        # summary(mod_lm_loc)
-        pre_lm_loc <- predict(mod_lm_loc, newdata = sim_loc_test) %>% 
-                cbind(pre = ., obs = sim_loc_test$pm2.5_sim) %>% 
+        mod_lm_loc_far <- lm(pm2.5_sim ~ pm2.5_cf1_a * (temp + hum),
+                         data = sim_loc_far_train)
+        # summary(mod_lm_loc_far)
+        pre_lm_loc_far <- predict(mod_lm_loc_far, newdata = sim_loc_far_test) %>% 
+                cbind(pre = ., obs = sim_loc_far_test$pm2.5_sim) %>% 
                 as_tibble()
-        met_lm_loc <- metrics(pre_lm_loc, truth = obs, estimate = pre)
-        met_sim_lm[[i]] <- rbind(met_sim_lm[[i]], met_lm_loc)
+        met_lm_loc_far <- metrics(pre_lm_loc_far, truth = obs, estimate = pre)
+        met_sim_lm[[i]] <- rbind(met_sim_lm[[i]], met_lm_loc_far)
         
         
         ### Gradient Boosting Method
@@ -2098,9 +2420,9 @@ for(i in 1:nsim){
         met_sim_lm[[i]] <- rbind(met_sim_lm[[i]], met_gbm_time)
         
         ## Location Farthest
-        mod_gbm_loc <- gbm(
+        mod_gbm_loc_far <- gbm(
                 formula = pm2.5_sim ~ pm2.5_cf1_a + temp + hum,
-                data = sim_loc_train,
+                data = sim_loc_far_train,
                 distribution = "gaussian",  # SSE loss function
                 n.trees = 400,
                 shrinkage = 0.1,
@@ -2108,11 +2430,11 @@ for(i in 1:nsim){
                 n.minobsinnode = 10,
                 cv.folds = 10
         )
-        pre_gbm_loc <- predict(mod_gbm_loc, newdata = sim_loc_test) %>% 
-                cbind(pre = ., obs = sim_loc_test$pm2.5_sim) %>% 
+        pre_gbm_loc_far <- predict(mod_gbm_loc_far, newdata = sim_loc_far_test) %>% 
+                cbind(pre = ., obs = sim_loc_far_test$pm2.5_sim) %>% 
                 as_tibble()
-        met_gbm_loc <- metrics(pre_gbm_loc, truth = obs, estimate = pre)
-        met_sim_lm[[i]] <- rbind(met_sim_lm[[i]], met_gbm_loc)
+        met_gbm_loc_far <- metrics(pre_gbm_loc_far, truth = obs, estimate = pre)
+        met_sim_lm[[i]] <- rbind(met_sim_lm[[i]], met_gbm_loc_far)
         
         ### Random forest
         ## Time
@@ -2140,27 +2462,27 @@ for(i in 1:nsim){
         
         
         ## Location Farthest
-        X_train_loc <- sim_loc_train[, c("pm2.5_cf1_a","temp","hum")]
-        Y_train_loc <- sim_loc_train[, "pm2.5_sim"]
+        X_train_loc_far <- sim_loc_far_train[, c("pm2.5_cf1_a","temp","hum")]
+        Y_train_loc_far <- sim_loc_far_train[, "pm2.5_sim"]
         
-        X_test_loc  <- sim_loc_test[, c("pm2.5_cf1_a","temp","hum")]
-        Y_test_loc  <- sim_loc_test[, "pm2.5_sim"]
+        X_test_loc_far  <- sim_loc_far_test[, c("pm2.5_cf1_a","temp","hum")]
+        Y_test_loc_far  <- sim_loc_far_test[, "pm2.5_sim"]
         
         p <- 3
         n_tree <- 30
         
         # mtry = p is basically just bagging, as above
-        mod_lm_loc <- randomForest(X_train_loc, Y_train_loc, 
-                                   xtest = X_test_loc, 
-                                   ytest = Y_test_loc, 
+        mod_lm_loc_far <- randomForest(X_train_loc_far, Y_train_loc_far, 
+                                   xtest = X_test_loc_far, 
+                                   ytest = Y_test_loc_far, 
                                    mtry = p, 
                                    ntree = n_tree)
         
-        pre_lm_loc <- mod_lm_loc$test$predicted %>% 
-                cbind(pre = ., obs = sim_loc_test$pm2.5_sim) %>% 
+        pre_lm_loc_far <- mod_lm_loc$test$predicted %>% 
+                cbind(pre = ., obs = sim_loc_far_test$pm2.5_sim) %>% 
                 as_tibble()
-        met_lm_loc <- metrics(pre_lm_loc, truth = obs, estimate = pre)
-        met_sim_lm[[i]] <- rbind(met_sim_lm[[i]], met_lm_loc)
+        met_lm_loc_far <- metrics(pre_lm_loc_far, truth = obs, estimate = pre)
+        met_sim_lm[[i]] <- rbind(met_sim_lm[[i]], met_lm_loc_far)
 }
 
 met_sim_lm
@@ -2204,7 +2526,7 @@ nsim_test <- 20000
 set.seed(123)
 ind_time_train <- sample(1:length(dat_time_train$time), nsim_train, replace = F)
 
-ind_loc_train <- sample(1:length(dat_loc_far_train$time), nsim_train, replace = F)
+ind_loc_far_train <- sample(1:length(dat_loc_far_train$time), nsim_train, replace = F)
 
 
 # Create simulation model specific data set
@@ -2219,11 +2541,11 @@ dat_sim_lmint_time_train <- dat_time_train %>%
 dat_sim_lmint_time_test <- dat_time_test %>% 
         mutate(true_sim = predict(mod_lmint_time, newdata = dat_time_test))
 
-dat_sim_lmint_loc_train <- dat_loc_far_train %>% 
+dat_sim_lmint_loc_far_train <- dat_loc_far_train %>% 
         mutate(true_sim = mod_lmint_loc$fitted.values)
 
-dat_sim_lmint_loc_test <- dat_loc_far_test %>% 
-        mutate(true_sim = predict(mod_lmint_loc, newdata = dat_loc_far_test))
+dat_sim_lmint_loc_far_test <- dat_loc_far_test %>% 
+        mutate(true_sim = predict(mod_lmint_loc_far, newdata = dat_loc_far_test))
 
 met_sim_lmint <- vector(mode = "list", length = nsim)
 
@@ -2240,10 +2562,10 @@ for(i in 1:nsim){
         sim_time_test <- sim_time_test[1:nsim_test,] %>% 
                 mutate(pm2.5_sim = true_sim + e_test)
         
-        sim_loc_train <- dat_sim_lmint_loc_train[ind_loc_train,] %>% 
+        sim_loc_far_train <- dat_sim_lmint_loc_far_train[ind_loc_far_train,] %>% 
                 mutate(pm2.5_sim = true_sim + e_train)
-        sim_loc_test <- dat_sim_lmint_loc_test[-ind_loc_train,] 
-        sim_loc_test <- sim_loc_test[1:nsim_test,] %>% 
+        sim_loc_far_test <- dat_sim_lmint_loc_far_test[-ind_loc_far_train,] 
+        sim_loc_far_test <- sim_loc_far_test[1:nsim_test,] %>% 
                 mutate(pm2.5_sim = true_sim + e_test)
         
         ## Model fitting and prediction
@@ -2257,12 +2579,12 @@ for(i in 1:nsim){
         met_sim_lmint[[i]] <- rbind(met_sim_lmint[[i]], met_epa_time)
         
         ## Location Farthest
-        pre_epa_loc <- 0.52*(sim_loc_test$pm2.5_cf1_a+sim_loc_test$pm2.5_cf1_b)/2-0.085*sim_loc_test$hum+5.71
-        pre_epa_loc <- pre_epa_loc %>% 
-                cbind(pre = ., obs = sim_loc_test$pm2.5_sim) %>% 
+        pre_epa_loc_far <- 0.52*(sim_loc_far_test$pm2.5_cf1_a+sim_loc_far_test$pm2.5_cf1_b)/2-0.085*sim_loc_far_test$hum+5.71
+        pre_epa_loc_far <- pre_epa_loc_far %>% 
+                cbind(pre = ., obs = sim_loc_far_test$pm2.5_sim) %>% 
                 as_tibble()
-        met_epa_loc <- metrics(pre_epa_loc, truth = obs, estimate = pre)
-        met_sim_lmint[[i]] <- rbind(met_sim_lmint[[i]], met_epa_loc)
+        met_epa_loc_far <- metrics(pre_epa_loc_far, truth = obs, estimate = pre)
+        met_sim_lmint[[i]] <- rbind(met_sim_lmint[[i]], met_epa_loc_far)
         
         
         ### EPA-retrained MODEL
@@ -2277,14 +2599,14 @@ for(i in 1:nsim){
         met_sim_lmint[[i]] <- rbind(met_sim_lmint[[i]], met_epare_time)
         
         ## Location Farthest
-        mod_epare_loc <- lm(pm2.5_sim ~ pm2.5_cf1_m + temp + hum,
-                            data = sim_loc_train)
-        # summary(mod_epare_loc)
-        pre_epare_loc <- predict(mod_epare_loc,newdata = sim_loc_test) %>% 
-                cbind(pre = ., obs = sim_loc_test$pm2.5_sim) %>% 
+        mod_epare_loc_far <- lm(pm2.5_sim ~ pm2.5_cf1_m + temp + hum,
+                            data = sim_loc_far_train)
+        # summary(mod_epare_loc_far)
+        pre_epare_loc_far <- predict(mod_epare_loc_far,newdata = sim_loc_far_test) %>% 
+                cbind(pre = ., obs = sim_loc_far_test$pm2.5_sim) %>% 
                 as_tibble()
-        met_epare_loc <- metrics(pre_epare_loc, truth = obs, estimate = pre)
-        met_sim_lmint[[i]] <- rbind(met_sim_lmint[[i]], met_epare_loc)
+        met_epare_loc_far <- metrics(pre_epare_loc_far, truth = obs, estimate = pre)
+        met_sim_lmint[[i]] <- rbind(met_sim_lmint[[i]], met_epare_loc_far)
         
         
         ### LINEAR MODEL
@@ -2299,14 +2621,14 @@ for(i in 1:nsim){
         met_sim_lmint[[i]] <- rbind(met_sim_lmint[[i]], met_lm_time)
         
         ## Location Farthest
-        mod_lm_loc <- lm(pm2.5_sim ~ pm2.5_cf1_a + temp + hum,
-                         data = sim_loc_train)
-        # summary(mod_lm_loc)
-        pre_lm_loc <- predict(mod_lm_loc,newdata = sim_loc_test) %>% 
-                cbind(pre = ., obs = sim_loc_test$pm2.5_sim) %>% 
+        mod_lm_loc_far <- lm(pm2.5_sim ~ pm2.5_cf1_a + temp + hum,
+                         data = sim_loc_far_train)
+        # summary(mod_lm_loc_far)
+        pre_lm_loc_far <- predict(mod_lm_loc_far,newdata = sim_loc_far_test) %>% 
+                cbind(pre = ., obs = sim_loc_far_test$pm2.5_sim) %>% 
                 as_tibble()
-        met_lm_loc <- metrics(pre_lm_loc, truth = obs, estimate = pre)
-        met_sim_lmint[[i]] <- rbind(met_sim_lmint[[i]], met_lm_loc)
+        met_lm_loc_far <- metrics(pre_lm_loc_far, truth = obs, estimate = pre)
+        met_sim_lmint[[i]] <- rbind(met_sim_lmint[[i]], met_lm_loc_far)
         
         
         ### LINEAR MODEL INTERACTION
@@ -2321,14 +2643,14 @@ for(i in 1:nsim){
         met_sim_lmint[[i]] <- rbind(met_sim_lmint[[i]], met_lmint_time)
         
         ## Location Farthest
-        mod_lmint_loc <- lm(pm2.5_sim ~ pm2.5_cf1_a * (temp + hum),
-                            data = sim_loc_train)
-        # summary(mod_lmint_loc)
-        pre_lmint_loc <- predict(mod_lmint_loc, newdata = sim_loc_test) %>% 
-                cbind(pre = ., obs = sim_loc_test$pm2.5_sim) %>% 
+        mod_lmint_loc_far <- lm(pm2.5_sim ~ pm2.5_cf1_a * (temp + hum),
+                            data = sim_loc_far_train)
+        # summary(mod_lmint_loc_far)
+        pre_lmint_loc_far <- predict(mod_lmint_loc_far, newdata = sim_loc_far_test) %>% 
+                cbind(pre = ., obs = sim_loc_far_test$pm2.5_sim) %>% 
                 as_tibble()
-        met_lmint_loc <- metrics(pre_lmint_loc, truth = obs, estimate = pre)
-        met_sim_lmint[[i]] <- rbind(met_sim_lmint[[i]], met_lmint_loc)
+        met_lmint_loc_far <- metrics(pre_lmint_loc_far, truth = obs, estimate = pre)
+        met_sim_lmint[[i]] <- rbind(met_sim_lmint[[i]], met_lmint_loc_far)
         
         
         ### Gradient Boosting Method
@@ -2350,9 +2672,9 @@ for(i in 1:nsim){
         met_sim_lmint[[i]] <- rbind(met_sim_lmint[[i]], met_gbm_time)
         
         ## Location Farthest
-        mod_gbm_loc <- gbm(
+        mod_gbm_loc_far <- gbm(
                 formula = pm2.5_sim ~ pm2.5_cf1_a + temp + hum,
-                data = sim_loc_train,
+                data = sim_loc_far_train,
                 distribution = "gaussian",  # SSE loss function
                 n.trees = 400,
                 shrinkage = 0.1,
@@ -2360,11 +2682,11 @@ for(i in 1:nsim){
                 n.minobsinnode = 10,
                 cv.folds = 10
         )
-        pre_gbm_loc <- predict(mod_gbm_loc, newdata = sim_loc_test) %>% 
-                cbind(pre = ., obs = sim_loc_test$pm2.5_sim) %>% 
+        pre_gbm_loc_far <- predict(mod_gbm_loc_far, newdata = sim_loc_far_test) %>% 
+                cbind(pre = ., obs = sim_loc_far_test$pm2.5_sim) %>% 
                 as_tibble()
-        met_gbm_loc <- metrics(pre_gbm_loc, truth = obs, estimate = pre)
-        met_sim_lmint[[i]] <- rbind(met_sim_lmint[[i]], met_gbm_loc)
+        met_gbm_loc_far <- metrics(pre_gbm_loc_far, truth = obs, estimate = pre)
+        met_sim_lmint[[i]] <- rbind(met_sim_lmint[[i]], met_gbm_loc_far)
         
         ### Random forest
         ## Time
@@ -2392,27 +2714,27 @@ for(i in 1:nsim){
         
         
         ## Location Farthest
-        X_train_loc <- sim_loc_train[, c("pm2.5_cf1_a","temp","hum")]
-        Y_train_loc <- sim_loc_train[, "pm2.5_sim"]
+        X_train_loc_far <- sim_loc_far_train[, c("pm2.5_cf1_a","temp","hum")]
+        Y_train_loc_far <- sim_loc_far_train[, "pm2.5_sim"]
         
-        X_test_loc  <- sim_loc_test[, c("pm2.5_cf1_a","temp","hum")]
-        Y_test_loc  <- sim_loc_test[, "pm2.5_sim"]
+        X_test_loc_far  <- sim_loc_far_test[, c("pm2.5_cf1_a","temp","hum")]
+        Y_test_loc_far  <- sim_loc_far_test[, "pm2.5_sim"]
         
         p <- 3
         n_tree <- 30
         
         # mtry = p is basically just bagging, as above
-        mod_lmint_loc <- randomForest(X_train_loc, Y_train_loc, 
-                                      xtest = X_test_loc, 
-                                      ytest = Y_test_loc, 
+        mod_lmint_loc_far <- randomForest(X_train_loc_far, Y_train_loc_far, 
+                                      xtest = X_test_loc_far, 
+                                      ytest = Y_test_loc_far, 
                                       mtry = p, 
                                       ntree = n_tree)
         
-        pre_lmint_loc <- mod_lmint_loc$test$predicted %>% 
-                cbind(pre = ., obs = sim_loc_test$pm2.5_sim) %>% 
+        pre_lmint_loc_far <- mod_lmint_loc$test$predicted %>% 
+                cbind(pre = ., obs = sim_loc_far_test$pm2.5_sim) %>% 
                 as_tibble()
-        met_lmint_loc <- metrics(pre_lmint_loc, truth = obs, estimate = pre)
-        met_sim_lmint[[i]] <- rbind(met_sim_lmint[[i]], met_lmint_loc)
+        met_lmint_loc_far <- metrics(pre_lmint_loc_far, truth = obs, estimate = pre)
+        met_sim_lmint[[i]] <- rbind(met_sim_lmint[[i]], met_lmint_loc_far)
 }
 
 met_sim_lmint
@@ -2456,7 +2778,7 @@ nsim_test <- 20000
 set.seed(123)
 ind_time_train <- sample(1:length(dat_time_train$time), nsim_train, replace = F)
 
-ind_loc_train <- sample(1:length(dat_loc_far_train$time), nsim_train, replace = F)
+ind_loc_far_train <- sample(1:length(dat_loc_far_train$time), nsim_train, replace = F)
 
 
 # Create simulation model specific data set
@@ -2471,11 +2793,11 @@ dat_sim_gbm_time_train <- dat_time_train %>%
 dat_sim_gbm_time_test <- dat_time_test %>% 
         mutate(true_sim = predict(mod_gbm_time, newdata = dat_time_test))
 
-dat_sim_gbm_loc_train <- dat_loc_far_train %>% 
+dat_sim_gbm_loc_far_train <- dat_loc_far_train %>% 
         mutate(true_sim = mod_gbm_loc$fit)
 
-dat_sim_gbm_loc_test <- dat_loc_far_test %>% 
-        mutate(true_sim = predict(mod_gbm_loc, newdata = dat_loc_far_test))
+dat_sim_gbm_loc_far_test <- dat_loc_far_test %>% 
+        mutate(true_sim = predict(mod_gbm_loc_far, newdata = dat_loc_far_test))
 
 met_sim_gbm <- vector(mode = "list", length = nsim)
 
@@ -2492,10 +2814,10 @@ for(i in 1:nsim){
         sim_time_test <- sim_time_test[1:nsim_test,] %>% 
                 mutate(pm2.5_sim = true_sim + e_test)
         
-        sim_loc_train <- dat_sim_gbm_loc_train[ind_loc_train,] %>% 
+        sim_loc_far_train <- dat_sim_gbm_loc_far_train[ind_loc_far_train,] %>% 
                 mutate(pm2.5_sim = true_sim + e_train)
-        sim_loc_test <- dat_sim_gbm_loc_test[-ind_loc_train,] 
-        sim_loc_test <- sim_loc_test[1:nsim_test,] %>% 
+        sim_loc_far_test <- dat_sim_gbm_loc_far_test[-ind_loc_far_train,] 
+        sim_loc_far_test <- sim_loc_far_test[1:nsim_test,] %>% 
                 mutate(pm2.5_sim = true_sim + e_test)
         
         ## Model fitting and prediction
@@ -2509,12 +2831,12 @@ for(i in 1:nsim){
         met_sim_gbm[[i]] <- rbind(met_sim_gbm[[i]], met_epa_time)
         
         ## Location Farthest
-        pre_epa_loc <- 0.52*(sim_loc_test$pm2.5_cf1_a+sim_loc_test$pm2.5_cf1_b)/2-0.085*sim_loc_test$hum+5.71
-        pre_epa_loc <- pre_epa_loc %>% 
-                cbind(pre = ., obs = sim_loc_test$pm2.5_sim) %>% 
+        pre_epa_loc_far <- 0.52*(sim_loc_far_test$pm2.5_cf1_a+sim_loc_far_test$pm2.5_cf1_b)/2-0.085*sim_loc_far_test$hum+5.71
+        pre_epa_loc_far <- pre_epa_loc_far %>% 
+                cbind(pre = ., obs = sim_loc_far_test$pm2.5_sim) %>% 
                 as_tibble()
-        met_epa_loc <- metrics(pre_epa_loc, truth = obs, estimate = pre)
-        met_sim_gbm[[i]] <- rbind(met_sim_gbm[[i]], met_epa_loc)
+        met_epa_loc_far <- metrics(pre_epa_loc_far, truth = obs, estimate = pre)
+        met_sim_gbm[[i]] <- rbind(met_sim_gbm[[i]], met_epa_loc_far)
         
         
         ### EPA-retrained MODEL
@@ -2529,14 +2851,14 @@ for(i in 1:nsim){
         met_sim_gbm[[i]] <- rbind(met_sim_gbm[[i]], met_gbm_time)
         
         ## Location Farthest
-        mod_gbm_loc <- lm(pm2.5_sim ~ pm2.5_cf1_m + temp + hum,
-                          data = sim_loc_train)
-        # summary(mod_gbm_loc)
-        pre_gbm_loc <- predict(mod_gbm_loc,newdata = sim_loc_test) %>% 
-                cbind(pre = ., obs = sim_loc_test$pm2.5_sim) %>% 
+        mod_gbm_loc_far <- lm(pm2.5_sim ~ pm2.5_cf1_m + temp + hum,
+                          data = sim_loc_far_train)
+        # summary(mod_gbm_loc_far)
+        pre_gbm_loc_far <- predict(mod_gbm_loc_far,newdata = sim_loc_far_test) %>% 
+                cbind(pre = ., obs = sim_loc_far_test$pm2.5_sim) %>% 
                 as_tibble()
-        met_gbm_loc <- metrics(pre_gbm_loc, truth = obs, estimate = pre)
-        met_sim_gbm[[i]] <- rbind(met_sim_gbm[[i]], met_gbm_loc)
+        met_gbm_loc_far <- metrics(pre_gbm_loc_far, truth = obs, estimate = pre)
+        met_sim_gbm[[i]] <- rbind(met_sim_gbm[[i]], met_gbm_loc_far)
         
         
         ### LINEAR MODEL
@@ -2551,14 +2873,14 @@ for(i in 1:nsim){
         met_sim_gbm[[i]] <- rbind(met_sim_gbm[[i]], met_gbm_time)
         
         ## Location Farthest
-        mod_gbm_loc <- lm(pm2.5_sim ~ pm2.5_cf1_a + temp + hum,
-                          data = sim_loc_train)
-        # summary(mod_gbm_loc)
-        pre_gbm_loc <- predict(mod_gbm_loc,newdata = sim_loc_test) %>% 
-                cbind(pre = ., obs = sim_loc_test$pm2.5_sim) %>% 
+        mod_gbm_loc_far <- lm(pm2.5_sim ~ pm2.5_cf1_a + temp + hum,
+                          data = sim_loc_far_train)
+        # summary(mod_gbm_loc_far)
+        pre_gbm_loc_far <- predict(mod_gbm_loc_far,newdata = sim_loc_far_test) %>% 
+                cbind(pre = ., obs = sim_loc_far_test$pm2.5_sim) %>% 
                 as_tibble()
-        met_gbm_loc <- metrics(pre_gbm_loc, truth = obs, estimate = pre)
-        met_sim_gbm[[i]] <- rbind(met_sim_gbm[[i]], met_gbm_loc)
+        met_gbm_loc_far <- metrics(pre_gbm_loc_far, truth = obs, estimate = pre)
+        met_sim_gbm[[i]] <- rbind(met_sim_gbm[[i]], met_gbm_loc_far)
         
         
         ### LINEAR MODEL INTERACTION
@@ -2573,14 +2895,14 @@ for(i in 1:nsim){
         met_sim_gbm[[i]] <- rbind(met_sim_gbm[[i]], met_gbm_time)
         
         ## Location Farthest
-        mod_gbm_loc <- lm(pm2.5_sim ~ pm2.5_cf1_a * (temp + hum),
-                          data = sim_loc_train)
-        # summary(mod_gbm_loc)
-        pre_gbm_loc <- predict(mod_gbm_loc, newdata = sim_loc_test) %>% 
-                cbind(pre = ., obs = sim_loc_test$pm2.5_sim) %>% 
+        mod_gbm_loc_far <- lm(pm2.5_sim ~ pm2.5_cf1_a * (temp + hum),
+                          data = sim_loc_far_train)
+        # summary(mod_gbm_loc_far)
+        pre_gbm_loc_far <- predict(mod_gbm_loc_far, newdata = sim_loc_far_test) %>% 
+                cbind(pre = ., obs = sim_loc_far_test$pm2.5_sim) %>% 
                 as_tibble()
-        met_gbm_loc <- metrics(pre_gbm_loc, truth = obs, estimate = pre)
-        met_sim_gbm[[i]] <- rbind(met_sim_gbm[[i]], met_gbm_loc)
+        met_gbm_loc_far <- metrics(pre_gbm_loc_far, truth = obs, estimate = pre)
+        met_sim_gbm[[i]] <- rbind(met_sim_gbm[[i]], met_gbm_loc_far)
         
         
         ### Gradient Boosting Method
@@ -2602,9 +2924,9 @@ for(i in 1:nsim){
         met_sim_gbm[[i]] <- rbind(met_sim_gbm[[i]], met_gbm_time)
         
         ## Location Farthest
-        mod_gbm_loc <- gbm(
+        mod_gbm_loc_far <- gbm(
                 formula = pm2.5_sim ~ pm2.5_cf1_a + temp + hum,
-                data = sim_loc_train,
+                data = sim_loc_far_train,
                 distribution = "gaussian",  # SSE loss function
                 n.trees = 400,
                 shrinkage = 0.1,
@@ -2612,11 +2934,11 @@ for(i in 1:nsim){
                 n.minobsinnode = 10,
                 cv.folds = 10
         )
-        pre_gbm_loc <- predict(mod_gbm_loc, newdata = sim_loc_test) %>% 
-                cbind(pre = ., obs = sim_loc_test$pm2.5_sim) %>% 
+        pre_gbm_loc_far <- predict(mod_gbm_loc_far, newdata = sim_loc_far_test) %>% 
+                cbind(pre = ., obs = sim_loc_far_test$pm2.5_sim) %>% 
                 as_tibble()
-        met_gbm_loc <- metrics(pre_gbm_loc, truth = obs, estimate = pre)
-        met_sim_gbm[[i]] <- rbind(met_sim_gbm[[i]], met_gbm_loc)
+        met_gbm_loc_far <- metrics(pre_gbm_loc_far, truth = obs, estimate = pre)
+        met_sim_gbm[[i]] <- rbind(met_sim_gbm[[i]], met_gbm_loc_far)
         
         ### Random forest
         ## Time
@@ -2644,27 +2966,27 @@ for(i in 1:nsim){
         
         
         ## Location Farthest
-        X_train_loc <- sim_loc_train[, c("pm2.5_cf1_a","temp","hum")]
-        Y_train_loc <- sim_loc_train[, "pm2.5_sim"]
+        X_train_loc_far <- sim_loc_far_train[, c("pm2.5_cf1_a","temp","hum")]
+        Y_train_loc_far <- sim_loc_far_train[, "pm2.5_sim"]
         
-        X_test_loc  <- sim_loc_test[, c("pm2.5_cf1_a","temp","hum")]
-        Y_test_loc  <- sim_loc_test[, "pm2.5_sim"]
+        X_test_loc_far  <- sim_loc_far_test[, c("pm2.5_cf1_a","temp","hum")]
+        Y_test_loc_far  <- sim_loc_far_test[, "pm2.5_sim"]
         
         p <- 3
         n_tree <- 30
         
         # mtry = p is basically just bagging, as above
-        mod_gbm_loc <- randomForest(X_train_loc, Y_train_loc, 
-                                    xtest = X_test_loc, 
-                                    ytest = Y_test_loc, 
+        mod_gbm_loc_far <- randomForest(X_train_loc_far, Y_train_loc_far, 
+                                    xtest = X_test_loc_far, 
+                                    ytest = Y_test_loc_far, 
                                     mtry = p, 
                                     ntree = n_tree)
         
-        pre_gbm_loc <- mod_gbm_loc$test$predicted %>% 
-                cbind(pre = ., obs = sim_loc_test$pm2.5_sim) %>% 
+        pre_gbm_loc_far <- mod_gbm_loc$test$predicted %>% 
+                cbind(pre = ., obs = sim_loc_far_test$pm2.5_sim) %>% 
                 as_tibble()
-        met_gbm_loc <- metrics(pre_gbm_loc, truth = obs, estimate = pre)
-        met_sim_gbm[[i]] <- rbind(met_sim_gbm[[i]], met_gbm_loc)
+        met_gbm_loc_far <- metrics(pre_gbm_loc_far, truth = obs, estimate = pre)
+        met_sim_gbm[[i]] <- rbind(met_sim_gbm[[i]], met_gbm_loc_far)
 }
 
 met_sim_gbm
@@ -2709,7 +3031,7 @@ nsim_test <- 20000
 set.seed(123)
 ind_time_train <- sample(1:length(dat_time_train$time), nsim_train, replace = F)
 
-ind_loc_train <- sample(1:length(dat_loc_far_train$time), nsim_train, replace = F)
+ind_loc_far_train <- sample(1:length(dat_loc_far_train$time), nsim_train, replace = F)
 
 
 # Create simulation model specific data set
@@ -2724,10 +3046,10 @@ dat_sim_rf_time_train <- dat_time_train %>%
 dat_sim_rf_time_test <- dat_time_test %>% 
         mutate(true_sim = mod_rf_time$test$predicted)
 
-dat_sim_rf_loc_train <- dat_loc_far_train %>% 
+dat_sim_rf_loc_far_train <- dat_loc_far_train %>% 
         mutate(true_sim = mod_rf_loc$predicted)
 
-dat_sim_rf_loc_test <- dat_loc_far_test %>% 
+dat_sim_rf_loc_far_test <- dat_loc_far_test %>% 
         mutate(true_sim = mod_rf_loc$test$predicted)
 
 met_sim_rf <- vector(mode = "list", length = nsim)
@@ -2745,10 +3067,10 @@ for(i in 1:nsim){
         sim_time_test <- sim_time_test[1:nsim_test,] %>% 
                 mutate(pm2.5_sim = true_sim + e_test)
         
-        sim_loc_train <- dat_sim_rf_loc_train[ind_loc_train,] %>% 
+        sim_loc_far_train <- dat_sim_rf_loc_far_train[ind_loc_far_train,] %>% 
                 mutate(pm2.5_sim = true_sim + e_train)
-        sim_loc_test <- dat_sim_rf_loc_test[-ind_loc_train,] 
-        sim_loc_test <- sim_loc_test[1:nsim_test,] %>% 
+        sim_loc_far_test <- dat_sim_rf_loc_far_test[-ind_loc_far_train,] 
+        sim_loc_far_test <- sim_loc_far_test[1:nsim_test,] %>% 
                 mutate(pm2.5_sim = true_sim + e_test)
         
         ## Model fitting and prediction
@@ -2762,12 +3084,12 @@ for(i in 1:nsim){
         met_sim_rf[[i]] <- rbind(met_sim_rf[[i]], met_epa_time)
         
         ## Location Farthest
-        pre_epa_loc <- 0.52*(sim_loc_test$pm2.5_cf1_a+sim_loc_test$pm2.5_cf1_b)/2-0.085*sim_loc_test$hum+5.71
-        pre_epa_loc <- pre_epa_loc %>% 
-                cbind(pre = ., obs = sim_loc_test$pm2.5_sim) %>% 
+        pre_epa_loc_far <- 0.52*(sim_loc_far_test$pm2.5_cf1_a+sim_loc_far_test$pm2.5_cf1_b)/2-0.085*sim_loc_far_test$hum+5.71
+        pre_epa_loc_far <- pre_epa_loc_far %>% 
+                cbind(pre = ., obs = sim_loc_far_test$pm2.5_sim) %>% 
                 as_tibble()
-        met_epa_loc <- metrics(pre_epa_loc, truth = obs, estimate = pre)
-        met_sim_rf[[i]] <- rbind(met_sim_rf[[i]], met_epa_loc)
+        met_epa_loc_far <- metrics(pre_epa_loc_far, truth = obs, estimate = pre)
+        met_sim_rf[[i]] <- rbind(met_sim_rf[[i]], met_epa_loc_far)
         
         
         ### EPA-retrained MODEL
@@ -2782,14 +3104,14 @@ for(i in 1:nsim){
         met_sim_rf[[i]] <- rbind(met_sim_rf[[i]], met_epare_time)
         
         ## Location Farthest
-        mod_epare_loc <- lm(pm2.5_sim ~ pm2.5_cf1_m + temp + hum,
-                            data = sim_loc_train)
-        # summary(mod_epare_loc)
-        pre_epare_loc <- predict(mod_epare_loc,newdata = sim_loc_test) %>% 
-                cbind(pre = ., obs = sim_loc_test$pm2.5_sim) %>% 
+        mod_epare_loc_far <- lm(pm2.5_sim ~ pm2.5_cf1_m + temp + hum,
+                            data = sim_loc_far_train)
+        # summary(mod_epare_loc_far)
+        pre_epare_loc_far <- predict(mod_epare_loc_far,newdata = sim_loc_far_test) %>% 
+                cbind(pre = ., obs = sim_loc_far_test$pm2.5_sim) %>% 
                 as_tibble()
-        met_epare_loc <- metrics(pre_epare_loc, truth = obs, estimate = pre)
-        met_sim_rf[[i]] <- rbind(met_sim_rf[[i]], met_epare_loc)
+        met_epare_loc_far <- metrics(pre_epare_loc_far, truth = obs, estimate = pre)
+        met_sim_rf[[i]] <- rbind(met_sim_rf[[i]], met_epare_loc_far)
         
         
         ### LINEAR MODEL
@@ -2804,14 +3126,14 @@ for(i in 1:nsim){
         met_sim_rf[[i]] <- rbind(met_sim_rf[[i]], met_lm_time)
         
         ## Location Farthest
-        mod_lm_loc <- lm(pm2.5_sim ~ pm2.5_cf1_a + temp + hum,
-                         data = sim_loc_train)
-        # summary(mod_lm_loc)
-        pre_lm_loc <- predict(mod_lm_loc,newdata = sim_loc_test) %>% 
-                cbind(pre = ., obs = sim_loc_test$pm2.5_sim) %>% 
+        mod_lm_loc_far <- lm(pm2.5_sim ~ pm2.5_cf1_a + temp + hum,
+                         data = sim_loc_far_train)
+        # summary(mod_lm_loc_far)
+        pre_lm_loc_far <- predict(mod_lm_loc_far,newdata = sim_loc_far_test) %>% 
+                cbind(pre = ., obs = sim_loc_far_test$pm2.5_sim) %>% 
                 as_tibble()
-        met_lm_loc <- metrics(pre_lm_loc, truth = obs, estimate = pre)
-        met_sim_rf[[i]] <- rbind(met_sim_rf[[i]], met_lm_loc)
+        met_lm_loc_far <- metrics(pre_lm_loc_far, truth = obs, estimate = pre)
+        met_sim_rf[[i]] <- rbind(met_sim_rf[[i]], met_lm_loc_far)
         
         
         ### LINEAR MODEL INTERACTION
@@ -2826,14 +3148,14 @@ for(i in 1:nsim){
         met_sim_rf[[i]] <- rbind(met_sim_rf[[i]], met_lmint_time)
         
         ## Location Farthest
-        mod_lmint_loc <- lm(pm2.5_sim ~ pm2.5_cf1_a * (temp + hum),
-                            data = sim_loc_train)
-        # summary(mod_lmint_loc)
-        pre_lmint_loc <- predict(mod_lmint_loc, newdata = sim_loc_test) %>% 
-                cbind(pre = ., obs = sim_loc_test$pm2.5_sim) %>% 
+        mod_lmint_loc_far <- lm(pm2.5_sim ~ pm2.5_cf1_a * (temp + hum),
+                            data = sim_loc_far_train)
+        # summary(mod_lmint_loc_far)
+        pre_lmint_loc_far <- predict(mod_lmint_loc_far, newdata = sim_loc_far_test) %>% 
+                cbind(pre = ., obs = sim_loc_far_test$pm2.5_sim) %>% 
                 as_tibble()
-        met_lmint_loc <- metrics(pre_lmint_loc, truth = obs, estimate = pre)
-        met_sim_rf[[i]] <- rbind(met_sim_rf[[i]], met_lmint_loc)
+        met_lmint_loc_far <- metrics(pre_lmint_loc_far, truth = obs, estimate = pre)
+        met_sim_rf[[i]] <- rbind(met_sim_rf[[i]], met_lmint_loc_far)
         
         
         ### Gradient Boosting Method
@@ -2855,9 +3177,9 @@ for(i in 1:nsim){
         met_sim_rf[[i]] <- rbind(met_sim_rf[[i]], met_gbm_time)
         
         ## Location Farthest
-        mod_gbm_loc <- gbm(
+        mod_gbm_loc_far <- gbm(
                 formula = pm2.5_sim ~ pm2.5_cf1_a + temp + hum,
-                data = sim_loc_train,
+                data = sim_loc_far_train,
                 distribution = "gaussian",  # SSE loss function
                 n.trees = 400,
                 shrinkage = 0.1,
@@ -2865,11 +3187,11 @@ for(i in 1:nsim){
                 n.minobsinnode = 10,
                 cv.folds = 10
         )
-        pre_gbm_loc <- predict(mod_gbm_loc, newdata = sim_loc_test) %>% 
-                cbind(pre = ., obs = sim_loc_test$pm2.5_sim) %>% 
+        pre_gbm_loc_far <- predict(mod_gbm_loc_far, newdata = sim_loc_far_test) %>% 
+                cbind(pre = ., obs = sim_loc_far_test$pm2.5_sim) %>% 
                 as_tibble()
-        met_gbm_loc <- metrics(pre_gbm_loc, truth = obs, estimate = pre)
-        met_sim_rf[[i]] <- rbind(met_sim_rf[[i]], met_gbm_loc)
+        met_gbm_loc_far <- metrics(pre_gbm_loc_far, truth = obs, estimate = pre)
+        met_sim_rf[[i]] <- rbind(met_sim_rf[[i]], met_gbm_loc_far)
         
         ### Random forest
         ## Time
@@ -2897,27 +3219,27 @@ for(i in 1:nsim){
         
         
         ## Location Farthest
-        X_train_loc <- sim_loc_train[, c("pm2.5_cf1_a","temp","hum")]
-        Y_train_loc <- sim_loc_train[, "pm2.5_sim"]
+        X_train_loc_far <- sim_loc_far_train[, c("pm2.5_cf1_a","temp","hum")]
+        Y_train_loc_far <- sim_loc_far_train[, "pm2.5_sim"]
         
-        X_test_loc  <- sim_loc_test[, c("pm2.5_cf1_a","temp","hum")]
-        Y_test_loc  <- sim_loc_test[, "pm2.5_sim"]
+        X_test_loc_far  <- sim_loc_far_test[, c("pm2.5_cf1_a","temp","hum")]
+        Y_test_loc_far  <- sim_loc_far_test[, "pm2.5_sim"]
         
         p <- 3
         n_tree <- 30
         
         # mtry = p is basically just bagging, as above
-        mod_rf_loc <- randomForest(X_train_loc, Y_train_loc, 
-                                   xtest = X_test_loc, 
-                                   ytest = Y_test_loc, 
+        mod_rf_loc_far <- randomForest(X_train_loc_far, Y_train_loc_far, 
+                                   xtest = X_test_loc_far, 
+                                   ytest = Y_test_loc_far, 
                                    mtry = p, 
                                    ntree = n_tree)
         
-        pre_rf_loc <- mod_rf_loc$test$predicted %>% 
-                cbind(pre = ., obs = sim_loc_test$pm2.5_sim) %>% 
+        pre_rf_loc_far <- mod_rf_loc$test$predicted %>% 
+                cbind(pre = ., obs = sim_loc_far_test$pm2.5_sim) %>% 
                 as_tibble()
-        met_rf_loc <- metrics(pre_rf_loc, truth = obs, estimate = pre)
-        met_sim_rf[[i]] <- rbind(met_sim_rf[[i]], met_rf_loc)
+        met_rf_loc_far <- metrics(pre_rf_loc_far, truth = obs, estimate = pre)
+        met_sim_rf[[i]] <- rbind(met_sim_rf[[i]], met_rf_loc_far)
 }
 
 met_sim_rf
