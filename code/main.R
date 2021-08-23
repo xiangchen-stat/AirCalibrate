@@ -915,25 +915,31 @@ dat_loc_ran_test <- dat %>%
 ## Split data to X and Y and normalized X and Y
 # Time
 X_train_time <- dat_time_train[, c("pm2.5_cf1_a","temp","hum")]
-Y_train_time <- dat_time_train[, "pm2.5_epa"]
+Y_train_time <- dat_time_train[, "pm2.5_epa"] %>% 
+        as.matrix()
 
 X_test_time  <- dat_time_test[, c("pm2.5_cf1_a","temp","hum")]
-Y_test_time  <- dat_time_test[, "pm2.5_epa"]
+Y_test_time  <- dat_time_test[, "pm2.5_epa"] %>% 
+        as.matrix()
 
 
 # Location farthest
 X_train_loc_far <- dat_loc_far_train[, c("pm2.5_cf1_a","temp","hum")]
-Y_train_loc_far <- dat_loc_far_train[, "pm2.5_epa"]
+Y_train_loc_far <- dat_loc_far_train[, "pm2.5_epa"] %>% 
+        as.matrix()
 
 X_test_loc_far  <- dat_loc_far_test[, c("pm2.5_cf1_a","temp","hum")]
-Y_test_loc_far  <- dat_loc_far_test[, "pm2.5_epa"]
+Y_test_loc_far  <- dat_loc_far_test[, "pm2.5_epa"] %>% 
+        as.matrix()
 
 # Location random
 X_train_loc_ran <- dat_loc_ran_train[, c("pm2.5_cf1_a","temp","hum")]
-Y_train_loc_ran <- dat_loc_ran_train[, "pm2.5_epa"]
+Y_train_loc_ran <- dat_loc_ran_train[, "pm2.5_epa"] %>% 
+        as.matrix()
 
 X_test_loc_ran  <- dat_loc_ran_test[, c("pm2.5_cf1_a","temp","hum")]
-Y_test_loc_ran  <- dat_loc_ran_test[, "pm2.5_epa"]
+Y_test_loc_ran  <- dat_loc_ran_test[, "pm2.5_epa"] %>% 
+        as.matrix()
 
 
 ## Normalizing data
@@ -963,10 +969,8 @@ c(X_train_loc_far_norm, X_test_loc_far_norm) %<-% norm_dt(X_train_loc_far, X_tes
 c(X_train_loc_ran_norm, X_test_loc_ran_norm) %<-% norm_dt(X_train_loc_ran, X_test_loc_ran)
 
 
-
 ## Model fitting and prediction
 met_all <- c()
-
 
 
 ### EPA model
@@ -1259,27 +1263,21 @@ write.csv(round(met_all[,seq(from = 3, to = length(met_all[1,]), by = 3)],2), he
 
 
 ### Neuaral Network -------------------------------------
-## Time
 FLAGS <- flags(
         # nodes
-        flag_numeric("nodes1", 256),
+        flag_numeric("nodes1", 128),
         flag_numeric("nodes2", 128),
-        flag_numeric("nodes3", 64),
-        flag_numeric("nodes4", 32),
-        flag_numeric("nodes5", 16),
+        flag_numeric("nodes3", 32),
         # dropout
-        flag_numeric("dropout1", 0.4),
-        flag_numeric("dropout2", 0.3),
+        flag_numeric("dropout1", 0.2),
+        flag_numeric("dropout2", 0.2),
         flag_numeric("dropout3", 0.2),
-        flag_numeric("dropout4", 0.1),
-        flag_numeric("dropout5", 0.05),
         # learning parameters
         flag_string("optimizer", "rmsprop"),
-        flag_numeric("lr_annealing", 0.1)
+        flag_numeric("lr_annealing", 0.05)
 )
 
 ## Define Model
-
 model <- keras_model_sequential() %>%
         layer_dense(units = FLAGS$nodes1, activation = "relu", input_shape = ncol(X_train_time_norm)) %>%
         layer_batch_normalization() %>%
@@ -1290,23 +1288,23 @@ model <- keras_model_sequential() %>%
         layer_dense(units = FLAGS$nodes3, activation = "relu") %>%
         layer_batch_normalization() %>%
         layer_dropout(rate = FLAGS$dropout3) %>%
-        layer_dense(units = FLAGS$nodes4, activation = "relu") %>%
-        layer_batch_normalization() %>%
-        layer_dropout(rate = FLAGS$dropout4) %>%
-        layer_dense(units = FLAGS$nodes5, activation = "relu") %>%
-        layer_batch_normalization() %>%
-        layer_dropout(rate = FLAGS$dropout5) %>%
-        layer_dense(units = 1, activation = "linear") %>%
-        compile(
+        layer_dense(units = 1, activation = "linear")
+
+compiler <- function(model){
+        model %>% compile(
                 loss = 'mse',
                 metrics = c('mae'),
-                optimizer = FLAGS$optimizer
-        ) %>%
-        fit(
+                optimizer = "rmsprop"
+        )
+}
+
+trainer_time <- function(model){
+        model %>% 
+                fit(
                 x = X_train_time_norm,
                 y = Y_train_time,
                 epochs = 30,
-                batch_size = 4096,
+                batch_size = 2048,
                 validation_split = 0.2,
                 callbacks = list(
                         callback_early_stopping(patience = 5),
@@ -1314,268 +1312,124 @@ model <- keras_model_sequential() %>%
                 ),
                 verbose = TRUE
         )
-
-test_model <- keras_model_sequential() %>%
-        layer_dense(units = 256, activation = "relu", input_shape = ncol(X_train_time_norm)) %>%
-        layer_dense(units = 256, activation = "relu") %>%
-        layer_dense(units = 128, activation = "relu") %>%
-        layer_dense(units = 1, activation = "linear") %>%
-        compile(
-                loss = 'mse',
-                metrics = c('mae'),
-                optimizer = FLAGS$optimizer
-        ) %>%
-        fit(
-                x = X_train_time_norm,
-                y = Y_train_time,
-                epochs = 30,
-                batch_size = 4096,
-                validation_split = 0.2,
-                verbose = TRUE
-        )
-min(test_model$metrics$val_loss)
-min(test_model$metrics$loss)
-
-result <- test_model %>% evaluate(X_test_time_norm, Y_test_time)
-result
-
-compiler <- function(model){
-        model %>% compile(
-                loss = 'mse',
-                metrics = c('mae'),
-                optimizer = FLAGS$optimizer
-        )
 }
 
-trainer <- function(model){
-        model %>% fit(
-                x = X_train_time_norm,
-                y = Y_train_time,
-                epochs = 30,
-                batch_size = 4096,
-                validation_split = 0.2,
-                verbose = TRUE
-        )
+trainer_loc_far <- function(model){
+        model %>% 
+                fit(
+                        x = X_train_loc_far_norm,
+                        y = Y_train_loc_far,
+                        epochs = 30,
+                        batch_size = 2048,
+                        validation_split = 0.2,
+                        callbacks = list(
+                                callback_early_stopping(patience = 5),
+                                callback_reduce_lr_on_plateau(factor = FLAGS$lr_annealing)
+                        ),
+                        verbose = TRUE
+                )
 }
 
-# One layer models -------------------------------------------------------------
-# small capacity model
-`1 layer_small` <- keras_model_sequential() %>%
-        layer_dense(units = 16, activation = "relu", input_shape = ncol(X_train_time_norm)) %>%
-        layer_batch_normalization() %>%
-        layer_dense(units = 1, activation = "linear") %>%
-        compiler() %>%
-        trainer()
+trainer_loc_ran <- function(model){
+        model %>% 
+                fit(
+                        x = X_train_loc_ran_norm,
+                        y = Y_train_loc_ran,
+                        epochs = 30,
+                        batch_size = 2048,
+                        validation_split = 0.2,
+                        callbacks = list(
+                                callback_early_stopping(patience = 5),
+                                callback_reduce_lr_on_plateau(factor = FLAGS$lr_annealing)
+                        ),
+                        verbose = TRUE
+                )
+}
 
-# medium
-`1 layer_medium` <- keras_model_sequential() %>%
-        layer_dense(units = 64, activation = "relu", input_shape = ncol(X_train_time_norm)) %>%
-        layer_batch_normalization() %>%
-        layer_dense(units = 1, activation = "linear") %>%
-        compiler() %>%
-        trainer()
+## Time
+mod_nn_time <- model %>% 
+        compiler %>% 
+        trainer_time
 
-# large
-`1 layer_large` <- keras_model_sequential() %>%
-        layer_dense(units = 256, activation = "relu", input_shape = ncol(X_train_time_norm)) %>%
-        layer_batch_normalization() %>%
-        layer_dense(units = 1, activation = "linear") %>%
-        compiler() %>%
-        trainer()
+pre_nn_time <- predict(model, X_test_time_norm) %>% 
+        cbind(pre = ., obs = Y_test_time) %>% 
+        as_tibble() %>% 
+        rename(pre = V1, obs = V2)
+        
+met_nn_time <- metrics(pre_nn_time, truth = obs, estimate = pre)
+met_all <- cbind(met_all, met_nn_time)
 
-# Two layer models -------------------------------------------------------------
-# small capacity model
-`2 layer_small` <- keras_model_sequential() %>%
-        layer_dense(units = 16, activation = "relu", input_shape = ncol(X_train_time_norm)) %>%
-        layer_batch_normalization() %>%
-        layer_dense(units = 8, activation = "relu") %>%
-        layer_batch_normalization() %>%
-        layer_dense(units = 1, activation = "linear") %>%
-        compiler() %>%
-        trainer()
+save(pre_nn_time, file = here("data", "model", "pre_nn_time.RData"))
+save(model, file = here("data", "model", "mod_nn_time.RData"))
 
-# medium
-`2 layer_medium` <- keras_model_sequential() %>%
-        layer_dense(units = 64, activation = "relu", input_shape = ncol(X_train_time_norm)) %>%
-        layer_batch_normalization() %>%
-        layer_dense(units = 32, activation = "relu") %>%
-        layer_batch_normalization() %>%
-        layer_dense(units = 1, activation = "linear") %>%
-        compiler() %>%
-        trainer()
+## Location farthest
+mod_nn_loc_far <- model %>% 
+        compiler %>% 
+        trainer_loc_far
 
-# large
-`2 layer_large` <- keras_model_sequential() %>%
-        layer_dense(units = 256, activation = "relu", input_shape = ncol(X_train_time_norm)) %>%
-        layer_batch_normalization() %>%
-        layer_dense(units = 128, activation = "relu") %>%
-        layer_batch_normalization() %>%
-        layer_dense(units = 1, activation = "linear") %>%
-        compiler() %>%
-        trainer()
+pre_nn_loc_far <- predict(model, X_test_loc_far_norm) %>% 
+        cbind(pre = ., obs = Y_test_loc_far) %>% 
+        as_tibble() %>% 
+        rename(pre = V1, obs = V2)
 
-# Three layer models -------------------------------------------------------------
-# small capacity model
-`3 layer_small` <- keras_model_sequential() %>%
-        layer_dense(units = 16, activation = "relu", input_shape = ncol(X_train_time_norm)) %>%
-        layer_batch_normalization() %>%
-        layer_dense(units = 8, activation = "relu") %>%
-        layer_batch_normalization() %>%
-        layer_dense(units = 4, activation = "relu") %>%
-        layer_batch_normalization() %>%
-        layer_dense(units = 1, activation = "linear") %>%
-        compiler() %>%
-        trainer()
+met_nn_loc_far <- metrics(pre_nn_loc_far, truth = obs, estimate = pre)
+met_all <- cbind(met_all, met_nn_loc_far)
 
-# medium
-`3 layer_medium` <- keras_model_sequential() %>%
-        layer_dense(units = 64, activation = "relu", input_shape = ncol(X_train_time_norm)) %>%
-        layer_batch_normalization() %>%
-        layer_dense(units = 32, activation = "relu") %>%
-        layer_batch_normalization() %>%
-        layer_dense(units = 16, activation = "relu") %>%
-        layer_batch_normalization() %>%
-        layer_dense(units = 1, activation = "linear") %>%
-        compiler() %>%
-        trainer()
+save(pre_nn_loc_far, file = here("data", "model", "pre_nn_loc_far.RData"))
+save(model, file = here("data", "model", "mod_nn_loc_far.RData"))
 
-# large
-`3 layer_large` <- keras_model_sequential() %>%
-        layer_dense(units = 256, activation = "relu", input_shape = ncol(X_train_time_norm)) %>%
-        layer_batch_normalization() %>%
-        layer_dense(units = 128, activation = "relu") %>%
-        layer_batch_normalization() %>%
-        layer_dense(units = 64, activation = "relu") %>%
-        layer_batch_normalization() %>%
-        layer_dense(units = 1, activation = "linear") %>%
-        compiler() %>%
-        trainer()
+## Location random
+mod_nn_loc_ran <- model %>% 
+        compiler %>% 
+        trainer_loc_ran
 
-# Four layer models -------------------------------------------------------------
-# small capacity model
-`4 layer_small` <- keras_model_sequential() %>%
-        layer_dense(units = 16, activation = "relu", input_shape = ncol(X_train_time_norm)) %>%
-        layer_batch_normalization() %>%
-        layer_dense(units = 8, activation = "relu") %>%
-        layer_batch_normalization() %>%
-        layer_dense(units = 4, activation = "relu") %>%
-        layer_batch_normalization() %>%
-        layer_dense(units = 2, activation = "relu") %>%
-        layer_batch_normalization() %>%
-        layer_dense(units = 1, activation = "linear") %>%
-        compiler() %>%
-        trainer()
+pre_nn_loc_ran <- predict(model, X_test_loc_ran_norm) %>% 
+        cbind(pre = ., obs = Y_test_loc_ran) %>% 
+        as_tibble() %>% 
+        rename(pre = V1, obs = V2)
 
-# medium
-`4 layer_medium` <- keras_model_sequential() %>%
-        layer_dense(units = 64, activation = "relu", input_shape = ncol(X_train_time_norm)) %>%
-        layer_batch_normalization() %>%
-        layer_dense(units = 32, activation = "relu") %>%
-        layer_batch_normalization() %>%
-        layer_dense(units = 16, activation = "relu") %>%
-        layer_batch_normalization() %>%
-        layer_dense(units = 8, activation = "relu") %>%
-        layer_batch_normalization() %>%
-        layer_dense(units = 1, activation = "linear") %>%
-        compiler() %>%
-        trainer()
+met_nn_loc_ran <- metrics(pre_nn_loc_ran, truth = obs, estimate = pre)
+met_all <- cbind(met_all, met_nn_loc_ran)
 
-# large
-`4 layer_large` <- keras_model_sequential() %>%
-        layer_dense(units = 256, activation = "relu", input_shape = ncol(X_train_time_norm)) %>%
-        layer_batch_normalization() %>%
-        layer_dense(units = 128, activation = "relu") %>%
-        layer_batch_normalization() %>%
-        layer_dense(units = 64, activation = "relu") %>%
-        layer_batch_normalization() %>%
-        layer_dense(units = 32, activation = "relu") %>%
-        layer_batch_normalization() %>%
-        layer_dense(units = 1, activation = "linear") %>%
-        compiler() %>%
-        trainer()
+save(pre_nn_loc_ran, file = here("data", "model", "pre_nn_loc_ran.RData"))
+save(model, file = here("data", "model", "mod_nn_loc_ran.RData"))
 
-models <- ls(pattern = "layer_") 
-df_batch <- models %>%
-        map(get) %>%
-        map(~ data.frame(
-                `Validation error` = .$metrics$val_loss,
-                `Training error`   = .$metrics$loss,
-                epoch = seq_len(.$params$epoch)
-        )) %>%
-        map2_df(models, ~ mutate(.x, model = .y)) %>%
-        separate(model, into = c("Middle layers", "Number of nodes"), sep = "_") %>%
-        gather(Validation, Loss, Validation.error:Training.error) %>%
-        mutate(
-                Validation = str_replace_all(Validation, "\\.", " "),
-                `Number of nodes` = factor(`Number of nodes`, levels = c("small", "medium", "large")),
-                `Batch normalization` = TRUE
-        )
 
-df2 <- df_batch %>% 
-        filter(Validation == "Validation error")
+save(pre_epa_time, file = here("data", "model", "pre_epa_time.RData"))
+save(mod_epare_time, file = here("data", "model", "mod_epare_time.RData"))
+save(pre_epare_time, file = here("data", "model", "pre_epare_time.RData"))
+save(mod_lm_time, file = here("data", "model", "mod_lm_time.RData"))
+save(pre_lm_time, file = here("data", "model", "pre_lm_time.RData"))
+save(mod_lmint_time, file = here("data", "model", "mod_lmint_time.RData"))
+save(pre_lmint_time, file = here("data", "model", "pre_lmint_time.RData"))
+save(mod_gbm_time, file = here("data", "model", "mod_gbm_time.RData"))
+save(pre_gbm_time, file = here("data", "model", "pre_gbm_time.RData"))
+save(mod_rf_time, file = here("data", "model", "mod_rf_time.RData"))
+save(pre_rf_time, file = here("data", "model", "pre_rf_time.RData"))
 
-best <- df2 %>% 
-        filter(Validation == "Validation error") %>%
-        group_by(`Middle layers`, `Number of nodes`) %>% 
-        filter(Loss == min(Loss)) %>%
-        mutate(label = paste("Min loss:", round(Loss, 2)))
+save(pre_epa_loc_far, file = here("data", "model", "pre_epa_loc.RData"))
+save(mod_epare_loc_far, file = here("data", "model", "mod_epare_loc.RData"))
+save(pre_epare_loc_far, file = here("data", "model", "pre_epare_loc.RData"))
+save(mod_lm_loc_far, file = here("data", "model", "mod_lm_loc.RData"))
+save(pre_lm_loc_far, file = here("data", "model", "pre_lm_loc.RData"))
+save(mod_lmint_loc_far, file = here("data", "model", "mod_lmint_loc.RData"))
+save(pre_lmint_loc_far, file = here("data", "model", "pre_lmint_loc.RData"))
+save(mod_gbm_loc_far, file = here("data", "model", "mod_gbm_loc.RData"))
+save(pre_gbm_loc_far, file = here("data", "model", "pre_gbm_loc.RData"))
+save(mod_rf_loc_far, file = here("data", "model", "mod_rf_loc.RData"))
+save(pre_rf_loc_far, file = here("data", "model", "pre_rf_loc.RData"))
 
-ggplot(df2, aes(epoch, Loss, color = `Batch normalization`)) + 
-        geom_text(data = best, aes(x = 25, y = 0.95, label = label, size = 4, hjust = 0.7, vjust = -6)) + 
-        geom_point() +
-        geom_line() +
-        facet_grid(`Number of nodes` ~ `Middle layers`, scales = "free_y") +
-        scale_y_continuous(limits = c(0,120)) +
-        xlab("Epoch") +
-        scale_color_discrete("Batch normalization") +
-        theme(legend.position = "none")
-
-ggplot(df2, aes(epoch, Loss, color = `Batch normalization`)) + 
-        geom_point() +
-        geom_line() +
-        geom_text(data = best, aes(x = 25, y = 0.95, label = label, size = 12, hjust = 0.7, vjust = -1)) + 
-        facet_grid(`Number of nodes` ~ `Middle layers`, scales = "free_y") +
-        scale_y_continuous(limits = c(20,40)) +
-        xlab("Epoch") +
-        scale_color_discrete("Batch normalization") +
-        theme(legend.position = "none")
-p2
-
-save(pre_epa_time,  file = here("data", "model", "pre_epa_time.RData"))
-save(mod_epare_time,  file = here("data", "model", "mod_epare_time.RData"))
-save(pre_epare_time,  file = here("data", "model", "pre_epare_time.RData"))
-save(mod_lm_time,  file = here("data", "model", "mod_lm_time.RData"))
-save(pre_lm_time,  file = here("data", "model", "pre_lm_time.RData"))
-save(mod_lmint_time,  file = here("data", "model", "mod_lmint_time.RData"))
-save(pre_lmint_time,  file = here("data", "model", "pre_lmint_time.RData"))
-save(mod_gbm_time,  file = here("data", "model", "mod_gbm_time.RData"))
-save(pre_gbm_time,  file = here("data", "model", "pre_gbm_time.RData"))
-save(mod_rf_time,  file = here("data", "model", "mod_rf_time.RData"))
-save(pre_rf_time,  file = here("data", "model", "pre_rf_time.RData"))
-
-save(pre_epa_loc_far,  file = here("data", "model", "pre_epa_loc.RData"))
-save(mod_epare_loc_far,  file = here("data", "model", "mod_epare_loc.RData"))
-save(pre_epare_loc_far,  file = here("data", "model", "pre_epare_loc.RData"))
-save(mod_lm_loc_far,  file = here("data", "model", "mod_lm_loc.RData"))
-save(pre_lm_loc_far,  file = here("data", "model", "pre_lm_loc.RData"))
-save(mod_lmint_loc_far,  file = here("data", "model", "mod_lmint_loc.RData"))
-save(pre_lmint_loc_far,  file = here("data", "model", "pre_lmint_loc.RData"))
-save(mod_gbm_loc_far,  file = here("data", "model", "mod_gbm_loc.RData"))
-save(pre_gbm_loc_far,  file = here("data", "model", "pre_gbm_loc.RData"))
-save(mod_rf_loc_far,  file = here("data", "model", "mod_rf_loc.RData"))
-save(pre_rf_loc_far,  file = here("data", "model", "pre_rf_loc.RData"))
-
-save(pre_epa_loc_ran,  file = here("data", "model", "pre_epa_loc_ran.RData"))
-save(mod_epare_loc_ran,  file = here("data", "model", "mod_epare_loc_ran.RData"))
-save(pre_epare_loc_ran,  file = here("data", "model", "pre_epare_loc_ran.RData"))
-save(mod_lm_loc_ran,  file = here("data", "model", "mod_lm_loc_ran.RData"))
-save(pre_lm_loc_ran,  file = here("data", "model", "pre_lm_loc_ran.RData"))
-save(mod_lmint_loc_ran,  file = here("data", "model", "mod_lmint_loc_ran.RData"))
-save(pre_lmint_loc_ran,  file = here("data", "model", "pre_lmint_loc_ran.RData"))
-save(mod_gbm_loc_ran,  file = here("data", "model", "mod_gbm_loc_ran.RData"))
-save(pre_gbm_loc_ran,  file = here("data", "model", "pre_gbm_loc_ran.RData"))
-save(mod_rf_loc_ran,  file = here("data", "model", "mod_rf_loc_ran.RData"))
-save(pre_rf_loc_ran,  file = here("data", "model", "pre_rf_loc_ran.RData"))
+save(pre_epa_loc_ran, file = here("data", "model", "pre_epa_loc_ran.RData"))
+save(mod_epare_loc_ran, file = here("data", "model", "mod_epare_loc_ran.RData"))
+save(pre_epare_loc_ran, file = here("data", "model", "pre_epare_loc_ran.RData"))
+save(mod_lm_loc_ran, file = here("data", "model", "mod_lm_loc_ran.RData"))
+save(pre_lm_loc_ran, file = here("data", "model", "pre_lm_loc_ran.RData"))
+save(mod_lmint_loc_ran, file = here("data", "model", "mod_lmint_loc_ran.RData"))
+save(pre_lmint_loc_ran, file = here("data", "model", "pre_lmint_loc_ran.RData"))
+save(mod_gbm_loc_ran, file = here("data", "model", "mod_gbm_loc_ran.RData"))
+save(pre_gbm_loc_ran, file = here("data", "model", "pre_gbm_loc_ran.RData"))
+save(mod_rf_loc_ran, file = here("data", "model", "mod_rf_loc_ran.RData"))
+save(pre_rf_loc_ran, file = here("data", "model", "pre_rf_loc_ran.RData"))
 
 
 ##################(1) Time Series Plot##################
@@ -3265,7 +3119,7 @@ mymean = function(x){
         else mean(x,na.rm=T)
 }
 
-# (1) Create data set for ploting
+# (1) Create data set for plotting
 load(here("data","model","mod_gbm_time.RData"))
 load(here("data","tidy","CA","pa_join_epa.RData"))
 

@@ -3,7 +3,7 @@ library(pacman)
 
 pacman::p_load(here)
 # Packages for building machine learning algorithm
-p_load(yardstick,ranger,h2o)
+p_load(yardstick,gbm,xgboost,h2o)
 # Load tidyverse
 p_load(tidyverse)
 # Set ggplot theme
@@ -103,7 +103,7 @@ save(p1, file = here("data","model","RF","p1.RData"))
 n_features <- 3
 
 tuning_grid <- expand.grid(
-        trees = seq(300, 560, by = 20),
+        trees = seq(300, 550, by = 20),
         mtry  = c(1:3),
         rmse  = NA
 )
