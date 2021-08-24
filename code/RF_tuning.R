@@ -1,9 +1,13 @@
 install.packages("pacman")
+install.packages("ranger")
+install.packages("h2o")
 library(pacman)
+library(ranger)
+library(h2o)
 
 pacman::p_load(here)
 # Packages for building machine learning algorithm
-p_load(yardstick,ranger,h2o)
+p_load(yardstick)
 # Load tidyverse
 p_load(tidyverse)
 # Set ggplot theme
@@ -98,6 +102,9 @@ p1 <- ggplot(tuning_grid, aes(trees, rmse)) +
 
 save(tuning_grid, file = here("data","model","RF","tuning_grid1.RData"))
 save(p1, file = here("data","model","RF","p1.RData"))
+
+# load(here("data","model","RF","tuning_grid1.RData"))
+# load(p1, file = here("data","model","RF","p1.RData"))
 
 ## 2. Number of trees and mtry
 n_features <- 3
