@@ -3,12 +3,15 @@ library(pacman)
 
 pacman::p_load(here)
 # Packages for building machine learning algorithm
-p_load(yardstick,gbm)
+p_load(yardstick,gbm,doParallel)
 # Load tidyverse
 p_load(tidyverse)
 
 # Check working directory
 print(here())
+
+cl<-makePSOCKcluster(24)
+registerDoParallel(cl)
 
 ## Create spatial-temporal evaluation data set
 load(here("data","tidy","CA","dat.RData"))
@@ -154,3 +157,5 @@ hyper_grid$rmse <- purrr::pmap_dbl(
 # results
 arrange(hyper_grid, rmse)
 save(hyper_grid, file = here("data","model","GBM","hyper_grid2.RData"))
+
+stopCluster(cl)
