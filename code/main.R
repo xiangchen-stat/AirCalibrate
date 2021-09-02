@@ -94,8 +94,8 @@ length(pm2.5_reduced_cov$Latitude)
 length(unique(pm2.5_reduced_cov$Latitude))        
 
 # save(pm2.5_reduced_cov, file=here("data","tidy","EPA","pm2.5_CA_reduced_cov.RData"))
-##################1.1 EPA Data import and reduce END##################
-############################END############################
+
+
 
 
 ##################1.2 PA Data import and wrangling##################
@@ -301,8 +301,7 @@ pa_long_reduced2_cov <- pa_long_reduced2 %>%
                "average","start_time","end_time") %>% 
         distinct()
 # save(pa_long_reduced2_cov, file = here("data","tidy","CA","cov.RData"))
-##################1.2 PA Data import and wrangling END##################
-############################END############################
+
 
 
 ##################1.3 Data matching and wrangling##################
@@ -470,8 +469,9 @@ dat <- dat_raw %>%
                pm2.5_cf1_m = (pm2.5_cf1_a+pm2.5_cf1_b)/2)
 
 save(dat, file = here("data","tidy","CA","dat.RData"))
-##################1.3 Data matching and wrangling END##################
-############################END############################
+
+
+
 
 ##################1.4 Plot maps##################
 ### California boundaries
@@ -612,7 +612,6 @@ ggsave(filename = "plot_map_sf.png",
        units = "cm",
        dpi = 300
 )
-##################1.4 Plot maps END##################
 ############################END############################
 
 
@@ -876,8 +875,7 @@ ggsave(filename = "plot_box_group.png",
 #        dpi = 300
 # )
 
-##################2.1 Exploratory Analysis END##################
-############################END############################
+
 
 
 ##################2.2 Model fitting and evaluation##################
@@ -973,6 +971,8 @@ c(X_train_loc_ran_norm, X_test_loc_ran_norm) %<-% norm_dt(X_train_loc_ran, X_tes
 met_all <- c()
 }
 
+cl<-makePSOCKcluster(4)
+registerDoParallel(cl)
 
 ### EPA model
 ## Time
@@ -1679,8 +1679,7 @@ ggsave(filename = "plot_ts_com.png",
 #        dpi = 300
 # )
 
-##################2.2 Model fitting and evaluation END##################
-############################END############################
+
 
 
 
@@ -3193,7 +3192,7 @@ met_rf_final <- matrix(met_rf_mean, ncol = 6, byrow = T)
 
 # write.csv(met_rf_matrix, here("results", "met_rf_matrix.csv"))
 write.csv(round(met_rf_final,2), here("results", "met_rf_final.csv"))
-############################END############################
+
 
 
 ##################2.4 MBA Interpolation Map##################
@@ -3764,5 +3763,4 @@ for(i in 1:length(name_mba)){
         )
 }
 
-##################2.4 MBA Interpolation Map END##################
 ############################END############################
