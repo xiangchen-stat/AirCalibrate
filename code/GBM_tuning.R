@@ -67,42 +67,90 @@ dat_time_test <- dat %>%
 # 
 # save(mod_gbm_time, file = here("data","model","GBM","mod_gbm_time.RData"))
 
+# 
+# ## 2. Learning rate-------------------------------------
+# # create grid search
+# hyper_grid <- expand.grid(
+#         learning_rate = c(0.3, 0.2, 0.1, 0.05, 0.01, 0.005),
+#         RMSE = NA,
+#         trees = NA,
+#         time = NA
+# )
+# 
+# # hyper_grid <- expand.grid(
+# #         learning_rate = c(0.01, 0.005),
+# #         RMSE = NA,
+# #         trees = NA,
+# #         time = NA
+# # )
+# 
+# # execute grid search
+# for(i in seq_len(nrow(hyper_grid))) {
+#         # fit gbm
+#         set.seed(123)  # for reproducibility
+#         train_time <- system.time({
+#                 m <- gbm(
+#                         formula = pm2.5_epa ~ pm2.5_cf1_a + temp + hum,
+#                         data = dat_time_train,
+#                         distribution = "gaussian",
+#                         n.trees = 1000, 
+#                         shrinkage = hyper_grid$learning_rate[i], 
+#                         interaction.depth = 3, 
+#                         n.minobsinnode = 10,
+#                         cv.folds = 10 
+#                 )
+#         })
+#         
+#         # add SSE, trees, and training time to results
+#         hyper_grid$RMSE[i]  <- sqrt(min(m$cv.error))
+#         hyper_grid$trees[i] <- which.min(m$cv.error)
+#         hyper_grid$Time[i]  <- train_time[["elapsed"]]
+#         
+# }
+# 
+# # results
+# arrange(hyper_grid, RMSE)
+# 
+# save(hyper_grid, file = here("data","model","GBM","hyper_grid1.RData"))
 
-## 2. Learning rate-------------------------------------
-# create grid search
+## 3. Tree parameters
+# search grid
 hyper_grid <- expand.grid(
-        learning_rate = c(0.3, 0.2, 0.1, 0.05, 0.01, 0.005),
-        RMSE = NA,
-        trees = NA,
-        time = NA
+        n.trees = 800,
+        shrinkage = 0.05,
+        interaction.depth = c(3, 5, 7),
+        n.minobsinnode = c(5, 10, 15)
 )
 
-# execute grid search
-for(i in seq_len(nrow(hyper_grid))) {
-        # fit gbm
-        set.seed(123)  # for reproducibility
-        train_time <- system.time({
-                m <- gbm(
-                        formula = pm2.5_epa ~ pm2.5_cf1_a + temp + hum,
-                        data = dat_time_train,
-                        distribution = "gaussian",
-                        n.trees = 500, 
-                        shrinkage = hyper_grid$learning_rate[i], 
-                        interaction.depth = 3, 
-                        n.minobsinnode = 10,
-                        cv.folds = 10 
-                )
-        })
-        
-        # add SSE, trees, and training time to results
-        hyper_grid$RMSE[i]  <- sqrt(min(m$cv.error))
-        hyper_grid$trees[i] <- which.min(m$cv.error)
-        hyper_grid$Time[i]  <- train_time[["elapsed"]]
-        
+# create model fit function
+model_fit <- function(n.trees, shrinkage, interaction.depth, n.minobsinnode) {
+        set.seed(123)
+        m <- gbm(
+                formula = pm2.5_epa ~ pm2.5_cf1_a + temp + hum,
+                data = dat_time_train,
+                distribution = "gaussian",
+                n.trees = n.trees,
+                shrinkage = shrinkage,
+                interaction.depth = interaction.depth,
+                n.minobsinnode = n.minobsinnode,
+                cv.folds = 10,
+                verbose = TRUE
+        )
+        # compute RMSE
+        sqrt(min(m$cv.error))
 }
 
+# perform search grid with functional programming
+hyper_grid$rmse <- purrr::pmap_dbl(
+        hyper_grid,
+        ~ model_fit(
+                n.trees = ..1,
+                shrinkage = ..2,
+                interaction.depth = ..3,
+                n.minobsinnode = ..4
+        )
+)
+
 # results
-arrange(hyper_grid, RMSE)
-
-save(hyper_grid, file = here("data","model","GBM","hyper_grid.RData"))
-
+arrange(hyper_grid, rmse)
+save(hyper_grid, file = here("data","model","GBM","hyper_grid2.RData"))
