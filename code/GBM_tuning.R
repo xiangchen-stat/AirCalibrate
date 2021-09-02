@@ -104,5 +104,5 @@ for(i in seq_len(nrow(hyper_grid))) {
 # results
 arrange(hyper_grid, RMSE)
 
-
+save(hyper_grid, file = here("data","model","GBM","hyper_grid.RData"))
 
