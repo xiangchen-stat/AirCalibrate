@@ -1264,6 +1264,7 @@ met_all <- cbind(met_all, met_rf_loc_ran)
 
 ### Gradient Boosting Method -------------------------------------
 ## Time
+set.seed(123)
 mod_gbm_time <- gbm(
         formula = pm2.5_epa ~ pm2.5_cf1_a + temp + hum,
         data = dat_time_train,
@@ -1288,6 +1289,7 @@ met_gbm_time <- metrics(pre_gbm_time, truth = obs, estimate = pre)
 met_all <- cbind(met_all, met_gbm_time)
 
 ## Location Farthest
+set.seed(123)
 mod_gbm_loc_far <- gbm(
         formula = pm2.5_epa ~ pm2.5_cf1_a + temp + hum,
         data = dat_loc_far_train,
@@ -1312,6 +1314,7 @@ met_gbm_loc_far <- metrics(pre_gbm_loc_far, truth = obs, estimate = pre)
 met_all <- cbind(met_all, met_gbm_loc_far)
 
 ## Location Random
+set.seed(123)
 mod_gbm_loc_ran <- gbm(
         formula = pm2.5_epa ~ pm2.5_cf1_a + temp + hum,
         data = dat_loc_ran_train,
@@ -1422,6 +1425,7 @@ trainer_loc_ran <- function(model){
 }
 
 ## Time
+set.seed(123)
 mod_nn_time <- model %>% 
         compiler %>% 
         trainer_time
@@ -1438,6 +1442,7 @@ save(pre_nn_time, file = here("data", "model", "pre_nn_time.RData"))
 save(model, file = here("data", "model", "mod_nn_time.RData"))
 
 ## Location farthest
+set.seed(123)
 mod_nn_loc_far <- model %>% 
         compiler %>% 
         trainer_loc_far
@@ -1454,6 +1459,7 @@ save(pre_nn_loc_far, file = here("data", "model", "pre_nn_loc_far.RData"))
 save(model, file = here("data", "model", "mod_nn_loc_far.RData"))
 
 ## Location random
+set.seed(123)
 mod_nn_loc_ran <- model %>% 
         compiler %>% 
         trainer_loc_ran
