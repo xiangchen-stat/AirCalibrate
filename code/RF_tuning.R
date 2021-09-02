@@ -2,19 +2,25 @@ install.packages("pacman")
 install.packages("ranger")
 install.packages("h2o")
 library(pacman)
-library(ranger)
-library(h2o)
 
 pacman::p_load(here)
 # Packages for building machine learning algorithm
-p_load(yardstick)
+p_load(yardstick,doParallel,ranger)
+p_load(h2o)
 # Load tidyverse
 p_load(tidyverse)
+
+# library(ranger)
+# library(h2o)
 # Set ggplot theme
 theme_set(theme_minimal(base_size = 22))
-
 # Check working directory
 print(here())
+
+cl<-makePSOCKcluster(4)
+registerDoParallel(cl)
+
+
 
 ## Create spatial-temporal evaluation data set
 load(here("data","tidy","CA","dat.RData"))
@@ -46,7 +52,7 @@ dat_time_test <- dat %>%
 # dat_loc_ran_test <- dat %>% 
 #         filter(dat$lat_pa %in% lat_pa_test)
 
-
+# Ranger --------------------------------------
 # number of features
 n_features <- 3
 
@@ -54,25 +60,32 @@ n_features <- 3
 mod_test <- ranger(
         formula = pm2.5_epa ~ pm2.5_cf1_a + temp + hum, 
         data = dat_time_train,
-        num.trees = 50,
+        num.trees = 100,
         mtry = floor(n_features / 3),
         respect.unordered.factors = "order",
         seed = 123,
         verbose = TRUE,
-        write.forest = FALSE
+        write.forest = TRUE
 )
 
 # get OOB RMSE
 (default_rmse <- sqrt(mod_test$prediction.error))
 
 
+
+pre_test <- predict(mod_test, data = dat_time_test)
+pre_test <- cbind(pre = pre_test$predictions, obs = dat_time_test$pm2.5_epa) %>%
+        as_tibble()
+met_test <- metrics(pre_test, truth = obs, estimate = pre)
+met_test
+
 # Tunning process
-## 1. number of trees
+## 1. number of trees --------------------------------------
 n_features <- 3
 
 # tuning grid
 tuning_grid <- expand.grid(
-        trees = seq(10, 600, by = 50),
+        trees = seq(300, 500, by = 20),
         rmse  = NA
 )
 
@@ -106,7 +119,7 @@ save(p1, file = here("data","model","RF","p1.RData"))
 # load(here("data","model","RF","tuning_grid1.RData"))
 # load(p1, file = here("data","model","RF","p1.RData"))
 
-## 2. Number of trees and mtry
+## 2. Number of trees and mtry --------------------------------------
 n_features <- 3
 
 tuning_grid <- expand.grid(
@@ -147,9 +160,9 @@ save(tuning_grid, file = here("data","model","RF","tuning_grid2.RData"))
 save(p1, file = here("data","model","RF","p2.RData"))
 
 
-## 3. Random grid search for other parameters
+## 3. Random grid search for other parameters --------------------------------------
 h2o.no_progress()
-h2o.init()
+h2o.init(max_mem_size = "10g")
 # h2o.init(max_mem_size = "5g")
 
 # convert training data to h2o object
@@ -217,3 +230,38 @@ random_grid_perf
 
 save(random_grid, file = here("data","model","RF","random_grid.RData"))
 save(random_grid_perf, file = here("data","model","RF","random_grid_perf.RData"))
+
+# 4 Tuning  --------------------------------------
+# hyperparameter grid
+n_features <- 3
+
+tuning_grid <- expand.grid(
+        min_node = c(1, 3, 5, 10),
+        max_depth = c(10, 20, 30),
+        sample_fraction = c(.60, .70, .80, .90, 1),
+        rmse  = NA
+)
+
+for(i in seq_len(nrow(tuning_grid))) {
+        fit <- ranger(
+                formula    = pm2.5_epa ~ pm2.5_cf1_a + temp + hum, 
+                data       = dat_time_train, 
+                num.trees  = 440,
+                mtry       = floor(n_features / 3),
+                min.node.size = tuning_grid$min_node[i],
+                max.depth = tuning_grid$max_depth[i],
+                sample.fraction = tuning_grid$sample_fraction[i],
+                verbose    = TRUE,
+                seed       = 123,
+                write.forest = FALSE
+        )
+        
+        tuning_grid$rmse[i] <- sqrt(fit$prediction.error)
+        
+}
+
+tuning_grid[with(tuning_grid,order(rmse)),] %>% 
+        head(10)
+
+save(tuning_grid, file = here("data","model","RF","tuning_grid4.RData"))
+# save(p1, file = here("data","model","RF","p2.RData"))

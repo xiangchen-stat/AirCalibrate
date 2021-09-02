@@ -27,7 +27,7 @@
 #         require(x,character.only = T)
 # }
 
-install.packages("pacman")
+# install.packages("pacman")
 if(TRUE){
 library(pacman)
 
@@ -36,7 +36,7 @@ pacman::p_load(here,reshape2,lubridate,hms)
 # Packages for data visualization
 p_load(skimr,GGally,RColorBrewer,viridis,ggpubr)
 # Packages for building machine learning algorithm
-p_load(yardstick,randomForest,ranger,gbm,keras,tfruns,tfestimators)
+p_load(yardstick,doParallel,randomForest,ranger,gbm,keras,tfruns,tfestimators)
 # Packages for creating map/spatial operation
 # p_load(sf,lwgeom,geosphere,units,ggmap,MBA)
 p_load(sf,geosphere,units,ggmap,MBA)
@@ -881,6 +881,7 @@ ggsave(filename = "plot_box_group.png",
 
 
 ##################2.2 Model fitting and evaluation##################
+if(TRUE){
 ## Create spatial-temporal evaluation data set
 load(here("data","tidy","CA","dat.RData"))
 
@@ -968,9 +969,9 @@ c(X_train_time_norm, X_test_time_norm) %<-% norm_dt(X_train_time, X_test_time)
 c(X_train_loc_far_norm, X_test_loc_far_norm) %<-% norm_dt(X_train_loc_far, X_test_loc_far)
 c(X_train_loc_ran_norm, X_test_loc_ran_norm) %<-% norm_dt(X_train_loc_ran, X_test_loc_ran)
 
-
 ## Model fitting and prediction
 met_all <- c()
+}
 
 
 ### EPA model
@@ -1101,7 +1102,167 @@ met_all <- cbind(met_all, met_lmint_loc_ran)
 
 
 
-### Gradient Boosting Method
+# ### Random forest
+# ## Time
+# cl<-makePSOCKcluster(4)
+# registerDoParallel(cl)
+# p <- 1
+# n_tree <- 50
+# 
+# # mtry = p is basically just bagging, as above
+# mod_rf_time <- randomForest(X_train_time, 
+#                             Y_train_time,
+#                             mtry = p,
+#                             ntree = n_tree,
+#                             nodesize = 600,
+#                             importance = FALSE,
+#                             proximity = FALSE,
+#                             do.trace = 5)
+# 
+# pre_rf_time <- mod_rf_time$predicted %>%
+#         cbind(pre = ., obs = dat_time_test$pm2.5_epa) %>%
+#         as_tibble()
+# met_rf_time <- metrics(pre_rf_time, truth = obs, estimate = pre)
+# met_all <- cbind(met_all, met_rf_time)
+# 
+# # plot test RMSE
+# plot(1:n_tree, sqrt(mod_rf_time$test$mse),
+#      col = "aquamarine4",
+#      type = "l",
+#      xlab = "Number of Trees",
+#      ylab = "Test RMSE")
+# legend("topright", c("m=3"),
+#        col = c("aquamarine4"),
+#        cex = 1, lty = 1)
+# 
+# ## Location Farthest
+# p <- 1
+# n_tree <- 50
+# 
+# # mtry = p is basically just bagging, as above
+# mod_rf_loc_far <- randomForest(X_train_loc_far, Y_train_loc_far,
+#                            xtest = X_test_loc_far,
+#                            ytest = Y_test_loc_far,
+#                            mtry = p,
+#                            ntree = n_tree,
+#                            do.trace = TRUE)
+# 
+# pre_rf_loc_far <- mod_rf_loc$test$predicted %>%
+#         cbind(pre = ., obs = dat_loc_far_test$pm2.5_epa) %>%
+#         as_tibble()
+# met_rf_loc_far <- metrics(pre_rf_loc_far, truth = obs, estimate = pre)
+# met_all <- cbind(met_all, met_rf_loc_far)
+# 
+# # plot test RMSE
+# plot(1:n_tree, sqrt(mod_rf_loc$test$mse),
+#      col = "aquamarine4",
+#      type = "l",
+#      xlab = "Number of Trees",
+#      ylab = "Test RMSE")
+# legend("topright", c("m=3"),
+#        col = c("aquamarine4"),
+#        cex = 1, lty = 1)
+# 
+# ## Location Random
+# p <- 1
+# n_tree <- 50
+# 
+# # mtry = p is basically just bagging, as above
+# mod_rf_loc_ran <- randomForest(X_train_loc_ran, Y_train_loc_ran,
+#                                xtest = X_test_loc_ran,
+#                                ytest = Y_test_loc_ran,
+#                                mtry = p,
+#                                ntree = n_tree,
+#                                do.trace = TRUE)
+# 
+# pre_rf_loc_ran <- mod_rf_loc_ran$test$predicted %>%
+#         cbind(pre = ., obs = dat_loc_ran_test$pm2.5_epa) %>%
+#         as_tibble()
+# met_rf_loc_ran <- metrics(pre_rf_loc_ran, truth = obs, estimate = pre)
+# met_all <- cbind(met_all, met_rf_loc_ran)
+# 
+# # plot test RMSE
+# plot(1:n_tree, sqrt(mod_rf_loc_ran$test$mse),
+#      col = "aquamarine4",
+#      type = "l",
+#      xlab = "Number of Trees",
+#      ylab = "Test RMSE")
+# legend("topright", c("m=3"),
+#        col = c("aquamarine4"),
+#        cex = 1, lty = 1)
+
+# write.csv(round(met_all[,seq(from = 3, to = length(met_all[1,]), by = 3)],2), here("results", "met_all_fit.csv"))
+
+# ### Random Forest -------------------------------------
+# number of features
+n_features <- 3
+
+## Time
+mod_rf_time <- ranger(
+        formula = pm2.5_epa ~ pm2.5_cf1_a + temp + hum,
+        data = dat_time_train,
+        num.trees = 440,
+        mtry = floor(n_features / 3),
+        min.node.size = 10,
+        max.depth = 20,
+        sample.fraction = 0.8,
+        seed = 123,
+        verbose = TRUE,
+        write.forest = TRUE
+)
+
+pre_rf_time <- predict(mod_rf_time, data = dat_time_test) %>% 
+        .$predictions %>% 
+    cbind(pre = ., obs = dat_time_test$pm2.5_epa) %>%
+    as_tibble()
+met_rf_time <- metrics(pre_rf_time, truth = obs, estimate = pre)
+met_all <- cbind(met_all, met_rf_time)
+
+## Location Farthest
+mod_rf_loc_far <- ranger(
+        formula = pm2.5_epa ~ pm2.5_cf1_a + temp + hum,
+        data = dat_loc_far_train,
+        num.trees = 440,
+        mtry = floor(n_features / 3),
+        min.node.size = 10,
+        max.depth = 20,
+        sample.fraction = 0.8,
+        seed = 123,
+        verbose = TRUE,
+        write.forest = TRUE
+)
+
+pre_rf_loc_far <- predict(mod_rf_loc_far, data = dat_loc_far_test) %>% 
+        .$predictions %>% 
+        cbind(pre = ., obs = dat_loc_far_test$pm2.5_epa) %>%
+        as_tibble()
+met_rf_loc_far <- metrics(pre_rf_loc_far, truth = obs, estimate = pre)
+met_all <- cbind(met_all, met_rf_loc_far)
+
+## Location Random
+mod_rf_loc_ran <- ranger(
+        formula = pm2.5_epa ~ pm2.5_cf1_a + temp + hum,
+        data = dat_loc_ran_train,
+        num.trees = 440,
+        mtry = floor(n_features / 3),
+        min.node.size = 10,
+        max.depth = 20,
+        sample.fraction = 0.8,
+        seed = 123,
+        verbose = TRUE,
+        write.forest = TRUE
+)
+
+pre_rf_loc_ran <- predict(mod_rf_loc_ran, data = dat_loc_ran_test) %>% 
+        .$predictions %>% 
+        cbind(pre = ., obs = dat_loc_ran_test$pm2.5_epa) %>%
+        as_tibble()
+met_rf_loc_ran <- metrics(pre_rf_loc_ran, truth = obs, estimate = pre)
+met_all <- cbind(met_all, met_rf_loc_ran)
+
+
+
+### Gradient Boosting Method -------------------------------------
 ## Time
 mod_gbm_time <- gbm(
         formula = pm2.5_epa ~ pm2.5_cf1_a + temp + hum,
@@ -1173,92 +1334,6 @@ pre_gbm_loc_ran <- predict(mod_gbm_loc_ran, newdata = dat_loc_ran_test) %>%
         as_tibble()
 met_gbm_loc_ran <- metrics(pre_gbm_loc_ran, truth = obs, estimate = pre)
 met_all <- cbind(met_all, met_gbm_loc_ran)
-
-
-
-### Random forest
-## Time
-p <- 3
-n_tree <- 50
-
-# mtry = p is basically just bagging, as above
-mod_rf_time <- randomForest(X_train_time, Y_train_time, 
-                            xtest = X_test_time, 
-                            ytest = Y_test_time, 
-                            mtry = p, 
-                            ntree = n_tree)
-
-pre_rf_time <- mod_rf_time$test$predicted %>% 
-        cbind(pre = ., obs = dat_time_test$pm2.5_epa) %>% 
-        as_tibble()
-met_rf_time <- metrics(pre_rf_time, truth = obs, estimate = pre)
-met_all <- cbind(met_all, met_rf_time)
-
-# plot test RMSE
-plot(1:n_tree, sqrt(mod_rf_time$test$mse), 
-     col = "aquamarine4", 
-     type = "l", 
-     xlab = "Number of Trees",
-     ylab = "Test RMSE")
-legend("topright", c("m=3"), 
-       col = c("aquamarine4"),
-       cex = 1, lty = 1)
-
-## Location Farthest
-p <- 3
-n_tree <- 50
-
-# mtry = p is basically just bagging, as above
-mod_rf_loc_far <- randomForest(X_train_loc_far, Y_train_loc_far, 
-                           xtest = X_test_loc_far, 
-                           ytest = Y_test_loc_far, 
-                           mtry = p, 
-                           ntree = n_tree)
-
-pre_rf_loc_far <- mod_rf_loc$test$predicted %>% 
-        cbind(pre = ., obs = dat_loc_far_test$pm2.5_epa) %>% 
-        as_tibble()
-met_rf_loc_far <- metrics(pre_rf_loc_far, truth = obs, estimate = pre)
-met_all <- cbind(met_all, met_rf_loc_far)
-
-# plot test RMSE
-plot(1:n_tree, sqrt(mod_rf_loc$test$mse), 
-     col = "aquamarine4", 
-     type = "l", 
-     xlab = "Number of Trees",
-     ylab = "Test RMSE")
-legend("topright", c("m=3"), 
-       col = c("aquamarine4"),
-       cex = 1, lty = 1)
-
-## Location Random
-p <- 3
-n_tree <- 50
-
-# mtry = p is basically just bagging, as above
-mod_rf_loc_ran <- randomForest(X_train_loc_ran, Y_train_loc_ran, 
-                               xtest = X_test_loc_ran, 
-                               ytest = Y_test_loc_ran, 
-                               mtry = p, 
-                               ntree = n_tree)
-
-pre_rf_loc_ran <- mod_rf_loc_ran$test$predicted %>% 
-        cbind(pre = ., obs = dat_loc_ran_test$pm2.5_epa) %>% 
-        as_tibble()
-met_rf_loc_ran <- metrics(pre_rf_loc_ran, truth = obs, estimate = pre)
-met_all <- cbind(met_all, met_rf_loc_ran)
-
-# plot test RMSE
-plot(1:n_tree, sqrt(mod_rf_loc_ran$test$mse), 
-     col = "aquamarine4", 
-     type = "l", 
-     xlab = "Number of Trees",
-     ylab = "Test RMSE")
-legend("topright", c("m=3"), 
-       col = c("aquamarine4"),
-       cex = 1, lty = 1)
-
-write.csv(round(met_all[,seq(from = 3, to = length(met_all[1,]), by = 3)],2), here("results", "met_all_fit.csv"))
 
 
 
@@ -1394,6 +1469,8 @@ met_all <- cbind(met_all, met_nn_loc_ran)
 save(pre_nn_loc_ran, file = here("data", "model", "pre_nn_loc_ran.RData"))
 save(model, file = here("data", "model", "mod_nn_loc_ran.RData"))
 
+write.csv(round(met_all[,seq(from = 3, to = length(met_all[1,]), by = 3)],2), here("results", "met_all_fit.csv"))
+
 
 save(pre_epa_time, file = here("data", "model", "pre_epa_time.RData"))
 save(mod_epare_time, file = here("data", "model", "mod_epare_time.RData"))
@@ -1430,6 +1507,7 @@ save(mod_gbm_loc_ran, file = here("data", "model", "mod_gbm_loc_ran.RData"))
 save(pre_gbm_loc_ran, file = here("data", "model", "pre_gbm_loc_ran.RData"))
 save(mod_rf_loc_ran, file = here("data", "model", "mod_rf_loc_ran.RData"))
 save(pre_rf_loc_ran, file = here("data", "model", "pre_rf_loc_ran.RData"))
+
 
 
 ##################(1) Time Series Plot##################

@@ -3,11 +3,9 @@ library(pacman)
 
 pacman::p_load(here)
 # Packages for building machine learning algorithm
-p_load(yardstick,gbm,xgboost,h2o)
+p_load(yardstick,gbm)
 # Load tidyverse
 p_load(tidyverse)
-# Set ggplot theme
-theme_set(theme_minimal(base_size = 22))
 
 # Check working directory
 print(here())
@@ -43,170 +41,26 @@ dat_time_test <- dat %>%
 #         filter(dat$lat_pa %in% lat_pa_test)
 
 
-# number of features
-n_features <- 3
-
-# train a default random forest model
-mod_test <- ranger(
-        formula = pm2.5_epa ~ pm2.5_cf1_a + temp + hum, 
+### Gradient Boosting Method -------------------------------------
+## Time
+mod_gbm_time <- gbm(
+        formula = pm2.5_epa ~ pm2.5_cf1_a + temp + hum,
         data = dat_time_train,
-        num.trees = 50,
-        mtry = floor(n_features / 3),
-        respect.unordered.factors = "order",
-        seed = 123,
-        verbose = TRUE,
-        write.forest = FALSE
+        distribution = "gaussian",  # SSE loss function
+        n.trees = 500,
+        shrinkage = 0.1,
+        interaction.depth = 3,
+        n.minobsinnode = 10,
+        cv.folds = 10
 )
-
-# get OOB RMSE
-(default_rmse <- sqrt(mod_test$prediction.error))
-
-
-# Tunning process
-## 1. number of trees
-n_features <- 3
-
-# tuning grid
-tuning_grid <- expand.grid(
-        trees = seq(10, 600, by = 50),
-        rmse  = NA
-)
-
-for(i in seq_len(nrow(tuning_grid))) {
-        
-        # Fit a random forest
-        fit <- ranger(
-                formula    = pm2.5_epa ~ pm2.5_cf1_a + temp + hum, 
-                data       = dat_time_train, 
-                num.trees  = tuning_grid$trees[i],
-                mtry       = floor(n_features / 3),
-                respect.unordered.factors = 'order',
-                verbose    = TRUE,
-                seed       = 123,
-                write.forest = FALSE
-        )
-        
-        # Extract OOB RMSE
-        tuning_grid$rmse[i] <- sqrt(fit$prediction.error)
-        
-}
-
-p1 <- ggplot(tuning_grid, aes(trees, rmse)) +
-        geom_line(size = 1) +
-        ylab("OOB Error (RMSE)") +
-        xlab("Number of trees")
-
-save(tuning_grid, file = here("data","model","RF","tuning_grid1.RData"))
-save(p1, file = here("data","model","RF","p1.RData"))
-
-## 2. Number of trees and mtry
-n_features <- 3
-
-tuning_grid <- expand.grid(
-        trees = seq(300, 550, by = 20),
-        mtry  = c(1:3),
-        rmse  = NA
-)
-
-for(i in seq_len(nrow(tuning_grid))) {
-        fit <- ranger(
-                formula    = pm2.5_epa ~ pm2.5_cf1_a + temp + hum, 
-                data       = dat_time_train, 
-                num.trees  = tuning_grid$trees[i],
-                mtry       = tuning_grid$mtry[i],
-                respect.unordered.factors = 'order',
-                verbose    = TRUE,
-                seed       = 123,
-                write.forest = FALSE
-        )
-        
-        tuning_grid$rmse[i] <- sqrt(fit$prediction.error)
-        
-}
-
-labels <- tuning_grid %>%
-        filter(trees == 10) %>%
-        mutate(mtry = as.factor(mtry))
-
-p2 <- tuning_grid %>%
-        mutate(mtry = as.factor(mtry)) %>%
-        ggplot(aes(trees, rmse, color = mtry)) +
-        geom_line(size = 1, show.legend = TRUE) +
-        ggrepel::geom_text_repel(data = labels, aes(trees, rmse, label = mtry), show.legend = FALSE) +
-        ylab("OOB Error (RMSE)") +
-        xlab("Number of trees")
-
-save(tuning_grid, file = here("data","model","RF","tuning_grid2.RData"))
-save(p1, file = here("data","model","RF","p2.RData"))
+best <- which.min(mod_gbm_time$cv.error)
+# get MSE and compute RMSE
+sqrt(mod_gbm_time$cv.error[best])
+# plot error curve
+gbm.perf(mod_gbm_time, method = "cv")
+summary(mod_gbm_time)
 
 
-## 3. Random grid search for other parameters
-h2o.no_progress()
-h2o.init()
-# h2o.init(max_mem_size = "5g")
 
-# convert training data to h2o object
-train_h2o <- as.h2o(dat_time_train[,c("pm2.5_epa", "pm2.5_cf1_a", "temp", "hum")])
 
-# set the response column to Sale_Price
-response <- "pm2.5_epa"
 
-# set the predictor names
-predictors <- c("pm2.5_cf1_a", "temp", "hum")
-
-h2o_rf1 <- h2o.randomForest(
-        x = predictors, 
-        y = response,
-        training_frame = train_h2o, 
-        ntrees = 440,
-        mtries = 1,
-        seed = 123,
-        verbose = TRUE
-)
-
-h2o_rf1
-
-# hyperparameter grid
-hyper_grid <- list(
-        min_rows = c(1, 3, 5, 10),
-        max_depth = c(10, 20, 30),
-        sample_rate = c(.60, .70, .80, .90, 1)
-)
-
-# random grid search strategy
-search_criteria <- list(
-        strategy = "RandomDiscrete",
-        stopping_metric = "mse",
-        stopping_tolerance = 0.001,   # stop if improvement is < 0.1%
-        stopping_rounds = 10         # over the last 10 models
-        #        max_runtime_secs = 60*5      # or stop search after 5 min.
-)
-
-# perform grid search 
-random_grid <- h2o.grid(
-        algorithm = "randomForest",
-        grid_id = "rf_random_grid",
-        x = predictors, 
-        y = response, 
-        training_frame = train_h2o,
-        hyper_params = hyper_grid,
-        ntrees = 440,
-        mtries = 1,
-        seed = 123,
-        stopping_metric = "RMSE",   
-        stopping_rounds = 10,           # stop if last 10 trees added 
-        stopping_tolerance = 0.005,     # don't improve RMSE by 0.5%
-        search_criteria = search_criteria
-)
-
-# collect the results and sort by our model performance metric 
-# of choice
-random_grid_perf <- h2o.getGrid(
-        grid_id = "rf_random_grid", 
-        sort_by = "mse", 
-        decreasing = FALSE
-)
-random_grid_perf
-
-save(random_grid, file = here("data","model","RF","random_grid.RData"))
-save(random_grid_perf, file = here("data","model","RF","random_grid_perf.RData"))
