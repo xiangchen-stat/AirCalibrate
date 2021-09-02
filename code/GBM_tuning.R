@@ -44,29 +44,29 @@ dat_time_test <- dat %>%
 
 ### Gradient Boosting Method -------------------------------------
 ## 1. Number of trees -------------------------------------
-# set.seed(123)
-# mod_gbm_time <- gbm(
-#         formula = pm2.5_epa ~ pm2.5_cf1_a + temp + hum,
-#         data = dat_time_train,
-#         distribution = "gaussian",  # SSE loss function
-#         n.trees = 500,
-#         shrinkage = 0.1,
-#         interaction.depth = 3,
-#         n.minobsinnode = 10,
-#         cv.folds = 10,
-#         verbose = TRUE
-# )
-# 
-# 
-# best <- which.min(mod_gbm_time$cv.error)
-# best
-# # get MSE and compute RMSE
-# sqrt(mod_gbm_time$cv.error[best])
-# # plot error curve
-# gbm.perf(mod_gbm_time, method = "cv")
-# summary(mod_gbm_time)
-# 
-# save(mod_gbm_time, file = here("data","model","GBM","mod_gbm_time.RData"))
+set.seed(123)
+mod_gbm_time <- gbm(
+        formula = pm2.5_epa ~ pm2.5_cf1_a + temp + hum,
+        data = dat_time_train,
+        distribution = "gaussian",  # SSE loss function
+        n.trees = 500,
+        shrinkage = 0.1,
+        interaction.depth = 7,
+        n.minobsinnode = 15,
+        cv.folds = 10,
+        verbose = TRUE
+)
+
+
+best <- which.min(mod_gbm_time$cv.error)
+best
+# get MSE and compute RMSE
+sqrt(mod_gbm_time$cv.error[best])
+# plot error curve
+gbm.perf(mod_gbm_time, method = "cv")
+summary(mod_gbm_time)
+
+save(mod_gbm_time, file = here("data","model","GBM","mod_gbm_time.RData"))
 
 # 
 # ## 2. Learning rate-------------------------------------
@@ -158,42 +158,67 @@ dat_time_test <- dat %>%
 
 
 
-## 4. Tree parameters -------------------------------------
-# create grid search
-hyper_grid <- expand.grid(
-        interaction.depth = c(3, 5, 7),
-        n.minobsinnode = c(5, 10, 15),
-        RMSE = NA,
-        trees = NA,
-        time = NA
+# ## 4. Tree parameters -------------------------------------
+# # create grid search
+# hyper_grid <- expand.grid(
+#         interaction.depth = c(3, 5, 7),
+#         n.minobsinnode = c(5, 10, 15),
+#         RMSE = NA,
+#         trees = NA,
+#         time = NA
+# )
+# 
+# # execute grid search
+# for(i in seq_len(nrow(hyper_grid))) {
+#         # fit gbm
+#         set.seed(123)  # for reproducibility
+#         train_time <- system.time({
+#                 m <- gbm(
+#                         formula = pm2.5_epa ~ pm2.5_cf1_a + temp + hum,
+#                         data = dat_time_train,
+#                         distribution = "gaussian",
+#                         n.trees = 700,
+#                         shrinkage = 0.05,
+#                         interaction.depth = hyper_grid$interaction.depth[i],
+#                         n.minobsinnode = hyper_grid$n.minobsinnode[i],
+#                         cv.folds = 10,
+#                         verbose = TRUE
+#                 )
+#         })
+# 
+#         # add SSE, trees, and training time to results
+#         hyper_grid$RMSE[i]  <- sqrt(min(m$cv.error))
+#         hyper_grid$trees[i] <- which.min(m$cv.error)
+#         hyper_grid$time[i]  <- train_time[["elapsed"]]
+# 
+# }
+# 
+# # results
+# arrange(hyper_grid, RMSE)
+# 
+# save(hyper_grid, file = here("data","model","GBM","hyper_grid4.RData"))
+
+## 5. Final model -------------------------------------
+set.seed(123)
+mod_gbm_time <- gbm(
+        formula = pm2.5_epa ~ pm2.5_cf1_a + temp + hum,
+        data = dat_time_train,
+        distribution = "gaussian",  # SSE loss function
+        n.trees = 700,
+        shrinkage = 0.05,
+        interaction.depth = 7,
+        n.minobsinnode = 15,
+        cv.folds = 10,
+        verbose = TRUE
 )
 
-# execute grid search
-for(i in seq_len(nrow(hyper_grid))) {
-        # fit gbm
-        set.seed(123)  # for reproducibility
-        train_time <- system.time({
-                m <- gbm(
-                        formula = pm2.5_epa ~ pm2.5_cf1_a + temp + hum,
-                        data = dat_time_train,
-                        distribution = "gaussian",
-                        n.trees = 700,
-                        shrinkage = 0.05,
-                        interaction.depth = hyper_grid$interaction.depth[i],
-                        n.minobsinnode = hyper_grid$n.minobsinnode[i],
-                        cv.folds = 10,
-                        verbose = TRUE
-                )
-        })
 
-        # add SSE, trees, and training time to results
-        hyper_grid$RMSE[i]  <- sqrt(min(m$cv.error))
-        hyper_grid$trees[i] <- which.min(m$cv.error)
-        hyper_grid$time[i]  <- train_time[["elapsed"]]
+best <- which.min(mod_gbm_time$cv.error)
+best
+# get MSE and compute RMSE
+sqrt(mod_gbm_time$cv.error[best])
+# plot error curve
+gbm.perf(mod_gbm_time, method = "cv")
+summary(mod_gbm_time)
 
-}
-
-# results
-arrange(hyper_grid, RMSE)
-
-save(hyper_grid, file = here("data","model","GBM","hyper_grid4.RData"))
+save(mod_gbm_time, file = here("data","model","GBM","mod_gbm_time.RData"))
