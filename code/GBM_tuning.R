@@ -53,14 +53,17 @@ mod_gbm_time <- gbm(
         n.minobsinnode = 10,
         cv.folds = 10
 )
+
 best <- which.min(mod_gbm_time$cv.error)
+best
 # get MSE and compute RMSE
 sqrt(mod_gbm_time$cv.error[best])
 # plot error curve
-gbm.perf(mod_gbm_time, method = "cv")
+p1 <- gbm.perf(mod_gbm_time, method = "cv")
 summary(mod_gbm_time)
 
-
+save(mod_gbm_time, file = here("data","model","GBM","mod_gbm_time.RData"))
+save(p1, here("data","model","GBM","p1.RData"))
 
 
 
