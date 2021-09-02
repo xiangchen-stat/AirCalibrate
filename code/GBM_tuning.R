@@ -3,13 +3,15 @@ library(pacman)
 
 pacman::p_load(here)
 # Packages for building machine learning algorithm
-p_load(yardstick,gbm)
+p_load(yardstick,gbm,doParallel)
 # Load tidyverse
 p_load(tidyverse)
 
 # Check working directory
 print(here())
 
+cl<-makePSOCKcluster(4)
+registerDoParallel(cl)
 
 ## Create spatial-temporal evaluation data set
 load(here("data","tidy","CA","dat.RData"))
@@ -44,29 +46,29 @@ dat_time_test <- dat %>%
 
 ### Gradient Boosting Method -------------------------------------
 ## 1. Number of trees -------------------------------------
-set.seed(123)
-mod_gbm_time <- gbm(
-        formula = pm2.5_epa ~ pm2.5_cf1_a + temp + hum,
-        data = dat_time_train,
-        distribution = "gaussian",  # SSE loss function
-        n.trees = 500,
-        shrinkage = 0.1,
-        interaction.depth = 7,
-        n.minobsinnode = 15,
-        cv.folds = 10,
-        verbose = TRUE
-)
-
-
-best <- which.min(mod_gbm_time$cv.error)
-best
-# get MSE and compute RMSE
-sqrt(mod_gbm_time$cv.error[best])
-# plot error curve
-gbm.perf(mod_gbm_time, method = "cv")
-summary(mod_gbm_time)
-
-save(mod_gbm_time, file = here("data","model","GBM","mod_gbm_time.RData"))
+# set.seed(123)
+# mod_gbm_time <- gbm(
+#         formula = pm2.5_epa ~ pm2.5_cf1_a + temp + hum,
+#         data = dat_time_train,
+#         distribution = "gaussian",  # SSE loss function
+#         n.trees = 500,
+#         shrinkage = 0.1,
+#         interaction.depth = 7,
+#         n.minobsinnode = 15,
+#         cv.folds = 10,
+#         verbose = TRUE
+# )
+# 
+# 
+# best <- which.min(mod_gbm_time$cv.error)
+# best
+# # get MSE and compute RMSE
+# sqrt(mod_gbm_time$cv.error[best])
+# # plot error curve
+# gbm.perf(mod_gbm_time, method = "cv")
+# summary(mod_gbm_time)
+# 
+# save(mod_gbm_time, file = here("data","model","GBM","mod_gbm_time.RData"))
 
 # 
 # ## 2. Learning rate-------------------------------------
@@ -222,3 +224,4 @@ gbm.perf(mod_gbm_time, method = "cv")
 summary(mod_gbm_time)
 
 save(mod_gbm_time, file = here("data","model","GBM","mod_gbm_time.RData"))
+stopCluster(cl)
